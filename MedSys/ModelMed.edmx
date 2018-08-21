@@ -1,0 +1,687 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="ModelMed.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2012" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityContainer Name="ModelMedStoreContainer">
+    <EntitySet Name="PersonSet" EntityType="ModelMed.Store.PersonSet" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="MedCardSet" EntityType="ModelMed.Store.MedCardSet" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="RecordSet" EntityType="ModelMed.Store.RecordSet" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="TimeForVisitSet" EntityType="ModelMed.Store.TimeForVisitSet" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="IllnessSet" EntityType="ModelMed.Store.IllnessSet" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="JobSet" EntityType="ModelMed.Store.JobSet" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="DocumentSet" EntityType="ModelMed.Store.DocumentSet" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="CabinetSet" EntityType="ModelMed.Store.CabinetSet" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="PersonSet_Doctor" EntityType="ModelMed.Store.PersonSet_Doctor" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="PersonSet_Patient" EntityType="ModelMed.Store.PersonSet_Patient" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="IllnessMedCard" EntityType="ModelMed.Store.IllnessMedCard" store:Type="Tables" Schema="dbo" />
+    <AssociationSet Name="PersonDocument" Association="ModelMed.Store.PersonDocument">
+      <End Role="Person" EntitySet="PersonSet" />
+      <End Role="Document" EntitySet="DocumentSet" />
+    </AssociationSet>
+    <AssociationSet Name="JobDoctor" Association="ModelMed.Store.JobDoctor">
+      <End Role="Job" EntitySet="JobSet" />
+      <End Role="Doctor" EntitySet="PersonSet_Doctor" />
+    </AssociationSet>
+    <AssociationSet Name="DoctorTimeForVisit" Association="ModelMed.Store.DoctorTimeForVisit">
+      <End Role="Doctor" EntitySet="PersonSet_Doctor" />
+      <End Role="TimeForVisit" EntitySet="TimeForVisitSet" />
+    </AssociationSet>
+    <AssociationSet Name="RecordDoctor" Association="ModelMed.Store.RecordDoctor">
+      <End Role="Record" EntitySet="RecordSet" />
+      <End Role="Doctor" EntitySet="PersonSet_Doctor" />
+    </AssociationSet>
+    <AssociationSet Name="MedCardRecord" Association="ModelMed.Store.MedCardRecord">
+      <End Role="MedCard" EntitySet="MedCardSet" />
+      <End Role="Record" EntitySet="RecordSet" />
+    </AssociationSet>
+    <AssociationSet Name="FK_IllnessMedCard_Illness" Association="ModelMed.Store.FK_IllnessMedCard_Illness">
+      <End Role="Illness" EntitySet="IllnessSet" />
+      <End Role="IllnessMedCard" EntitySet="IllnessMedCard" />
+    </AssociationSet>
+    <AssociationSet Name="FK_IllnessMedCard_MedCard" Association="ModelMed.Store.FK_IllnessMedCard_MedCard">
+      <End Role="MedCard" EntitySet="MedCardSet" />
+      <End Role="IllnessMedCard" EntitySet="IllnessMedCard" />
+    </AssociationSet>
+    <AssociationSet Name="MedCardPatient" Association="ModelMed.Store.MedCardPatient">
+      <End Role="MedCard" EntitySet="MedCardSet" />
+      <End Role="Patient" EntitySet="PersonSet_Patient" />
+    </AssociationSet>
+    <AssociationSet Name="CabinetTimeForVisit" Association="ModelMed.Store.CabinetTimeForVisit">
+      <End Role="Cabinet" EntitySet="CabinetSet" />
+      <End Role="TimeForVisit" EntitySet="TimeForVisitSet" />
+    </AssociationSet>
+    <AssociationSet Name="TimeForVisitPatient" Association="ModelMed.Store.TimeForVisitPatient">
+      <End Role="TimeForVisit" EntitySet="TimeForVisitSet" />
+      <End Role="Patient" EntitySet="PersonSet_Patient" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Doctor_inherits_Person" Association="ModelMed.Store.FK_Doctor_inherits_Person">
+      <End Role="Person" EntitySet="PersonSet" />
+      <End Role="Doctor" EntitySet="PersonSet_Doctor" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Patient_inherits_Person" Association="ModelMed.Store.FK_Patient_inherits_Person">
+      <End Role="Person" EntitySet="PersonSet" />
+      <End Role="Patient" EntitySet="PersonSet_Patient" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="PersonSet">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="FullName" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="BirthDate" Type="datetime" Nullable="false" />
+    <Property Name="InsuranceNum" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Adress" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Gender" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Password" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Document_Id" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="MedCardSet">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Shelf" Type="nvarchar(max)" Nullable="false" />
+  </EntityType>
+  <EntityType Name="RecordSet">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Info" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Date" Type="datetime" Nullable="false" />
+    <Property Name="MedCard_Id" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="TimeForVisitSet">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="VisitTime" Type="datetime" Nullable="false" />
+    <Property Name="Doctor_Id" Type="int" Nullable="false" />
+    <Property Name="Cabinet_Id" Type="int" Nullable="false" />
+    <Property Name="Patient_Id" Type="int" Nullable="true" />
+  </EntityType>
+  <EntityType Name="IllnessSet">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Info" Type="nvarchar(max)" Nullable="true" />
+  </EntityType>
+  <EntityType Name="JobSet">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name" Type="nvarchar(max)" Nullable="false" />
+  </EntityType>
+  <EntityType Name="DocumentSet">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Type" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Num" Type="nvarchar(max)" Nullable="false" />
+  </EntityType>
+  <EntityType Name="CabinetSet">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Num" Type="int" Nullable="false" />
+    <Property Name="Floor" Type="int" Nullable="false" />
+    <Property Name="Corpus" Type="nvarchar(max)" Nullable="false" />
+  </EntityType>
+  <EntityType Name="PersonSet_Doctor">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Education" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Id" Type="int" Nullable="false" />
+    <Property Name="Job_Id" Type="int" Nullable="false" />
+    <Property Name="Record_Id" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="PersonSet_Patient">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="BloodType" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Id" Type="int" Nullable="false" />
+    <Property Name="MedCard_Id" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="IllnessMedCard">
+    <Key>
+      <PropertyRef Name="Illness_Id" />
+      <PropertyRef Name="MedCard_Id" />
+    </Key>
+    <Property Name="Illness_Id" Type="int" Nullable="false" />
+    <Property Name="MedCard_Id" Type="int" Nullable="false" />
+  </EntityType>
+  <Association Name="PersonDocument">
+    <End Role="Person" Type="ModelMed.Store.PersonSet" Multiplicity="*" />
+    <End Role="Document" Type="ModelMed.Store.DocumentSet" Multiplicity="1" />
+    <ReferentialConstraint>
+      <Principal Role="Document">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Person">
+        <PropertyRef Name="Document_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="JobDoctor">
+    <End Role="Job" Type="ModelMed.Store.JobSet" Multiplicity="1" />
+    <End Role="Doctor" Type="ModelMed.Store.PersonSet_Doctor" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Job">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Doctor">
+        <PropertyRef Name="Job_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="DoctorTimeForVisit">
+    <End Role="Doctor" Type="ModelMed.Store.PersonSet_Doctor" Multiplicity="1" />
+    <End Role="TimeForVisit" Type="ModelMed.Store.TimeForVisitSet" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Doctor">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="TimeForVisit">
+        <PropertyRef Name="Doctor_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="RecordDoctor">
+    <End Role="Record" Type="ModelMed.Store.RecordSet" Multiplicity="1" />
+    <End Role="Doctor" Type="ModelMed.Store.PersonSet_Doctor" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Record">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Doctor">
+        <PropertyRef Name="Record_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="MedCardRecord">
+    <End Role="MedCard" Type="ModelMed.Store.MedCardSet" Multiplicity="1" />
+    <End Role="Record" Type="ModelMed.Store.RecordSet" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="MedCard">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Record">
+        <PropertyRef Name="MedCard_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="MedCardPatient">
+    <End Role="MedCard" Type="ModelMed.Store.MedCardSet" Multiplicity="1" />
+    <End Role="Patient" Type="ModelMed.Store.PersonSet_Patient" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="MedCard">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Patient">
+        <PropertyRef Name="MedCard_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="CabinetTimeForVisit">
+    <End Role="Cabinet" Type="ModelMed.Store.CabinetSet" Multiplicity="1" />
+    <End Role="TimeForVisit" Type="ModelMed.Store.TimeForVisitSet" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Cabinet">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="TimeForVisit">
+        <PropertyRef Name="Cabinet_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="TimeForVisitPatient">
+    <End Role="TimeForVisit" Type="ModelMed.Store.TimeForVisitSet" Multiplicity="*" />
+    <End Role="Patient" Type="ModelMed.Store.PersonSet_Patient" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="Patient">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="TimeForVisit">
+        <PropertyRef Name="Patient_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_IllnessMedCard_Illness">
+    <End Role="Illness" Type="ModelMed.Store.IllnessSet" Multiplicity="1" />
+    <End Role="IllnessMedCard" Type="ModelMed.Store.IllnessMedCard" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Illness">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="IllnessMedCard">
+        <PropertyRef Name="Illness_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_IllnessMedCard_MedCard">
+    <End Role="IllnessMedCard" Type="ModelMed.Store.IllnessMedCard" Multiplicity="*" />
+    <End Role="MedCard" Type="ModelMed.Store.MedCardSet" Multiplicity="1" />
+    <ReferentialConstraint>
+      <Principal Role="MedCard">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="IllnessMedCard">
+        <PropertyRef Name="MedCard_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Doctor_inherits_Person">
+    <End Role="Person" Type="ModelMed.Store.PersonSet" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="Doctor" Type="ModelMed.Store.PersonSet_Doctor" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="Person">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Doctor">
+        <PropertyRef Name="Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Patient_inherits_Person">
+    <End Role="Person" Type="ModelMed.Store.PersonSet" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="Patient" Type="ModelMed.Store.PersonSet_Patient" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="Person">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Patient">
+        <PropertyRef Name="Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema xmlns="http://schemas.microsoft.com/ado/2009/11/edm" xmlns:cg="http://schemas.microsoft.com/ado/2006/04/codegeneration" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" Namespace="ModelMed" Alias="Self" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" annotation:UseStrongSpatialTypes="false">
+        <EntityContainer Name="ModelMedContainer" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="PersonSet" EntityType="ModelMed.Person" />
+          <EntitySet Name="MedCardSet" EntityType="ModelMed.MedCard" />
+          <EntitySet Name="RecordSet" EntityType="ModelMed.Record" />
+          <EntitySet Name="TimeForVisitSet" EntityType="ModelMed.TimeForVisit" />
+          <EntitySet Name="IllnessSet" EntityType="ModelMed.Illness" />
+          <EntitySet Name="JobSet" EntityType="ModelMed.Job" />
+          <EntitySet Name="DocumentSet" EntityType="ModelMed.Document" />
+          <AssociationSet Name="PersonDocument" Association="ModelMed.PersonDocument">
+            <End Role="Person" EntitySet="PersonSet" />
+            <End Role="Document" EntitySet="DocumentSet" />
+          </AssociationSet>
+          <AssociationSet Name="JobDoctor" Association="ModelMed.JobDoctor">
+            <End Role="Job" EntitySet="JobSet" />
+            <End Role="Doctor" EntitySet="PersonSet" />
+          </AssociationSet>
+          <AssociationSet Name="DoctorTimeForVisit" Association="ModelMed.DoctorTimeForVisit">
+            <End Role="Doctor" EntitySet="PersonSet" />
+            <End Role="TimeForVisit" EntitySet="TimeForVisitSet" />
+          </AssociationSet>
+          <AssociationSet Name="RecordDoctor" Association="ModelMed.RecordDoctor">
+            <End Role="Record" EntitySet="RecordSet" />
+            <End Role="Doctor" EntitySet="PersonSet" />
+          </AssociationSet>
+          <AssociationSet Name="MedCardRecord" Association="ModelMed.MedCardRecord">
+            <End Role="MedCard" EntitySet="MedCardSet" />
+            <End Role="Record" EntitySet="RecordSet" />
+          </AssociationSet>
+          <AssociationSet Name="IllnessMedCard" Association="ModelMed.IllnessMedCard">
+            <End Role="Illness" EntitySet="IllnessSet" />
+            <End Role="MedCard" EntitySet="MedCardSet" />
+          </AssociationSet>
+          <AssociationSet Name="MedCardPatient" Association="ModelMed.MedCardPatient">
+            <End Role="MedCard" EntitySet="MedCardSet" />
+            <End Role="Patient" EntitySet="PersonSet" />
+          </AssociationSet>
+          <EntitySet Name="CabinetSet" EntityType="ModelMed.Cabinet" />
+          <AssociationSet Name="CabinetTimeForVisit" Association="ModelMed.CabinetTimeForVisit">
+            <End Role="Cabinet" EntitySet="CabinetSet" />
+            <End Role="TimeForVisit" EntitySet="TimeForVisitSet" />
+          </AssociationSet>
+          <AssociationSet Name="TimeForVisitPatient" Association="ModelMed.TimeForVisitPatient">
+            <End Role="TimeForVisit" EntitySet="TimeForVisitSet" />
+            <End Role="Patient" EntitySet="PersonSet" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="Person">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <NavigationProperty Name="Document" Relationship="ModelMed.PersonDocument" FromRole="Person" ToRole="Document" />
+          <Property Name="FullName" Type="String" Nullable="false" />
+          <Property Name="BirthDate" Type="DateTime" Nullable="false" />
+          <Property Name="InsuranceNum" Type="String" Nullable="false" />
+          <Property Name="Adress" Type="String" Nullable="false" />
+          <Property Name="Gender" Type="String" Nullable="false" />
+          <Property Name="Password" Type="String" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Patient" BaseType="ModelMed.Person">
+          <NavigationProperty Name="MedCard" Relationship="ModelMed.MedCardPatient" FromRole="Patient" ToRole="MedCard" />
+          <Property Name="BloodType" Type="String" Nullable="false" />
+          <NavigationProperty Name="TimeForVisit" Relationship="ModelMed.TimeForVisitPatient" FromRole="Patient" ToRole="TimeForVisit" />
+        </EntityType>
+        <EntityType Name="Doctor" BaseType="ModelMed.Person">
+          <NavigationProperty Name="Job" Relationship="ModelMed.JobDoctor" FromRole="Doctor" ToRole="Job" />
+          <NavigationProperty Name="TimeForVisit" Relationship="ModelMed.DoctorTimeForVisit" FromRole="Doctor" ToRole="TimeForVisit" />
+          <NavigationProperty Name="Record" Relationship="ModelMed.RecordDoctor" FromRole="Doctor" ToRole="Record" />
+          <Property Name="Education" Type="String" Nullable="false" />
+        </EntityType>
+        <EnumType Name="DocTypes">
+          <Member Name="Пасспорт_РФ" Value="1" />
+          <Member Name="Временное_удостоверение_личности" Value="2" />
+          <Member Name="Военный_билет" Value="3" />
+          <Member Name="Свидетельство_о_рождении" Value="4" />
+          <Member Name="Дипломатический_паспорт" Value="5" />
+        </EnumType>
+        <EntityType Name="MedCard">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <NavigationProperty Name="Record" Relationship="ModelMed.MedCardRecord" FromRole="MedCard" ToRole="Record" />
+          <NavigationProperty Name="Illness" Relationship="ModelMed.IllnessMedCard" FromRole="MedCard" ToRole="Illness" />
+          <NavigationProperty Name="Patient" Relationship="ModelMed.MedCardPatient" FromRole="MedCard" ToRole="Patient" />
+          <Property Name="Shelf" Type="String" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Record">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <NavigationProperty Name="Doctor" Relationship="ModelMed.RecordDoctor" FromRole="Record" ToRole="Doctor" />
+          <NavigationProperty Name="MedCard" Relationship="ModelMed.MedCardRecord" FromRole="Record" ToRole="MedCard" />
+          <Property Name="Info" Type="String" Nullable="false" />
+          <Property Name="Date" Type="DateTime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="TimeForVisit">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <NavigationProperty Name="Doctor" Relationship="ModelMed.DoctorTimeForVisit" FromRole="TimeForVisit" ToRole="Doctor" />
+          <Property Name="VisitTime" Type="DateTime" Nullable="false" />
+          <NavigationProperty Name="Cabinet" Relationship="ModelMed.CabinetTimeForVisit" FromRole="TimeForVisit" ToRole="Cabinet" />
+          <NavigationProperty Name="Patient" Relationship="ModelMed.TimeForVisitPatient" FromRole="TimeForVisit" ToRole="Patient" />
+        </EntityType>
+        <EntityType Name="Illness">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <NavigationProperty Name="MedCard" Relationship="ModelMed.IllnessMedCard" FromRole="Illness" ToRole="MedCard" />
+          <Property Name="Name" Type="String" Nullable="false" />
+          <Property Name="Info" Type="String" Nullable="true" />
+        </EntityType>
+        <EntityType Name="Job">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <NavigationProperty Name="Doctor" Relationship="ModelMed.JobDoctor" FromRole="Job" ToRole="Doctor" />
+          <Property Name="Name" Type="String" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Document">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <NavigationProperty Name="Person" Relationship="ModelMed.PersonDocument" FromRole="Document" ToRole="Person" />
+          <Property Name="Type" Type="String" Nullable="false" />
+          <Property Name="Num" Type="String" Nullable="false" />
+        </EntityType>
+        <Association Name="PersonDocument">
+          <End Type="ModelMed.Person" Role="Person" Multiplicity="1" />
+          <End Type="ModelMed.Document" Role="Document" Multiplicity="1" />
+        </Association>
+        <Association Name="JobDoctor">
+          <End Type="ModelMed.Job" Role="Job" Multiplicity="1" />
+          <End Type="ModelMed.Doctor" Role="Doctor" Multiplicity="*" />
+        </Association>
+        <Association Name="DoctorTimeForVisit">
+          <End Type="ModelMed.Doctor" Role="Doctor" Multiplicity="1" />
+          <End Type="ModelMed.TimeForVisit" Role="TimeForVisit" Multiplicity="*" />
+        </Association>
+        <Association Name="RecordDoctor">
+          <End Type="ModelMed.Record" Role="Record" Multiplicity="1" />
+          <End Type="ModelMed.Doctor" Role="Doctor" Multiplicity="*" />
+        </Association>
+        <Association Name="MedCardRecord">
+          <End Type="ModelMed.MedCard" Role="MedCard" Multiplicity="1" />
+          <End Type="ModelMed.Record" Role="Record" Multiplicity="*" />
+        </Association>
+        <Association Name="IllnessMedCard">
+          <End Type="ModelMed.Illness" Role="Illness" Multiplicity="*" />
+          <End Type="ModelMed.MedCard" Role="MedCard" Multiplicity="*" />
+        </Association>
+        <Association Name="MedCardPatient">
+          <End Type="ModelMed.MedCard" Role="MedCard" Multiplicity="1" />
+          <End Type="ModelMed.Patient" Role="Patient" Multiplicity="*" />
+        </Association>
+        <EntityType Name="Cabinet">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Num" Type="Int32" Nullable="false" />
+          <Property Name="Floor" Type="Int32" Nullable="false" />
+          <Property Name="Corpus" Type="String" Nullable="false" />
+          <NavigationProperty Name="TimeForVisit" Relationship="ModelMed.CabinetTimeForVisit" FromRole="Cabinet" ToRole="TimeForVisit" />
+        </EntityType>
+        <Association Name="CabinetTimeForVisit">
+          <End Type="ModelMed.Cabinet" Role="Cabinet" Multiplicity="1" />
+          <End Type="ModelMed.TimeForVisit" Role="TimeForVisit" Multiplicity="*" />
+        </Association>
+        <Association Name="TimeForVisitPatient">
+          <End Type="ModelMed.TimeForVisit" Role="TimeForVisit" Multiplicity="*" />
+          <End Type="ModelMed.Patient" Role="Patient" Multiplicity="0..1" />
+        </Association>
+        <EnumType Name="GenderTypes">
+          <Member Name="Мужской" Value="1" />
+          <Member Name="Женский" Value="2" />
+        </EnumType>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+    <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="ModelMedStoreContainer" CdmEntityContainer="ModelMedContainer">
+    <EntitySetMapping Name="PersonSet">
+      <EntityTypeMapping TypeName="IsTypeOf(ModelMed.Person)">
+        <MappingFragment StoreEntitySet="PersonSet">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="FullName" ColumnName="FullName" />
+          <ScalarProperty Name="BirthDate" ColumnName="BirthDate" />
+          <ScalarProperty Name="InsuranceNum" ColumnName="InsuranceNum" />
+          <ScalarProperty Name="Adress" ColumnName="Adress" />
+          <ScalarProperty Name="Gender" ColumnName="Gender" />
+          <ScalarProperty Name="Password" ColumnName="Password" />
+        </MappingFragment>
+      </EntityTypeMapping>
+      <EntityTypeMapping TypeName="IsTypeOf(ModelMed.Doctor)">
+        <MappingFragment StoreEntitySet="PersonSet_Doctor">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Education" ColumnName="Education" />
+        </MappingFragment>
+      </EntityTypeMapping>
+      <EntityTypeMapping TypeName="IsTypeOf(ModelMed.Patient)">
+        <MappingFragment StoreEntitySet="PersonSet_Patient">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="BloodType" ColumnName="BloodType" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="MedCardSet">
+      <EntityTypeMapping TypeName="IsTypeOf(ModelMed.MedCard)">
+        <MappingFragment StoreEntitySet="MedCardSet">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Shelf" ColumnName="Shelf" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="RecordSet">
+      <EntityTypeMapping TypeName="IsTypeOf(ModelMed.Record)">
+        <MappingFragment StoreEntitySet="RecordSet">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Info" ColumnName="Info" />
+          <ScalarProperty Name="Date" ColumnName="Date" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TimeForVisitSet">
+      <EntityTypeMapping TypeName="IsTypeOf(ModelMed.TimeForVisit)">
+        <MappingFragment StoreEntitySet="TimeForVisitSet">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="VisitTime" ColumnName="VisitTime" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="IllnessSet">
+      <EntityTypeMapping TypeName="IsTypeOf(ModelMed.Illness)">
+        <MappingFragment StoreEntitySet="IllnessSet">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Info" ColumnName="Info" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="JobSet">
+      <EntityTypeMapping TypeName="IsTypeOf(ModelMed.Job)">
+        <MappingFragment StoreEntitySet="JobSet">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="DocumentSet">
+      <EntityTypeMapping TypeName="IsTypeOf(ModelMed.Document)">
+        <MappingFragment StoreEntitySet="DocumentSet">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Type" ColumnName="Type" />
+          <ScalarProperty Name="Num" ColumnName="Num" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="CabinetSet">
+      <EntityTypeMapping TypeName="IsTypeOf(ModelMed.Cabinet)">
+        <MappingFragment StoreEntitySet="CabinetSet">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Num" ColumnName="Num" />
+          <ScalarProperty Name="Floor" ColumnName="Floor" />
+          <ScalarProperty Name="Corpus" ColumnName="Corpus" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <AssociationSetMapping Name="PersonDocument" TypeName="ModelMed.PersonDocument" StoreEntitySet="PersonSet">
+      <EndProperty Name="Document">
+        <ScalarProperty Name="Id" ColumnName="Document_Id" />
+      </EndProperty>
+      <EndProperty Name="Person">
+        <ScalarProperty Name="Id" ColumnName="Id" />
+      </EndProperty>
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="JobDoctor" TypeName="ModelMed.JobDoctor" StoreEntitySet="PersonSet_Doctor">
+      <EndProperty Name="Job">
+        <ScalarProperty Name="Id" ColumnName="Job_Id" />
+      </EndProperty>
+      <EndProperty Name="Doctor">
+        <ScalarProperty Name="Id" ColumnName="Id" />
+      </EndProperty>
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="DoctorTimeForVisit" TypeName="ModelMed.DoctorTimeForVisit" StoreEntitySet="TimeForVisitSet">
+      <EndProperty Name="Doctor">
+        <ScalarProperty Name="Id" ColumnName="Doctor_Id" />
+      </EndProperty>
+      <EndProperty Name="TimeForVisit">
+        <ScalarProperty Name="Id" ColumnName="Id" />
+      </EndProperty>
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="RecordDoctor" TypeName="ModelMed.RecordDoctor" StoreEntitySet="PersonSet_Doctor">
+      <EndProperty Name="Record">
+        <ScalarProperty Name="Id" ColumnName="Record_Id" />
+      </EndProperty>
+      <EndProperty Name="Doctor">
+        <ScalarProperty Name="Id" ColumnName="Id" />
+      </EndProperty>
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="MedCardRecord" TypeName="ModelMed.MedCardRecord" StoreEntitySet="RecordSet">
+      <EndProperty Name="MedCard">
+        <ScalarProperty Name="Id" ColumnName="MedCard_Id" />
+      </EndProperty>
+      <EndProperty Name="Record">
+        <ScalarProperty Name="Id" ColumnName="Id" />
+      </EndProperty>
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="IllnessMedCard" TypeName="ModelMed.IllnessMedCard" StoreEntitySet="IllnessMedCard">
+      <EndProperty Name="Illness">
+        <ScalarProperty Name="Id" ColumnName="Illness_Id" />
+      </EndProperty>
+      <EndProperty Name="MedCard">
+        <ScalarProperty Name="Id" ColumnName="MedCard_Id" />
+      </EndProperty>
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="MedCardPatient" TypeName="ModelMed.MedCardPatient" StoreEntitySet="PersonSet_Patient">
+      <EndProperty Name="MedCard">
+        <ScalarProperty Name="Id" ColumnName="MedCard_Id" />
+      </EndProperty>
+      <EndProperty Name="Patient">
+        <ScalarProperty Name="Id" ColumnName="Id" />
+      </EndProperty>
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="CabinetTimeForVisit" TypeName="ModelMed.CabinetTimeForVisit" StoreEntitySet="TimeForVisitSet">
+      <EndProperty Name="Cabinet">
+        <ScalarProperty Name="Id" ColumnName="Cabinet_Id" />
+      </EndProperty>
+      <EndProperty Name="TimeForVisit">
+        <ScalarProperty Name="Id" ColumnName="Id" />
+      </EndProperty>
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="TimeForVisitPatient" TypeName="ModelMed.TimeForVisitPatient" StoreEntitySet="TimeForVisitSet">
+      <EndProperty Name="Patient">
+        <ScalarProperty Name="Id" ColumnName="Patient_Id" />
+      </EndProperty>
+      <EndProperty Name="TimeForVisit">
+        <ScalarProperty Name="Id" ColumnName="Id" />
+      </EndProperty>
+      <Condition ColumnName="Patient_Id" IsNull="false" />
+    </AssociationSetMapping>
+  </EntityContainerMapping>
+</Mapping></edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <edmx:Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </edmx:Connection>
+    <edmx:Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="False" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Нет" />
+        <DesignerProperty Name="UseLegacyProvider" Value="False" />
+      </DesignerInfoPropertySet>
+    </edmx:Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>
