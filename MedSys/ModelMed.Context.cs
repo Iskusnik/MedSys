@@ -46,6 +46,7 @@ namespace MedSys
             /*инициализация БД*/
             Doctor doctor = new Doctor();
             doctor.FullName = "Иван Иванович Иванов";
+
             doctor.BirthDate = new DateTime(1980, 9, 9);
 
             db.SaveChanges();
