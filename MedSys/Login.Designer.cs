@@ -1,6 +1,6 @@
 ﻿namespace MedSys
 {
-    partial class Form1
+    partial class Login
     {
         /// <summary>
         /// Обязательная переменная конструктора.
@@ -28,19 +28,20 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.button1 = new System.Windows.Forms.Button();
+            this.buttonLogin = new System.Windows.Forms.Button();
             this.textBoxFullName = new System.Windows.Forms.TextBox();
             this.textBoxPassword = new System.Windows.Forms.TextBox();
             this.SuspendLayout();
             // 
-            // button1
+            // buttonLogin
             // 
-            this.button1.Location = new System.Drawing.Point(12, 64);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(99, 23);
-            this.button1.TabIndex = 0;
-            this.button1.Text = "Вход";
-            this.button1.UseVisualStyleBackColor = true;
+            this.buttonLogin.Location = new System.Drawing.Point(12, 64);
+            this.buttonLogin.Name = "buttonLogin";
+            this.buttonLogin.Size = new System.Drawing.Size(99, 23);
+            this.buttonLogin.TabIndex = 0;
+            this.buttonLogin.Text = "Вход";
+            this.buttonLogin.UseVisualStyleBackColor = true;
+            this.buttonLogin.Click += new System.EventHandler(this.buttonLogin_Click);
             // 
             // textBoxFullName
             // 
@@ -56,15 +57,15 @@
             this.textBoxPassword.Size = new System.Drawing.Size(260, 20);
             this.textBoxPassword.TabIndex = 2;
             // 
-            // Form1
+            // Login
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(284, 99);
             this.Controls.Add(this.textBoxPassword);
             this.Controls.Add(this.textBoxFullName);
-            this.Controls.Add(this.button1);
-            this.Name = "Form1";
+            this.Controls.Add(this.buttonLogin);
+            this.Name = "Login";
             this.Text = "ИС Поликлиника";
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -73,7 +74,7 @@
 
         #endregion
 
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button buttonLogin;
         private System.Windows.Forms.TextBox textBoxFullName;
         private System.Windows.Forms.TextBox textBoxPassword;
     }
