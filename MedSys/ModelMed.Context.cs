@@ -15,19 +15,16 @@ namespace MedSys
     
     public partial class ModelMedContainer : DbContext
     {
-
-
         public ModelMedContainer()
             : base("name=ModelMedContainer")
         {
-            Database.SetInitializer<ModelMedContainer>(new MyContextInitializer());
         }
     
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             throw new UnintentionalCodeFirstException();
         }
-
+    
         public virtual DbSet<Person> PersonSet { get; set; }
         public virtual DbSet<MedCard> MedCardSet { get; set; }
         public virtual DbSet<Record> RecordSet { get; set; }
@@ -37,20 +34,4 @@ namespace MedSys
         public virtual DbSet<Document> DocumentSet { get; set; }
         public virtual DbSet<Cabinet> CabinetSet { get; set; }
     }
-
-
-    class MyContextInitializer : DropCreateDatabaseAlways<ModelMedContainer>
-    {
-        protected override void Seed(ModelMedContainer db)
-        {
-            /*инициализация БД*/
-            Doctor doctor = new Doctor();
-            doctor.FullName = "Иван Иванович Иванов";
-
-            doctor.BirthDate = new DateTime(1980, 9, 9);
-
-            db.SaveChanges();
-        }
-    }
-
 }

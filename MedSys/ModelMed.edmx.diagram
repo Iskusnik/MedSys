@@ -6,7 +6,7 @@
     <edmx:Diagrams>
       <Diagram DiagramId="a990b816f29744f6bdaa7c062c260952" Name="Diagram1" >
         <EntityTypeShape EntityType="ModelMed.Person" Width="1.5" PointX="6.5" PointY="0.5" />
-        <EntityTypeShape EntityType="ModelMed.Patient" Width="1.5" PointX="5.375" PointY="3.375" />
+        <EntityTypeShape EntityType="ModelMed.Patient" Width="1.5" PointX="5" PointY="3.25" />
         <EntityTypeShape EntityType="ModelMed.Doctor" Width="1.5" PointX="7.875" PointY="3.25" />
         <InheritanceConnector EntityType="ModelMed.Doctor" />
         <InheritanceConnector EntityType="ModelMed.Patient" />

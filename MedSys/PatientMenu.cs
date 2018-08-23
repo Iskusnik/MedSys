@@ -16,5 +16,10 @@ namespace MedSys
         {
             InitializeComponent();
         }
+
+        private void PatientMenu_Load(object sender, EventArgs e)
+        {
+
+        }
     }
 }
