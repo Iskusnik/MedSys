@@ -54,6 +54,7 @@
             // 
             this.textBoxPassword.Location = new System.Drawing.Point(12, 38);
             this.textBoxPassword.Name = "textBoxPassword";
+            this.textBoxPassword.PasswordChar = '*';
             this.textBoxPassword.Size = new System.Drawing.Size(260, 20);
             this.textBoxPassword.TabIndex = 2;
             // 
@@ -65,6 +66,7 @@
             this.Controls.Add(this.textBoxPassword);
             this.Controls.Add(this.textBoxFullName);
             this.Controls.Add(this.buttonLogin);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
             this.Name = "Login";
             this.Text = "ИС Поликлиника";
             this.ResumeLayout(false);

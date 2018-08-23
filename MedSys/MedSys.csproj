@@ -106,6 +106,12 @@
     <Compile Include="Patient.cs">
       <DependentUpon>ModelMed.tt</DependentUpon>
     </Compile>
+    <Compile Include="PatientMenu.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PatientMenu.Designer.cs">
+      <DependentUpon>PatientMenu.cs</DependentUpon>
+    </Compile>
     <Compile Include="Person.cs">
       <DependentUpon>ModelMed.tt</DependentUpon>
     </Compile>

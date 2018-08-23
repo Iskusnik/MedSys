@@ -19,7 +19,21 @@ namespace MedSys
 
         private void buttonLogin_Click(object sender, EventArgs e)
         {
-
+            string mes;
+            Person pers;
+            if (!ControlFunctions.LoginResult(this.textBoxFullName.Text, this.textBoxPassword.Text, out mes, out pers))
+                MessageBox.Show(mes);
+            else
+                if (pers is Patient)
+            {
+                PatientMenu patientMenu = new PatientMenu((Patient)pers);
+                patientMenu.ShowDialog();
+            }
+            else
+            {
+               // DoctorMenu doctorMenu = new DoctorMenu((Doctor)pers);
+              //  doctorMenu.ShowDialog();
+            }
         }
     }
 }
