@@ -93,6 +93,7 @@
     <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="Info" Type="nvarchar(max)" Nullable="false" />
     <Property Name="Date" Type="datetime" Nullable="false" />
+    <Property Name="Doctor_Id" Type="int" Nullable="false" />
     <Property Name="MedCard_Id" Type="int" Nullable="false" />
   </EntityType>
   <EntityType Name="TimeForVisitSet">
@@ -144,7 +145,6 @@
     <Property Name="Education" Type="nvarchar(max)" Nullable="false" />
     <Property Name="Id" Type="int" Nullable="false" />
     <Property Name="Job_Id" Type="int" Nullable="false" />
-    <Property Name="Record_Id" Type="int" Nullable="false" />
   </EntityType>
   <EntityType Name="PersonSet_Patient">
     <Key>
@@ -199,14 +199,14 @@
     </ReferentialConstraint>
   </Association>
   <Association Name="RecordDoctor">
-    <End Role="Record" Type="ModelMed.Store.RecordSet" Multiplicity="1" />
-    <End Role="Doctor" Type="ModelMed.Store.PersonSet_Doctor" Multiplicity="*" />
+    <End Role="Record" Type="ModelMed.Store.RecordSet" Multiplicity="*" />
+    <End Role="Doctor" Type="ModelMed.Store.PersonSet_Doctor" Multiplicity="1" />
     <ReferentialConstraint>
-      <Principal Role="Record">
+      <Principal Role="Doctor">
         <PropertyRef Name="Id" />
       </Principal>
-      <Dependent Role="Doctor">
-        <PropertyRef Name="Record_Id" />
+      <Dependent Role="Record">
+        <PropertyRef Name="Doctor_Id" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -460,8 +460,8 @@
           <End Type="ModelMed.TimeForVisit" Role="TimeForVisit" Multiplicity="*" />
         </Association>
         <Association Name="RecordDoctor">
-          <End Type="ModelMed.Record" Role="Record" Multiplicity="1" />
-          <End Type="ModelMed.Doctor" Role="Doctor" Multiplicity="*" />
+          <End Type="ModelMed.Record" Role="Record" Multiplicity="*" />
+          <End Type="ModelMed.Doctor" Role="Doctor" Multiplicity="1" />
         </Association>
         <Association Name="MedCardRecord">
           <End Type="ModelMed.MedCard" Role="MedCard" Multiplicity="1" />
@@ -613,11 +613,11 @@
         <ScalarProperty Name="Id" ColumnName="Id" />
       </EndProperty>
     </AssociationSetMapping>
-    <AssociationSetMapping Name="RecordDoctor" TypeName="ModelMed.RecordDoctor" StoreEntitySet="PersonSet_Doctor">
-      <EndProperty Name="Record">
-        <ScalarProperty Name="Id" ColumnName="Record_Id" />
-      </EndProperty>
+    <AssociationSetMapping Name="RecordDoctor" TypeName="ModelMed.RecordDoctor" StoreEntitySet="RecordSet">
       <EndProperty Name="Doctor">
+        <ScalarProperty Name="Id" ColumnName="Doctor_Id" />
+      </EndProperty>
+      <EndProperty Name="Record">
         <ScalarProperty Name="Id" ColumnName="Id" />
       </EndProperty>
     </AssociationSetMapping>

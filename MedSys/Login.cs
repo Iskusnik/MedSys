@@ -31,8 +31,8 @@ namespace MedSys
             }
             else
             {
-               // DoctorMenu doctorMenu = new DoctorMenu((Doctor)pers);
-              //  doctorMenu.ShowDialog();
+                DoctorMenu doctorMenu = new DoctorMenu((Doctor)pers);
+                doctorMenu.ShowDialog();
             }
         }
     }

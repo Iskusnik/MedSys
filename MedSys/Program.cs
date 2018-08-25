@@ -14,6 +14,7 @@ namespace MedSys
         [STAThread]
         static void Main()
         {
+            ModelMedContainer model = new ModelMedContainer();
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             Application.Run(new Login());

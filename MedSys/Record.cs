@@ -14,18 +14,11 @@ namespace MedSys
     
     public partial class Record
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Record()
-        {
-            this.Doctor = new HashSet<Doctor>();
-        }
-    
         public int Id { get; set; }
         public string Info { get; set; }
         public System.DateTime Date { get; set; }
     
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Doctor> Doctor { get; set; }
+        public virtual Doctor Doctor { get; set; }
         public virtual MedCard MedCard { get; set; }
     }
 }

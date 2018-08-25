@@ -18,6 +18,7 @@ namespace MedSys
         public Doctor()
         {
             this.TimeForVisit = new HashSet<TimeForVisit>();
+            this.Record = new HashSet<Record>();
         }
     
         public string Education { get; set; }
@@ -25,6 +26,7 @@ namespace MedSys
         public virtual Job Job { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<TimeForVisit> TimeForVisit { get; set; }
-        public virtual Record Record { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Record> Record { get; set; }
     }
 }

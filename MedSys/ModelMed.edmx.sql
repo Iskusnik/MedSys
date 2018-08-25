@@ -2,7 +2,7 @@
 -- --------------------------------------------------
 -- Entity Designer DDL Script for SQL Server 2005, 2008, 2012 and Azure
 -- --------------------------------------------------
--- Date Created: 08/21/2018 16:13:41
+-- Date Created: 08/25/2018 18:36:32
 -- Generated from EDMX file: C:\Users\IskusnikXD\Documents\Visual Studio 2015\Projects\MedSys\MedSys\ModelMed.edmx
 -- --------------------------------------------------
 
@@ -121,6 +121,7 @@ CREATE TABLE [dbo].[RecordSet] (
     [Id] int IDENTITY(1,1) NOT NULL,
     [Info] nvarchar(max)  NOT NULL,
     [Date] datetime  NOT NULL,
+    [Doctor_Id] int  NOT NULL,
     [MedCard_Id] int  NOT NULL
 );
 GO
@@ -171,8 +172,7 @@ GO
 CREATE TABLE [dbo].[PersonSet_Doctor] (
     [Education] nvarchar(max)  NOT NULL,
     [Id] int  NOT NULL,
-    [Job_Id] int  NOT NULL,
-    [Record_Id] int  NOT NULL
+    [Job_Id] int  NOT NULL
 );
 GO
 
@@ -310,19 +310,19 @@ ON [dbo].[TimeForVisitSet]
     ([Doctor_Id]);
 GO
 
--- Creating foreign key on [Record_Id] in table 'PersonSet_Doctor'
-ALTER TABLE [dbo].[PersonSet_Doctor]
+-- Creating foreign key on [Doctor_Id] in table 'RecordSet'
+ALTER TABLE [dbo].[RecordSet]
 ADD CONSTRAINT [FK_RecordDoctor]
-    FOREIGN KEY ([Record_Id])
-    REFERENCES [dbo].[RecordSet]
+    FOREIGN KEY ([Doctor_Id])
+    REFERENCES [dbo].[PersonSet_Doctor]
         ([Id])
     ON DELETE NO ACTION ON UPDATE NO ACTION;
 GO
 
 -- Creating non-clustered index for FOREIGN KEY 'FK_RecordDoctor'
 CREATE INDEX [IX_FK_RecordDoctor]
-ON [dbo].[PersonSet_Doctor]
-    ([Record_Id]);
+ON [dbo].[RecordSet]
+    ([Doctor_Id]);
 GO
 
 -- Creating foreign key on [MedCard_Id] in table 'RecordSet'

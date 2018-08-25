@@ -12,19 +12,41 @@ namespace MedSys
     using System;
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
-    
+
+    class MyContextInitializer : DropCreateDatabaseAlways<ModelMedContainer>
+    {
+        protected override void Seed(ModelMedContainer db)
+        {
+            Doctor docA = new Doctor();
+            docA.Adress = "none";
+            docA.FullName = "none";
+            docA.BirthDate = DateTime.Parse("11.11.1980");
+
+
+
+            db.PersonSet.Add(docA);
+            db.SaveChanges();
+        }
+    }
+
     public partial class ModelMedContainer : DbContext
     {
+
+        static ModelMedContainer()
+        {
+            Database.SetInitializer<ModelMedContainer>(new MyContextInitializer());
+        }
+
         public ModelMedContainer()
             : base("name=ModelMedContainer")
         {
         }
-    
+
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             throw new UnintentionalCodeFirstException();
         }
-    
+
         public virtual DbSet<Person> PersonSet { get; set; }
         public virtual DbSet<MedCard> MedCardSet { get; set; }
         public virtual DbSet<Record> RecordSet { get; set; }

@@ -1,6 +1,6 @@
 ﻿namespace MedSys
 {
-    partial class PatientMenu
+    partial class DoctorMenu
     {
         /// <summary>
         /// Required designer variable.
@@ -28,10 +28,9 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.textBoxDocType = new System.Windows.Forms.TextBox();
             this.textBoxBirthDate = new System.Windows.Forms.TextBox();
             this.textBoxGender = new System.Windows.Forms.TextBox();
-            this.label17 = new System.Windows.Forms.Label();
-            this.textBoxBloodType = new System.Windows.Forms.TextBox();
             this.записиВрачейToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.просмотретьИсториюБолезнейToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.изменитьДанныеToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -53,13 +52,30 @@
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.tabPage2 = new System.Windows.Forms.TabPage();
             this.label2 = new System.Windows.Forms.Label();
-            this.textBoxInsuranceNum = new System.Windows.Forms.TextBox();
-            this.textBoxDocType = new System.Windows.Forms.TextBox();
+            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.tabPage3 = new System.Windows.Forms.TabPage();
+            this.label3 = new System.Windows.Forms.Label();
+            this.textBoxJob = new System.Windows.Forms.TextBox();
+            this.label6 = new System.Windows.Forms.Label();
+            this.textBoxEducation = new System.Windows.Forms.TextBox();
             this.menuStrip2.SuspendLayout();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.tabPage2.SuspendLayout();
+            this.tabPage3.SuspendLayout();
             this.SuspendLayout();
+            // 
+            // textBoxDocType
+            // 
+            this.textBoxDocType.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.textBoxDocType.Location = new System.Drawing.Point(123, 6);
+            this.textBoxDocType.Name = "textBoxDocType";
+            this.textBoxDocType.ReadOnly = true;
+            this.textBoxDocType.Size = new System.Drawing.Size(638, 20);
+            this.textBoxDocType.TabIndex = 143;
+            this.textBoxDocType.Text = "a";
             // 
             // textBoxBirthDate
             // 
@@ -84,30 +100,6 @@
             this.textBoxGender.Size = new System.Drawing.Size(634, 20);
             this.textBoxGender.TabIndex = 140;
             this.textBoxGender.Text = "a";
-            // 
-            // label17
-            // 
-            this.label17.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.label17.AutoSize = true;
-            this.label17.Location = new System.Drawing.Point(3, 110);
-            this.label17.Name = "label17";
-            this.label17.Size = new System.Drawing.Size(75, 13);
-            this.label17.TabIndex = 139;
-            this.label17.Text = "Группа крови";
-            // 
-            // textBoxBloodType
-            // 
-            this.textBoxBloodType.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.textBoxBloodType.Location = new System.Drawing.Point(127, 110);
-            this.textBoxBloodType.Name = "textBoxBloodType";
-            this.textBoxBloodType.ReadOnly = true;
-            this.textBoxBloodType.Size = new System.Drawing.Size(634, 20);
-            this.textBoxBloodType.TabIndex = 138;
-            this.textBoxBloodType.Text = "a";
             // 
             // записиВрачейToolStripMenuItem
             // 
@@ -281,31 +273,30 @@
             // 
             this.tabControl1.Controls.Add(this.tabPage1);
             this.tabControl1.Controls.Add(this.tabPage2);
+            this.tabControl1.Controls.Add(this.tabPage3);
             this.tabControl1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tabControl1.Location = new System.Drawing.Point(0, 24);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(777, 188);
+            this.tabControl1.Size = new System.Drawing.Size(777, 166);
             this.tabControl1.TabIndex = 144;
             // 
             // tabPage1
             // 
             this.tabPage1.Controls.Add(this.label2);
-            this.tabPage1.Controls.Add(this.textBoxInsuranceNum);
+            this.tabPage1.Controls.Add(this.textBox1);
             this.tabPage1.Controls.Add(this.textBoxName);
             this.tabPage1.Controls.Add(this.label1);
             this.tabPage1.Controls.Add(this.textBoxBirthDate);
             this.tabPage1.Controls.Add(this.label4);
             this.tabPage1.Controls.Add(this.textBoxGender);
             this.tabPage1.Controls.Add(this.label5);
-            this.tabPage1.Controls.Add(this.label17);
             this.tabPage1.Controls.Add(this.textBoxAdress);
-            this.tabPage1.Controls.Add(this.textBoxBloodType);
             this.tabPage1.Controls.Add(this.label7);
             this.tabPage1.Location = new System.Drawing.Point(4, 22);
             this.tabPage1.Name = "tabPage1";
             this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage1.Size = new System.Drawing.Size(769, 162);
+            this.tabPage1.Size = new System.Drawing.Size(769, 140);
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "Общие сведения";
             this.tabPage1.UseVisualStyleBackColor = true;
@@ -319,7 +310,7 @@
             this.tabPage2.Location = new System.Drawing.Point(4, 22);
             this.tabPage2.Name = "tabPage2";
             this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage2.Size = new System.Drawing.Size(769, 162);
+            this.tabPage2.Size = new System.Drawing.Size(769, 140);
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "Удостоверение личности";
             this.tabPage2.UseVisualStyleBackColor = true;
@@ -330,50 +321,100 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(3, 136);
+            this.label2.Location = new System.Drawing.Point(3, 110);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(80, 13);
             this.label2.TabIndex = 143;
             this.label2.Text = "Номер полиса";
             // 
-            // textBoxInsuranceNum
+            // textBox1
             // 
-            this.textBoxInsuranceNum.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            this.textBox1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.textBoxInsuranceNum.Location = new System.Drawing.Point(127, 136);
-            this.textBoxInsuranceNum.Name = "textBoxInsuranceNum";
-            this.textBoxInsuranceNum.ReadOnly = true;
-            this.textBoxInsuranceNum.Size = new System.Drawing.Size(634, 20);
-            this.textBoxInsuranceNum.TabIndex = 142;
-            this.textBoxInsuranceNum.Text = "a";
+            this.textBox1.Location = new System.Drawing.Point(127, 110);
+            this.textBox1.Name = "textBox1";
+            this.textBox1.ReadOnly = true;
+            this.textBox1.Size = new System.Drawing.Size(634, 20);
+            this.textBox1.TabIndex = 142;
+            this.textBox1.Text = "a";
             // 
-            // textBoxDocType
+            // tabPage3
             // 
-            this.textBoxDocType.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            this.tabPage3.Controls.Add(this.label3);
+            this.tabPage3.Controls.Add(this.textBoxJob);
+            this.tabPage3.Controls.Add(this.label6);
+            this.tabPage3.Controls.Add(this.textBoxEducation);
+            this.tabPage3.Location = new System.Drawing.Point(4, 22);
+            this.tabPage3.Name = "tabPage3";
+            this.tabPage3.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage3.Size = new System.Drawing.Size(769, 140);
+            this.tabPage3.TabIndex = 2;
+            this.tabPage3.Text = "Данные врача";
+            this.tabPage3.UseVisualStyleBackColor = true;
+            // 
+            // label3
+            // 
+            this.label3.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.textBoxDocType.Location = new System.Drawing.Point(123, 6);
-            this.textBoxDocType.Name = "textBoxDocType";
-            this.textBoxDocType.ReadOnly = true;
-            this.textBoxDocType.Size = new System.Drawing.Size(638, 20);
-            this.textBoxDocType.TabIndex = 143;
-            this.textBoxDocType.Text = "a";
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(6, 6);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(65, 13);
+            this.label3.TabIndex = 144;
+            this.label3.Text = "Должность";
             // 
-            // PatientMenu
+            // textBoxJob
+            // 
+            this.textBoxJob.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.textBoxJob.Location = new System.Drawing.Point(123, 6);
+            this.textBoxJob.Name = "textBoxJob";
+            this.textBoxJob.ReadOnly = true;
+            this.textBoxJob.Size = new System.Drawing.Size(638, 20);
+            this.textBoxJob.TabIndex = 147;
+            this.textBoxJob.Text = "a";
+            // 
+            // label6
+            // 
+            this.label6.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.label6.AutoSize = true;
+            this.label6.Location = new System.Drawing.Point(6, 32);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(75, 13);
+            this.label6.TabIndex = 145;
+            this.label6.Text = "Образование";
+            // 
+            // textBoxEducation
+            // 
+            this.textBoxEducation.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.textBoxEducation.Location = new System.Drawing.Point(123, 32);
+            this.textBoxEducation.Name = "textBoxEducation";
+            this.textBoxEducation.ReadOnly = true;
+            this.textBoxEducation.Size = new System.Drawing.Size(638, 20);
+            this.textBoxEducation.TabIndex = 146;
+            this.textBoxEducation.Text = "1";
+            // 
+            // DoctorMenu
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoScroll = true;
             this.AutoSize = true;
-            this.ClientSize = new System.Drawing.Size(777, 212);
+            this.ClientSize = new System.Drawing.Size(777, 190);
             this.Controls.Add(this.tabControl1);
             this.Controls.Add(this.menuStrip2);
-            this.MaximumSize = new System.Drawing.Size(793, 251);
+            this.MaximumSize = new System.Drawing.Size(793, 229);
             this.MinimumSize = new System.Drawing.Size(392, 229);
-            this.Name = "PatientMenu";
-            this.Text = "Меню пациента:";
-            this.Load += new System.EventHandler(this.PatientMenu_Load);
+            this.Name = "DoctorMenu";
+            this.Text = "Меню врача:";
+            this.Load += new System.EventHandler(this.DoctorMenu_Load);
             this.menuStrip2.ResumeLayout(false);
             this.menuStrip2.PerformLayout();
             this.tabControl1.ResumeLayout(false);
@@ -381,16 +422,17 @@
             this.tabPage1.PerformLayout();
             this.tabPage2.ResumeLayout(false);
             this.tabPage2.PerformLayout();
+            this.tabPage3.ResumeLayout(false);
+            this.tabPage3.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
         }
 
         #endregion
+        public System.Windows.Forms.TextBox textBoxDocType;
         public System.Windows.Forms.TextBox textBoxBirthDate;
         public System.Windows.Forms.TextBox textBoxGender;
-        private System.Windows.Forms.Label label17;
-        public System.Windows.Forms.TextBox textBoxBloodType;
         private System.Windows.Forms.ToolStripMenuItem записиВрачейToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem просмотретьИсториюБолезнейToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem изменитьДанныеToolStripMenuItem;
@@ -412,7 +454,11 @@
         private System.Windows.Forms.TabPage tabPage1;
         private System.Windows.Forms.TabPage tabPage2;
         private System.Windows.Forms.Label label2;
-        public System.Windows.Forms.TextBox textBoxInsuranceNum;
-        public System.Windows.Forms.TextBox textBoxDocType;
+        public System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.TabPage tabPage3;
+        private System.Windows.Forms.Label label3;
+        public System.Windows.Forms.TextBox textBoxJob;
+        private System.Windows.Forms.Label label6;
+        public System.Windows.Forms.TextBox textBoxEducation;
     }
 }
