@@ -49,6 +49,7 @@
             this.textBoxFullName.Name = "textBoxFullName";
             this.textBoxFullName.Size = new System.Drawing.Size(260, 20);
             this.textBoxFullName.TabIndex = 1;
+            this.textBoxFullName.Text = "Иванов Иван Иванович_11.12.1980";
             // 
             // textBoxPassword
             // 
@@ -57,6 +58,7 @@
             this.textBoxPassword.PasswordChar = '*';
             this.textBoxPassword.Size = new System.Drawing.Size(260, 20);
             this.textBoxPassword.TabIndex = 2;
+            this.textBoxPassword.Text = "2";
             // 
             // Login
             // 

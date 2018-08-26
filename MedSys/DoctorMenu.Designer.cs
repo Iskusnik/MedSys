@@ -50,9 +50,9 @@
             this.menuStrip2 = new System.Windows.Forms.MenuStrip();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
-            this.tabPage2 = new System.Windows.Forms.TabPage();
             this.label2 = new System.Windows.Forms.Label();
-            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.textBoxInsuranceNum = new System.Windows.Forms.TextBox();
+            this.tabPage2 = new System.Windows.Forms.TabPage();
             this.tabPage3 = new System.Windows.Forms.TabPage();
             this.label3 = new System.Windows.Forms.Label();
             this.textBoxJob = new System.Windows.Forms.TextBox();
@@ -284,7 +284,7 @@
             // tabPage1
             // 
             this.tabPage1.Controls.Add(this.label2);
-            this.tabPage1.Controls.Add(this.textBox1);
+            this.tabPage1.Controls.Add(this.textBoxInsuranceNum);
             this.tabPage1.Controls.Add(this.textBoxName);
             this.tabPage1.Controls.Add(this.label1);
             this.tabPage1.Controls.Add(this.textBoxBirthDate);
@@ -301,6 +301,31 @@
             this.tabPage1.Text = "Общие сведения";
             this.tabPage1.UseVisualStyleBackColor = true;
             // 
+            // label2
+            // 
+            this.label2.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(3, 110);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(80, 13);
+            this.label2.TabIndex = 143;
+            this.label2.Text = "Номер полиса";
+            // 
+            // textBoxInsuranceNum
+            // 
+            this.textBoxInsuranceNum.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.textBoxInsuranceNum.HideSelection = false;
+            this.textBoxInsuranceNum.Location = new System.Drawing.Point(127, 110);
+            this.textBoxInsuranceNum.Name = "textBoxInsuranceNum";
+            this.textBoxInsuranceNum.ReadOnly = true;
+            this.textBoxInsuranceNum.Size = new System.Drawing.Size(634, 20);
+            this.textBoxInsuranceNum.TabIndex = 142;
+            this.textBoxInsuranceNum.Text = "a";
+            // 
             // tabPage2
             // 
             this.tabPage2.Controls.Add(this.label10);
@@ -314,30 +339,6 @@
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "Удостоверение личности";
             this.tabPage2.UseVisualStyleBackColor = true;
-            // 
-            // label2
-            // 
-            this.label2.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(3, 110);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(80, 13);
-            this.label2.TabIndex = 143;
-            this.label2.Text = "Номер полиса";
-            // 
-            // textBox1
-            // 
-            this.textBox1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.textBox1.Location = new System.Drawing.Point(127, 110);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.ReadOnly = true;
-            this.textBox1.Size = new System.Drawing.Size(634, 20);
-            this.textBox1.TabIndex = 142;
-            this.textBox1.Text = "a";
             // 
             // tabPage3
             // 
@@ -454,7 +455,7 @@
         private System.Windows.Forms.TabPage tabPage1;
         private System.Windows.Forms.TabPage tabPage2;
         private System.Windows.Forms.Label label2;
-        public System.Windows.Forms.TextBox textBox1;
+        public System.Windows.Forms.TextBox textBoxInsuranceNum;
         private System.Windows.Forms.TabPage tabPage3;
         private System.Windows.Forms.Label label3;
         public System.Windows.Forms.TextBox textBoxJob;

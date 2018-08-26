@@ -22,7 +22,15 @@ namespace MedSys
 
         private void DoctorMenu_Load(object sender, EventArgs e)
         {
-
+            textBoxBirthDate.Text = doctor.BirthDate.ToShortDateString();
+            textBoxJob.Text = doctor.Job.Name;
+            textBoxName.Text = doctor.FullName;
+            textBoxGender.Text = doctor.Gender;
+            textBoxInsuranceNum.Text = doctor.InsuranceNum;
+            textBoxDocType.Text = doctor.Document.Type;
+            textBoxDocumentNum.Text = doctor.Document.Num;
+            textBoxAdress.Text = doctor.Adress;
+            textBoxEducation.Text = doctor.Education;
         }
     }
 }
