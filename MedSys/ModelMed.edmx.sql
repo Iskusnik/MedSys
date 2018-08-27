@@ -2,7 +2,7 @@
 -- --------------------------------------------------
 -- Entity Designer DDL Script for SQL Server 2005, 2008, 2012 and Azure
 -- --------------------------------------------------
--- Date Created: 08/25/2018 18:36:32
+-- Date Created: 08/27/2018 18:58:27
 -- Generated from EDMX file: C:\Users\IskusnikXD\Documents\Visual Studio 2015\Projects\MedSys\MedSys\ModelMed.edmx
 -- --------------------------------------------------
 
@@ -27,7 +27,7 @@ IF OBJECT_ID(N'[dbo].[FK_DoctorTimeForVisit]', 'F') IS NOT NULL
     ALTER TABLE [dbo].[TimeForVisitSet] DROP CONSTRAINT [FK_DoctorTimeForVisit];
 GO
 IF OBJECT_ID(N'[dbo].[FK_RecordDoctor]', 'F') IS NOT NULL
-    ALTER TABLE [dbo].[PersonSet_Doctor] DROP CONSTRAINT [FK_RecordDoctor];
+    ALTER TABLE [dbo].[RecordSet] DROP CONSTRAINT [FK_RecordDoctor];
 GO
 IF OBJECT_ID(N'[dbo].[FK_MedCardRecord]', 'F') IS NOT NULL
     ALTER TABLE [dbo].[RecordSet] DROP CONSTRAINT [FK_MedCardRecord];
@@ -39,7 +39,7 @@ IF OBJECT_ID(N'[dbo].[FK_IllnessMedCard_MedCard]', 'F') IS NOT NULL
     ALTER TABLE [dbo].[IllnessMedCard] DROP CONSTRAINT [FK_IllnessMedCard_MedCard];
 GO
 IF OBJECT_ID(N'[dbo].[FK_MedCardPatient]', 'F') IS NOT NULL
-    ALTER TABLE [dbo].[PersonSet_Patient] DROP CONSTRAINT [FK_MedCardPatient];
+    ALTER TABLE [dbo].[MedCardSet] DROP CONSTRAINT [FK_MedCardPatient];
 GO
 IF OBJECT_ID(N'[dbo].[FK_CabinetTimeForVisit]', 'F') IS NOT NULL
     ALTER TABLE [dbo].[TimeForVisitSet] DROP CONSTRAINT [FK_CabinetTimeForVisit];
@@ -112,7 +112,8 @@ GO
 -- Creating table 'MedCardSet'
 CREATE TABLE [dbo].[MedCardSet] (
     [Id] int IDENTITY(1,1) NOT NULL,
-    [Shelf] nvarchar(max)  NOT NULL
+    [Shelf] nvarchar(max)  NOT NULL,
+    [Patient_Id] int  NOT NULL
 );
 GO
 
@@ -179,8 +180,7 @@ GO
 -- Creating table 'PersonSet_Patient'
 CREATE TABLE [dbo].[PersonSet_Patient] (
     [BloodType] nvarchar(max)  NOT NULL,
-    [Id] int  NOT NULL,
-    [MedCard_Id] int  NOT NULL
+    [Id] int  NOT NULL
 );
 GO
 
@@ -364,19 +364,19 @@ ON [dbo].[IllnessMedCard]
     ([MedCard_Id]);
 GO
 
--- Creating foreign key on [MedCard_Id] in table 'PersonSet_Patient'
-ALTER TABLE [dbo].[PersonSet_Patient]
+-- Creating foreign key on [Patient_Id] in table 'MedCardSet'
+ALTER TABLE [dbo].[MedCardSet]
 ADD CONSTRAINT [FK_MedCardPatient]
-    FOREIGN KEY ([MedCard_Id])
-    REFERENCES [dbo].[MedCardSet]
+    FOREIGN KEY ([Patient_Id])
+    REFERENCES [dbo].[PersonSet_Patient]
         ([Id])
     ON DELETE NO ACTION ON UPDATE NO ACTION;
 GO
 
 -- Creating non-clustered index for FOREIGN KEY 'FK_MedCardPatient'
 CREATE INDEX [IX_FK_MedCardPatient]
-ON [dbo].[PersonSet_Patient]
-    ([MedCard_Id]);
+ON [dbo].[MedCardSet]
+    ([Patient_Id]);
 GO
 
 -- Creating foreign key on [Cabinet_Id] in table 'TimeForVisitSet'

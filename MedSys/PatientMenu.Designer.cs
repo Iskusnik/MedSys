@@ -51,9 +51,9 @@
             this.menuStrip2 = new System.Windows.Forms.MenuStrip();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
-            this.tabPage2 = new System.Windows.Forms.TabPage();
             this.label2 = new System.Windows.Forms.Label();
             this.textBoxInsuranceNum = new System.Windows.Forms.TextBox();
+            this.tabPage2 = new System.Windows.Forms.TabPage();
             this.textBoxDocType = new System.Windows.Forms.TextBox();
             this.menuStrip2.SuspendLayout();
             this.tabControl1.SuspendLayout();
@@ -114,18 +114,21 @@
             this.записиВрачейToolStripMenuItem.Name = "записиВрачейToolStripMenuItem";
             this.записиВрачейToolStripMenuItem.Size = new System.Drawing.Size(176, 22);
             this.записиВрачейToolStripMenuItem.Text = "Записи врачей";
+            this.записиВрачейToolStripMenuItem.Click += new System.EventHandler(this.записиВрачейToolStripMenuItem_Click);
             // 
             // просмотретьИсториюБолезнейToolStripMenuItem
             // 
             this.просмотретьИсториюБолезнейToolStripMenuItem.Name = "просмотретьИсториюБолезнейToolStripMenuItem";
             this.просмотретьИсториюБолезнейToolStripMenuItem.Size = new System.Drawing.Size(176, 22);
             this.просмотретьИсториюБолезнейToolStripMenuItem.Text = "История болезней";
+            this.просмотретьИсториюБолезнейToolStripMenuItem.Click += new System.EventHandler(this.просмотретьИсториюБолезнейToolStripMenuItem_Click);
             // 
             // изменитьДанныеToolStripMenuItem
             // 
             this.изменитьДанныеToolStripMenuItem.Name = "изменитьДанныеToolStripMenuItem";
             this.изменитьДанныеToolStripMenuItem.Size = new System.Drawing.Size(176, 22);
             this.изменитьДанныеToolStripMenuItem.Text = "Изменить данные";
+            this.изменитьДанныеToolStripMenuItem.Click += new System.EventHandler(this.изменитьДанныеToolStripMenuItem_Click);
             // 
             // редактироватьДанныеToolStripMenuItem
             // 
@@ -142,12 +145,14 @@
             this.просмотретьИсториюЗаписейToolStripMenuItem.Name = "просмотретьИсториюЗаписейToolStripMenuItem";
             this.просмотретьИсториюЗаписейToolStripMenuItem.Size = new System.Drawing.Size(247, 22);
             this.просмотретьИсториюЗаписейToolStripMenuItem.Text = "Просмотреть историю записей";
+            this.просмотретьИсториюЗаписейToolStripMenuItem.Click += new System.EventHandler(this.просмотретьИсториюЗаписейToolStripMenuItem_Click);
             // 
             // записатьсяToolStripMenuItem
             // 
             this.записатьсяToolStripMenuItem.Name = "записатьсяToolStripMenuItem";
             this.записатьсяToolStripMenuItem.Size = new System.Drawing.Size(247, 22);
             this.записатьсяToolStripMenuItem.Text = "Записаться";
+            this.записатьсяToolStripMenuItem.Click += new System.EventHandler(this.записатьсяToolStripMenuItem_Click);
             // 
             // приёмКВрачуToolStripMenuItem
             // 
@@ -310,20 +315,6 @@
             this.tabPage1.Text = "Общие сведения";
             this.tabPage1.UseVisualStyleBackColor = true;
             // 
-            // tabPage2
-            // 
-            this.tabPage2.Controls.Add(this.label10);
-            this.tabPage2.Controls.Add(this.textBoxDocType);
-            this.tabPage2.Controls.Add(this.label12);
-            this.tabPage2.Controls.Add(this.textBoxDocumentNum);
-            this.tabPage2.Location = new System.Drawing.Point(4, 22);
-            this.tabPage2.Name = "tabPage2";
-            this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage2.Size = new System.Drawing.Size(769, 162);
-            this.tabPage2.TabIndex = 1;
-            this.tabPage2.Text = "Удостоверение личности";
-            this.tabPage2.UseVisualStyleBackColor = true;
-            // 
             // label2
             // 
             this.label2.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
@@ -347,6 +338,20 @@
             this.textBoxInsuranceNum.Size = new System.Drawing.Size(634, 20);
             this.textBoxInsuranceNum.TabIndex = 142;
             this.textBoxInsuranceNum.Text = "a";
+            // 
+            // tabPage2
+            // 
+            this.tabPage2.Controls.Add(this.label10);
+            this.tabPage2.Controls.Add(this.textBoxDocType);
+            this.tabPage2.Controls.Add(this.label12);
+            this.tabPage2.Controls.Add(this.textBoxDocumentNum);
+            this.tabPage2.Location = new System.Drawing.Point(4, 22);
+            this.tabPage2.Name = "tabPage2";
+            this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage2.Size = new System.Drawing.Size(769, 162);
+            this.tabPage2.TabIndex = 1;
+            this.tabPage2.Text = "Удостоверение личности";
+            this.tabPage2.UseVisualStyleBackColor = true;
             // 
             // textBoxDocType
             // 

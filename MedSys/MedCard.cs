@@ -19,7 +19,6 @@ namespace MedSys
         {
             this.Record = new HashSet<Record>();
             this.Illness = new HashSet<Illness>();
-            this.Patient = new HashSet<Patient>();
         }
     
         public int Id { get; set; }
@@ -29,7 +28,6 @@ namespace MedSys
         public virtual ICollection<Record> Record { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Illness> Illness { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Patient> Patient { get; set; }
+        public virtual Patient Patient { get; set; }
     }
 }

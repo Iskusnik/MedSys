@@ -85,6 +85,7 @@
     </Key>
     <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="Shelf" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Patient_Id" Type="int" Nullable="false" />
   </EntityType>
   <EntityType Name="RecordSet">
     <Key>
@@ -152,7 +153,6 @@
     </Key>
     <Property Name="BloodType" Type="nvarchar(max)" Nullable="false" />
     <Property Name="Id" Type="int" Nullable="false" />
-    <Property Name="MedCard_Id" Type="int" Nullable="false" />
   </EntityType>
   <EntityType Name="IllnessMedCard">
     <Key>
@@ -223,14 +223,14 @@
     </ReferentialConstraint>
   </Association>
   <Association Name="MedCardPatient">
-    <End Role="MedCard" Type="ModelMed.Store.MedCardSet" Multiplicity="1" />
-    <End Role="Patient" Type="ModelMed.Store.PersonSet_Patient" Multiplicity="*" />
+    <End Role="MedCard" Type="ModelMed.Store.MedCardSet" Multiplicity="*" />
+    <End Role="Patient" Type="ModelMed.Store.PersonSet_Patient" Multiplicity="1" />
     <ReferentialConstraint>
-      <Principal Role="MedCard">
+      <Principal Role="Patient">
         <PropertyRef Name="Id" />
       </Principal>
-      <Dependent Role="Patient">
-        <PropertyRef Name="MedCard_Id" />
+      <Dependent Role="MedCard">
+        <PropertyRef Name="Patient_Id" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -473,7 +473,7 @@
         </Association>
         <Association Name="MedCardPatient">
           <End Type="ModelMed.MedCard" Role="MedCard" Multiplicity="1" />
-          <End Type="ModelMed.Patient" Role="Patient" Multiplicity="*" />
+          <End Type="ModelMed.Patient" Role="Patient" Multiplicity="1" />
         </Association>
         <EntityType Name="Cabinet">
           <Key>
@@ -637,11 +637,11 @@
         <ScalarProperty Name="Id" ColumnName="MedCard_Id" />
       </EndProperty>
     </AssociationSetMapping>
-    <AssociationSetMapping Name="MedCardPatient" TypeName="ModelMed.MedCardPatient" StoreEntitySet="PersonSet_Patient">
-      <EndProperty Name="MedCard">
-        <ScalarProperty Name="Id" ColumnName="MedCard_Id" />
-      </EndProperty>
+    <AssociationSetMapping Name="MedCardPatient" TypeName="ModelMed.MedCardPatient" StoreEntitySet="MedCardSet">
       <EndProperty Name="Patient">
+        <ScalarProperty Name="Id" ColumnName="Patient_Id" />
+      </EndProperty>
+      <EndProperty Name="MedCard">
         <ScalarProperty Name="Id" ColumnName="Id" />
       </EndProperty>
     </AssociationSetMapping>

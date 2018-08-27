@@ -30,5 +30,31 @@ namespace MedSys
             textBoxDocumentNum.Text = patient.Document.Num;
             textBoxAdress.Text = patient.Adress;
         }
+
+        private void записатьсяToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Form record = new PatientToDoctor(patient);
+            record.Show();
+        }
+
+        private void просмотретьИсториюЗаписейToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void изменитьДанныеToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void просмотретьИсториюБолезнейToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void записиВрачейToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }
