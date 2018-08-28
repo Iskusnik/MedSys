@@ -132,6 +132,12 @@
     <Compile Include="Record.cs">
       <DependentUpon>ModelMed.tt</DependentUpon>
     </Compile>
+    <Compile Include="ShowVisits.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ShowVisits.Designer.cs">
+      <DependentUpon>ShowVisits.cs</DependentUpon>
+    </Compile>
     <Compile Include="TimeForVisit.cs">
       <DependentUpon>ModelMed.tt</DependentUpon>
     </Compile>
@@ -156,6 +162,9 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="ShowVisits.resx">
+      <DependentUpon>ShowVisits.cs</DependentUpon>
+    </EmbeddedResource>
     <EntityDeploy Include="ModelMed.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
       <LastGenOutput>ModelMed.Designer.cs</LastGenOutput>

@@ -18,18 +18,24 @@ namespace MedSys
         protected override void Seed(ModelMedContainer db)
         {
             Job jobA = ControlFunctions.CreateJob("Главврач");
-            Doctor docA = ControlFunctions.CreateDoctor("Александров Александр Иванович", DateTime.Parse("11.11.1980"), "Паспорт", "0000000001", jobA, "Home,1", "Enough", "Мужской", "12345", "2");
+            Doctor docA = ControlFunctions.CreateDoctor("Александров Александр Иванович", DateTime.Parse("11.11.1990"), "Паспорт", "0000000001", jobA, "Home,1", "Enough", "Мужской", "12345", "2");
             db.PersonSet.Add(docA);
 
             Job jobB = ControlFunctions.CreateJob("Терапевт");
             db.JobSet.Add(jobB);
-            Doctor docB = ControlFunctions.CreateDoctor("Иванов Иван Иванович", DateTime.Parse("11.12.1980"), "Паспорт", "0000000002", jobB, "Home,2", "Enough", "Мужской", "12346", "2");
+            Doctor docB = ControlFunctions.CreateDoctor("Иванов Иван Иванович", DateTime.Parse("11.11.1980"), "Паспорт", "0000000002", jobB, "Home,2", "Enough", "Мужской", "12346", "2");
             db.PersonSet.Add(docB);
 
 
-            Patient patA = ControlFunctions.CreatePatient("Иванов Иван Иванович", DateTime.Parse("11.12.1990"), "Паспорт", "0000000002", "Home,3", "Enough", "Мужской", "12347", "2");
+            Patient patA = ControlFunctions.CreatePatient("Иванов Иван Иванович", DateTime.Parse("11.12.1980"), "Паспорт", "0000000003", "Home,3", "1+", "Мужской", "12347", "2");
+            Cabinet cabA = ControlFunctions.CreateCabinet("1", 1, 1);
+            TimeForVisit timeA = ControlFunctions.CreateTimeForVisit(cabA, docB, DateTime.Parse("11.11.2000"));
+            TimeForVisit timeB = ControlFunctions.CreateTimeForVisit(cabA, docB, new DateTime(2000,12,11,13,15,17));
+            db.TimeForVisitSet.Add(timeB);
+            db.TimeForVisitSet.Add(timeA);
+            patA.TimeForVisit.Add(timeA);
+            timeA.Patient = patA;
             db.PersonSet.Add(patA);
-
 
             db.SaveChanges();
         }

@@ -57,6 +57,7 @@ namespace MedSys
             }
         }
        
+        //Создание сущностей
         static public Patient CreatePatient(string fullName,
                                             DateTime birthDate,
                                             string docType,
@@ -77,6 +78,9 @@ namespace MedSys
             newPatient.InsuranceNum = insuranceNum;
             newPatient.Password = password;
             newPatient.MedCard = new MedCard();
+            newPatient.MedCard.Illness = new List<Illness>();
+            newPatient.MedCard.Record = new List<Record>();
+            newPatient.MedCard.Shelf = "Не приписано";
             newPatient.TimeForVisit = new List<TimeForVisit>();
 
             return newPatient;
@@ -185,6 +189,7 @@ namespace MedSys
             return illness;
         }
 
+        //Проверка на повторения и добавление в БД
         /// <summary>
         /// Проверка данных персоны с данными в БД на совпадения
         /// </summary>
@@ -216,39 +221,110 @@ namespace MedSys
 
             //Добавление в БД
             dbContext.PersonSet.Add(person);
+            dbContext.SaveChanges();
+            return null;
+        }
+
+        static public string AddTimeForVisitToPatient(Patient patient, TimeForVisit visit)
+        {
+            visit = dbContext.TimeForVisitSet.Find(visit.Id);
+            patient = (Patient)dbContext.PersonSet.Find(patient.Id);
+            visit.Patient = patient;
+            patient.TimeForVisit.Add(visit);
+            dbContext.SaveChanges();
             return null;
         }
 
         static public string AddJob(Job job)
         {
-            //Проверка ФИО и ДР
-            var searchResult = (from Person p in dbContext.PersonSet
-                                where p.FullName == person.FullName && p.BirthDate == person.BirthDate
-                                select p).ToList();
+            //Проверка наличия такой работы
+            var searchResult = (from Job j in dbContext.JobSet
+                                where j.Name == job.Name
+                                select j).ToList();
             if (searchResult != null)
-                return "Человек с таким ФИО и датой рождения уже зарегистрирован";
+                return "Такая работа уже есть";
             else;
 
-            //Проверка документов
-            searchResult = (from Person p in dbContext.PersonSet
-                            where p.Document.Type == person.Document.Type && p.Document.Num == person.Document.Num
-                            select p).ToList();
-            if (searchResult != null)
-                return "Человек с таким удостоверением личности уже зарегистрирован";
-            else;
-
-            //Проверка полиса
-            searchResult = (from Person p in dbContext.PersonSet
-                            where p.InsuranceNum == person.InsuranceNum
-                            select p).ToList();
-            if (searchResult != null)
-                return "Номер страхового полиса занят";
 
             //Добавление в БД
-            dbContext.PersonSet.Add(person);
+            dbContext.JobSet.Add(job);
+            dbContext.SaveChanges();
             return null;
         }
 
+        static public string AddTimeForVisit(TimeForVisit timeForVisit)
+        {
+            //Проверка не прошло ли время, в которое хотят поставить время для приёмов
+            if (timeForVisit.VisitTime < DateTime.Today)
+                return String.Format("Нельзя назначить приём в указанную дату. Сегодня уже {0}", DateTime.Today);
+            else;
+
+            //Проверка наличия совпадений по врачу
+            var searchResult = (from t in dbContext.TimeForVisitSet
+                                where t.VisitTime == timeForVisit.VisitTime &&
+                                      t.Doctor.Id == timeForVisit.Doctor.Id
+                                select t).ToList();
+            if (searchResult != null)
+                return "Такое время у такого врача уже занято";
+            else;
+            
+            //Проверка кабинета
+            searchResult = (from t in dbContext.TimeForVisitSet
+                            where t.VisitTime == timeForVisit.VisitTime &&
+                                  t.Cabinet.Id == timeForVisit.Cabinet.Id
+                            select t).ToList();
+            if (searchResult != null)
+                return "Кабинет занят в это время";
+
+            //Добавление в БД
+            dbContext.TimeForVisitSet.Add(timeForVisit);
+            dbContext.SaveChanges();
+            return null;
+        }
+
+        static public string AddCabinet(Cabinet cabinet)
+        {
+            
+            //Проверка наличия совпадений по этажу, комнате, корпусу
+            var searchResult = (from c in dbContext.CabinetSet
+                                where c.Corpus == cabinet.Corpus &&
+                                      c.Floor == cabinet.Floor &&
+                                      c.Num == cabinet.Num
+                                select c).ToList();
+            if (searchResult != null)
+                return "Такой кабинет уже существует";
+            else;
+            
+            //Добавление в БД
+            dbContext.CabinetSet.Add(cabinet);
+            dbContext.SaveChanges();
+            return null;
+        }
+
+        static public string AddIllness(Illness illness)
+        {
+
+            //Проверка наличия совпадений по названию
+            var searchResult = (from ill in dbContext.IllnessSet
+                                where ill.Name == illness.Name
+                                select ill).ToList();
+            if (searchResult != null)
+                return "Такая болезнь уже записана";
+            else;
+
+            //Добавление в БД
+            dbContext.IllnessSet.Add(illness);
+            dbContext.SaveChanges();
+            return null;
+        }
+
+        static public string AddRecord(Record record)
+        {
+            //Добавление в БД
+            dbContext.RecordSet.Add(record);
+            dbContext.SaveChanges();
+            return null;
+        }
     }
 }
 
@@ -283,7 +359,11 @@ namespace MedSys
             db.PersonSet.Add(docB);
 
 
-            Patient patA = ControlFunctions.CreatePatient("Иванов Иван Иванович", DateTime.Parse("11.12.1990"), "Паспорт", "0000000002", "Home,3", "Enough", "Мужской", "12347", "2");
+            Patient patA = ControlFunctions.CreatePatient("Иванов Иван Иванович", DateTime.Parse("11.12.1990"), "Паспорт", "0000000003", "Home,3", "Enough", "Мужской", "12347", "2");
+            Cabinet cabA = ControlFunctions.CreateCabinet("1", 1, 1);
+            TimeForVisit timeA = ControlFunctions.CreateTimeForVisit(cabA, docA, DateTime.Parse("11.11.2000"));
+            patA.TimeForVisit.Add(timeA);
+            timeA.Patient = patA;
             db.PersonSet.Add(patA);
 
 

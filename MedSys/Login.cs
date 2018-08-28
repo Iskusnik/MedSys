@@ -35,5 +35,10 @@ namespace MedSys
                 doctorMenu.ShowDialog();
             }
         }
+
+        private void Login_Load(object sender, EventArgs e)
+        {
+
+        }
     }
 }
