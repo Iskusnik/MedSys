@@ -325,7 +325,51 @@ namespace MedSys
             dbContext.SaveChanges();
             return null;
         }
-    }
+
+        static public Person EditPerson(Person person, string fullName,
+                                            DateTime birthDate,
+                                            string docType,
+                                            string docNum,
+                                            string adress,
+                                            string gender,
+                                            string insuranceNum,
+                                            string password,
+                                            string bloodType = "0000",
+                                            Job    job = null,
+                                            string education = "0000")
+        {
+            person = dbContext.PersonSet.Find(person.Id);
+
+            person.Adress = adress;
+            person.BirthDate = birthDate;
+            person.Document = CreateDocument(docType, docNum);
+            person.FullName = fullName;
+            person.Gender = gender;
+            person.InsuranceNum = insuranceNum;
+            person.Password = password;
+
+            if (person is Patient)
+            {
+                (person as Patient).BloodType = bloodType;
+            }
+            else;
+
+            if (person is Doctor)
+            {
+                (person as Doctor).Job = job;
+                (person as Doctor).Education = education;
+            }
+            else;
+
+            dbContext.SaveChanges();
+
+            return person;
+        }
+
+
+
+
+        }
 }
 
 

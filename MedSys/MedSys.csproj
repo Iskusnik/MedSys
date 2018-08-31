@@ -60,6 +60,12 @@
     <Compile Include="Cabinet.cs">
       <DependentUpon>ModelMed.tt</DependentUpon>
     </Compile>
+    <Compile Include="ChangePersonInfo.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ChangePersonInfo.Designer.cs">
+      <DependentUpon>ChangePersonInfo.cs</DependentUpon>
+    </Compile>
     <Compile Include="ControlFunctions.cs" />
     <Compile Include="Doctor.cs">
       <DependentUpon>ModelMed.tt</DependentUpon>
@@ -141,6 +147,9 @@
     <Compile Include="TimeForVisit.cs">
       <DependentUpon>ModelMed.tt</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="ChangePersonInfo.resx">
+      <DependentUpon>ChangePersonInfo.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Login.resx">
       <DependentUpon>Login.cs</DependentUpon>
     </EmbeddedResource>

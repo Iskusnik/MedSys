@@ -45,7 +45,7 @@ namespace MedSys
 
         private void изменитьДанныеToolStripMenuItem_Click(object sender, EventArgs e)
         {
-
+            
         }
 
         private void просмотретьИсториюБолезнейToolStripMenuItem_Click(object sender, EventArgs e)
