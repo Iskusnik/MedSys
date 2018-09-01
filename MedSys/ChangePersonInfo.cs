@@ -10,147 +10,69 @@ using System.Windows.Forms;
 using System.Text.RegularExpressions;
 
 
-namespace Med2
+namespace MedSys
 {
     public partial class ChangePersonInfo : Form
     {
         Person person;
-        public ChangePersonInfo(Person Info)
+        ModelMedContainer db = new ModelMedContainer();
+
+        public ChangePersonInfo(Person person)
         {
-            person = Info;
+            this.person = person;
             InitializeComponent();
         }
 
         private void ChangePersonInfo_Load(object sender, EventArgs e)
         {
-            this.Text =  "Изменение данных:" + person.FullName;
+            this.Text = "Изменение данных:" + person.FullName;
+
+            var jobs = db.JobSet;
+            foreach (Job j in jobs)
+                comboBoxJob.Items.Add(j);
+
+            textBoxName.Text = person.FullName;
+            dateTimePickerBirthDate.Value = person.BirthDate;
+            comboBoxDocType.Text = person.Document.Type;
+            textBoxDocumentNum.Text = person.Document.Num;
+            textBoxAdress.Text = person.Adress;
+            comboBoxGender.Text = person.Gender;
+            textBoxInsurance.Text = person.InsuranceNum;
+            textBoxPassword.Text = person.Password;
+            if (person is Patient)
+                comboBoxBloodType.Text = (person as Patient).BloodType;
+            else;
             if (person is Doctor)
             {
-                this.textInsurancePolicyNum.Hide();
-                this.textBoxWorkIncapacity.Hide();
-                this.comboBoxBloodType.Hide();
-                this.label20.Show();
-                this.label15.Show();
-                this.label19.Hide();
-                this.label2.Hide();
-                this.label3.Hide();
-                this.label17.Show();
-                this.textBoxJob.Show();
-                this.button3.Hide();
-                this.textInsuranceMemberships.Show();
-                this.textBoxEducation.Show();
-                using (ModelMedDBContainer db = new ModelMedDBContainer())
-                {
-                    Doctor thisDoctor = (Doctor)db.PersonSet.Find(person.BirthDate, person.NameHashID);
-                    this.textBoxBirthPlace.Text = thisDoctor.BirthPlace;
-                    this.textBoxName.Text = thisDoctor.FullName;
-                    this.textBoxGender.Text = thisDoctor.Gender;
-                    this.textBoxBirthDate.Text = thisDoctor.BirthDate.Date.ToShortDateString();
-                    this.textNation.Text = thisDoctor.Nationality;
-                    this.textLiveAdress.Text = thisDoctor.LiveAdress;
-                    this.textRegAdress.Text = thisDoctor.RegAdress;
-                    this.textBoxRegDate.Text = thisDoctor.RegDate.Date.ToShortDateString();
-                    this.textBoxInsuranceBillNum.Text = thisDoctor.InsuranceBillNum;
-                    this.textBoxEducation.Text = thisDoctor.Education;
-                    this.textBoxJob.Text = thisDoctor.Job;
-                    this.textInsuranceMemberships.Text = thisDoctor.Memberships;
-
-                    this.textBoxDocType.Text = thisDoctor.Documents.DocumentName;
-                    this.textDocumentN.Text = thisDoctor.Documents.DocumentNum.ToString();
-                }
-
+                comboBoxJob.Text = (person as Doctor).Job.Name;
+                textBoxEducation.Text = (person as Doctor).Education;
             }
-            else
-            {
-                if (this.Owner is SelectPerson)
-                {
-                    comboBoxBloodType.Enabled = true;
-                    this.button3.Show();
-                }
-                else
-                {
-                    comboBoxBloodType.Enabled = false;
-                    comboBoxBloodType.Hide();
-                    this.button3.Hide();
-                }
-            
-                this.textInsurancePolicyNum.Show();
-                this.textBoxWorkIncapacity.Show();
-                this.comboBoxBloodType.Show();
-                this.textBoxJob.Hide();
-                this.textInsuranceMemberships.Hide();
-                this.textBoxEducation.Hide();
-                this.label20.Hide();
-                this.label15.Hide();
-                this.label3.Show();
-                this.label19.Show();
-                this.label2.Show();
-                this.label17.Hide();
-                using (ModelMedDBContainer db = new ModelMedDBContainer())
-                {
-                    Patient thisPatient = (Patient)db.PersonSet.Find(person.BirthDate, person.NameHashID);
-                    this.textBoxBirthPlace.Text = thisPatient.BirthPlace;
-                    this.textBoxName.Text = thisPatient.FullName;
-                    this.textBoxGender.Text = thisPatient.Gender;
-                    this.textBoxBirthDate.Text = thisPatient.BirthDate.Date.ToShortDateString();
-                    this.textNation.Text = thisPatient.Nationality;
-                    this.textLiveAdress.Text = thisPatient.LiveAdress;
-                    this.textRegAdress.Text = thisPatient.RegAdress;
-                    this.textBoxRegDate.Text = thisPatient.RegDate.Date.ToShortDateString();
-                    this.textBoxInsuranceBillNum.Text = thisPatient.InsuranceBillNum;
-                    this.textInsurancePolicyNum.Text = thisPatient.InsurancePolicyNum;
-                    this.textBoxWorkIncapacity.Text = thisPatient.WorkIncapacityListNum;
-                    this.comboBoxBloodType.Text = thisPatient.Rhesus + thisPatient.BloodType.ToString();
-                    this.comboBoxBloodType.Hide();
-                    this.textBoxJob.Show();
-                    this.textBoxJob.ReadOnly = true;
-                    this.textBoxJob.Text = thisPatient.Rhesus + thisPatient.BloodType.ToString();
-
-                    this.textBoxDocType.Text = thisPatient.Documents.DocumentName;
-                    this.textDocumentN.Text = thisPatient.Documents.DocumentNum.ToString();
-                }
-            }
+            else;
         }
 
         private void button1_Click(object sender, EventArgs e)
         {
-            using (ModelMedDBContainer db = new ModelMedDBContainer())
+            string s = TextBoxesCheck();
+            if (s != null)
             {
-                Person info = db.PersonSet.Find(person.BirthDate, person.NameHashID);
-                info.LiveAdress = textLiveAdress.Text;
-                info.Nationality = textNation.Text;
-                info.InsuranceBillNum = textBoxInsuranceBillNum.Text;
-
-                if (info is Patient)
-                {
-
-                    if (Regex.IsMatch(comboBoxBloodType.Text, @"(-|\+)[1-4]{1}$|[1-4]{1}$"))
-                    {
-                        if (comboBoxBloodType.Text[0] == '-')
-                        {
-                            (info as Patient).Rhesus = "-";
-                            (info as Patient).BloodType -= byte.Parse(comboBoxBloodType.Text);
-                        }
-                        else
-                        {
-                            (info as Patient).Rhesus = "+";
-                            (info as Patient).BloodType = byte.Parse(comboBoxBloodType.Text);
-                        }
-                    }
-                    else
-                        MessageBox.Show("Невозможное значение для группы крови. Изменение группы крови не будет сохранено");
-                    (info as Patient).WorkIncapacityListNum = textBoxWorkIncapacity.Text;
-                    (info as Patient).InsurancePolicyNum = textInsurancePolicyNum.Text;
-                    
-                }
-                else
-                {
-                    (info as Doctor).Memberships = textInsuranceMemberships.Text;
-                }
-                db.SaveChanges();
-
-                this.Close();
-
+                MessageBox.Show(s, "Исправьте ошибки");
+            }
+            else
+            {
+                var jobs = (from j in db.JobSet where j.Name == comboBoxJob.Text select j).ToArray();
+                Job job = jobs[0];
+                ControlFunctions.EditPerson(person,
+                                            textBoxName.Text,
+                                            dateTimePickerBirthDate.Value,
+                                            comboBoxDocType.Text,
+                                            textBoxDocumentNum.Text,
+                                            textBoxAdress.Text,
+                                            comboBoxGender.Text,
+                                            textBoxInsurance.Text,
+                                            textBoxPassword.Text,
+                                            comboBoxBloodType.Text,
+                                            job,
+                                            textBoxEducation.Text);
             }
         }
 
@@ -159,10 +81,81 @@ namespace Med2
             this.Close();
         }
 
-        private void button3_Click(object sender, EventArgs e)
+       
+
+        private void label2_Click(object sender, EventArgs e)
         {
-            Form patToDoc = new PatientToDoctor((Patient)person);
-            patToDoc.ShowDialog();
+
         }
+
+        private void ChangePersonInfo_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            if (e.CloseReason == CloseReason.UserClosing)
+            {
+                DialogResult result = MessageBox.Show("Сохранить и выйти?", "Внимание",
+                                                      MessageBoxButtons.YesNoCancel, MessageBoxIcon.Warning);
+                if (result == DialogResult.Yes)
+                {
+                    string s = TextBoxesCheck();
+                    if (s != null)
+                    {
+                        MessageBox.Show(s, "Исправьте ошибки");
+                        e.Cancel = false;
+                    }
+                    else
+                    {
+                        var jobs = (from j in db.JobSet where j.Name == comboBoxJob.Text select j).ToArray();
+                        Job job = jobs[0];
+                        ControlFunctions.EditPerson(person,
+                                                    textBoxName.Text,
+                                                    dateTimePickerBirthDate.Value,
+                                                    comboBoxDocType.Text,
+                                                    textBoxDocumentNum.Text,
+                                                    textBoxAdress.Text,
+                                                    comboBoxGender.Text,
+                                                    textBoxInsurance.Text,
+                                                    textBoxPassword.Text,
+                                                    comboBoxBloodType.Text,
+                                                    job,
+                                                    textBoxEducation.Text);
+                        e.Cancel = true;
+                    }
+                }
+                else if (result == DialogResult.No)
+                {
+                    e.Cancel = true;
+                }
+                else if (result == DialogResult.Cancel)
+                {
+                    e.Cancel = false;
+                }
+                else;
+            }
+        }
+        private string TextBoxesCheck()
+        {
+            if (dateTimePickerBirthDate.Value > DateTime.Now)
+                return "Дата рождения не может стоять в будущем.";
+
+            else if (Regex.IsMatch(textBoxName.Text, "[А-Я][а-я]* [А-Я][а-я]*( [А-Я][а-я]*){0,1}$"))
+                return "Введите имя в формате: \"Фамилия Имя Отчество(при наличии)\",  пробелы между фамилией и именем, именем и отчеством при наличии отчества.";
+
+            else if (Regex.IsMatch(textBoxAdress.Text, "[А-Я][а-я]* [0-9]+[абв]{0,1}, [0-9]+$"))
+                return "Введите адрес в формате: \"Улица номер дома, номер квартиры\" - \"Домовая 1, 1\",  пробелы между улицей и номером дома, запятой и номером квартиры.";
+
+            else if (Regex.IsMatch(textBoxInsurance.Text, "[0-9]+$"))
+                return "Номер страховки содержит только цифры от 0 до 9";
+
+            else if (Regex.IsMatch(textBoxDocumentNum.Text, "[0-9]+$"))
+                return "Номер документа содержит только цифры от 0 до 9";
+            else if (person is Doctor)
+                if (Regex.IsMatch(textBoxEducation.Text, "[0-9]+$"))
+                    return "В образовании не должно быть пустой строки";
+                else;
+            else;
+
+            return null;
+        }
+
     }
 }
