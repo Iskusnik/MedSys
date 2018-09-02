@@ -320,6 +320,15 @@ namespace MedSys
 
         static public string AddRecord(Record record)
         {
+            //Проверка наличия совпадений по названию
+            var searchResult = (from rec in dbContext.RecordSet
+                                where rec.Date == record.Date &&
+                                      rec.Doctor == record.Doctor
+                                select rec).ToList();
+            if (searchResult != null)
+                return "Доктор уже делал такую запись в это время";
+            else;
+
             //Добавление в БД
             dbContext.RecordSet.Add(record);
             dbContext.SaveChanges();

@@ -112,21 +112,21 @@
             // записиВрачейToolStripMenuItem
             // 
             this.записиВрачейToolStripMenuItem.Name = "записиВрачейToolStripMenuItem";
-            this.записиВрачейToolStripMenuItem.Size = new System.Drawing.Size(176, 22);
+            this.записиВрачейToolStripMenuItem.Size = new System.Drawing.Size(172, 22);
             this.записиВрачейToolStripMenuItem.Text = "Записи врачей";
             this.записиВрачейToolStripMenuItem.Click += new System.EventHandler(this.записиВрачейToolStripMenuItem_Click);
             // 
             // просмотретьИсториюБолезнейToolStripMenuItem
             // 
             this.просмотретьИсториюБолезнейToolStripMenuItem.Name = "просмотретьИсториюБолезнейToolStripMenuItem";
-            this.просмотретьИсториюБолезнейToolStripMenuItem.Size = new System.Drawing.Size(176, 22);
-            this.просмотретьИсториюБолезнейToolStripMenuItem.Text = "История болезней";
+            this.просмотретьИсториюБолезнейToolStripMenuItem.Size = new System.Drawing.Size(172, 22);
+            this.просмотретьИсториюБолезнейToolStripMenuItem.Text = "Болезни";
             this.просмотретьИсториюБолезнейToolStripMenuItem.Click += new System.EventHandler(this.просмотретьИсториюБолезнейToolStripMenuItem_Click);
             // 
             // изменитьДанныеToolStripMenuItem
             // 
             this.изменитьДанныеToolStripMenuItem.Name = "изменитьДанныеToolStripMenuItem";
-            this.изменитьДанныеToolStripMenuItem.Size = new System.Drawing.Size(176, 22);
+            this.изменитьДанныеToolStripMenuItem.Size = new System.Drawing.Size(172, 22);
             this.изменитьДанныеToolStripMenuItem.Text = "Изменить данные";
             this.изменитьДанныеToolStripMenuItem.Click += new System.EventHandler(this.изменитьДанныеToolStripMenuItem_Click);
             // 
@@ -348,7 +348,7 @@
             this.tabPage2.Location = new System.Drawing.Point(4, 22);
             this.tabPage2.Name = "tabPage2";
             this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage2.Size = new System.Drawing.Size(769, 162);
+            this.tabPage2.Size = new System.Drawing.Size(672, 162);
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "Удостоверение личности";
             this.tabPage2.UseVisualStyleBackColor = true;

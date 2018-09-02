@@ -138,6 +138,18 @@
     <Compile Include="Record.cs">
       <DependentUpon>ModelMed.tt</DependentUpon>
     </Compile>
+    <Compile Include="ShowIllnesses.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ShowIllnesses.Designer.cs">
+      <DependentUpon>ShowIllnesses.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ShowRecords.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ShowRecords.Designer.cs">
+      <DependentUpon>ShowRecords.cs</DependentUpon>
+    </Compile>
     <Compile Include="ShowVisits.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -171,6 +183,12 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="ShowIllnesses.resx">
+      <DependentUpon>ShowIllnesses.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ShowRecords.resx">
+      <DependentUpon>ShowRecords.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="ShowVisits.resx">
       <DependentUpon>ShowVisits.cs</DependentUpon>
     </EmbeddedResource>

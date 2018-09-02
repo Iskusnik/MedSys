@@ -45,17 +45,20 @@ namespace MedSys
 
         private void изменитьДанныеToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            
+            Form changePersonInfo = new ChangePersonInfo(patient);
+            changePersonInfo.Show();
         }
 
         private void просмотретьИсториюБолезнейToolStripMenuItem_Click(object sender, EventArgs e)
         {
-
+            Form showIllnesses = new ShowIllnesses(patient);
+            showIllnesses.Show();
         }
 
         private void записиВрачейToolStripMenuItem_Click(object sender, EventArgs e)
         {
-
+            Form showRecords = new ShowRecords(patient);
+            showRecords.Show();
         }
     }
 }
