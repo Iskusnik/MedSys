@@ -257,6 +257,11 @@
             "Дипломатический паспорт"});
             this.comboBoxDocType.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboBoxDocType.FormattingEnabled = true;
+            this.comboBoxDocType.Items.AddRange(new object[] {
+            "Паспорт РФ",
+            "Временное удостоверение личности",
+            "Военный билет",
+            "Свидетельство о рождении"});
             this.comboBoxDocType.Location = new System.Drawing.Point(152, 275);
             this.comboBoxDocType.Name = "comboBoxDocType";
             this.comboBoxDocType.Size = new System.Drawing.Size(223, 21);
@@ -276,6 +281,16 @@
             "Неизвестно"});
             this.comboBoxJob.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboBoxJob.FormattingEnabled = true;
+            this.comboBoxJob.Items.AddRange(new object[] {
+            "1+",
+            "2+",
+            "3+",
+            "4+",
+            "1-",
+            "2-",
+            "3-",
+            "4-",
+            "Неизвестно"});
             this.comboBoxJob.Location = new System.Drawing.Point(152, 181);
             this.comboBoxJob.Name = "comboBoxJob";
             this.comboBoxJob.Size = new System.Drawing.Size(223, 21);
@@ -296,6 +311,9 @@
             "Женский"});
             this.comboBoxGender.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboBoxGender.FormattingEnabled = true;
+            this.comboBoxGender.Items.AddRange(new object[] {
+            "Мужской",
+            "Женский"});
             this.comboBoxGender.Location = new System.Drawing.Point(152, 77);
             this.comboBoxGender.Name = "comboBoxGender";
             this.comboBoxGender.Size = new System.Drawing.Size(223, 21);

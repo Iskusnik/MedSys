@@ -27,9 +27,7 @@ namespace MedSys
         {
             this.Text = "Изменение данных:" + person.FullName;
 
-            var jobs = db.JobSet;
-            foreach (Job j in jobs)
-                comboBoxJob.Items.Add(j);
+            
 
             textBoxName.Text = person.FullName;
             dateTimePickerBirthDate.Value = person.BirthDate;
@@ -40,12 +38,38 @@ namespace MedSys
             textBoxInsurance.Text = person.InsuranceNum;
             textBoxPassword.Text = person.Password;
             if (person is Patient)
+            {
                 comboBoxBloodType.Text = (person as Patient).BloodType;
+
+                labelJob.Hide();
+                comboBoxJob.Hide();
+
+                labelEducation.Hide();
+                textBoxEducation.Hide();
+
+                labelBloodType.Show();
+                comboBoxBloodType.Show();
+            }
             else;
             if (person is Doctor)
             {
+
+                var jobs = db.JobSet;
+                foreach (Job j in jobs)
+                    comboBoxJob.Items.Add(j.Name);
+
                 comboBoxJob.Text = (person as Doctor).Job.Name;
                 textBoxEducation.Text = (person as Doctor).Education;
+
+
+                labelJob.Show();
+                comboBoxJob.Show();
+
+                labelEducation.Show();
+                textBoxEducation.Show();
+
+                labelBloodType.Hide();
+                comboBoxBloodType.Hide();
             }
             else;
         }
@@ -92,7 +116,7 @@ namespace MedSys
         {
             if (e.CloseReason == CloseReason.UserClosing)
             {
-                DialogResult result = MessageBox.Show("Сохранить и выйти?", "Внимание",
+                DialogResult result = MessageBox.Show("Сохранить перед выходом?", "Внимание",
                                                       MessageBoxButtons.YesNoCancel, MessageBoxIcon.Warning);
                 if (result == DialogResult.Yes)
                 {
@@ -123,11 +147,11 @@ namespace MedSys
                 }
                 else if (result == DialogResult.No)
                 {
-                    e.Cancel = true;
+                    e.Cancel = false;
                 }
                 else if (result == DialogResult.Cancel)
                 {
-                    e.Cancel = false;
+                    e.Cancel = true;
                 }
                 else;
             }
@@ -137,19 +161,19 @@ namespace MedSys
             if (dateTimePickerBirthDate.Value > DateTime.Now)
                 return "Дата рождения не может стоять в будущем.";
 
-            else if (Regex.IsMatch(textBoxName.Text, "[А-Я][а-я]* [А-Я][а-я]*( [А-Я][а-я]*){0,1}$"))
+            else if (Regex.IsMatch(textBoxName.Text, @"[А-Я][а-я]*\s[А-Я][а-я]*((\s[А-Я][а-я]*)?)$"))
                 return "Введите имя в формате: \"Фамилия Имя Отчество(при наличии)\",  пробелы между фамилией и именем, именем и отчеством при наличии отчества.";
 
-            else if (Regex.IsMatch(textBoxAdress.Text, "[А-Я][а-я]* [0-9]+[абв]{0,1}, [0-9]+$"))
+            else if (Regex.IsMatch(textBoxAdress.Text, @"[А-Я][а-я]* [0-9]+[абв]{0,1}, [0-9]+$"))
                 return "Введите адрес в формате: \"Улица номер дома, номер квартиры\" - \"Домовая 1, 1\",  пробелы между улицей и номером дома, запятой и номером квартиры.";
 
-            else if (Regex.IsMatch(textBoxInsurance.Text, "[0-9]+$"))
+            else if (Regex.IsMatch(textBoxInsurance.Text, @"[0-9]+$"))
                 return "Номер страховки содержит только цифры от 0 до 9";
 
-            else if (Regex.IsMatch(textBoxDocumentNum.Text, "[0-9]+$"))
+            else if (Regex.IsMatch(textBoxDocumentNum.Text, @"[0-9]+$"))
                 return "Номер документа содержит только цифры от 0 до 9";
             else if (person is Doctor)
-                if (Regex.IsMatch(textBoxEducation.Text, "[0-9]+$"))
+                if (Regex.IsMatch(textBoxEducation.Text, @"[0-9]+$"))
                     return "В образовании не должно быть пустой строки";
                 else;
             else;

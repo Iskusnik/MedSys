@@ -10,11 +10,11 @@ using System.Windows.Forms;
 
 namespace MedSys
 {
-    public partial class ShowVisitRecords : Form
+    public partial class ShowRecords : Form
     {
         Patient patient;
         ModelMedContainer db = new ModelMedContainer();
-        public ShowVisitRecords(Patient patient)
+        public ShowRecords(Patient patient)
         {
             this.patient = patient;
             InitializeComponent();

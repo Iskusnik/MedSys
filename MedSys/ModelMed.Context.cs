@@ -29,13 +29,39 @@ namespace MedSys
 
             Patient patA = ControlFunctions.CreatePatient("Иванов Иван Иванович", DateTime.Parse("11.12.1980"), "Паспорт", "0000000003", "Home,3", "1+", "Мужской", "12347", "2");
             Cabinet cabA = ControlFunctions.CreateCabinet("1", 1, 1);
+
+
             TimeForVisit timeA = ControlFunctions.CreateTimeForVisit(cabA, docB, DateTime.Parse("11.11.2000"));
             TimeForVisit timeB = ControlFunctions.CreateTimeForVisit(cabA, docB, new DateTime(2000,12,11,13,15,17));
             db.TimeForVisitSet.Add(timeB);
             db.TimeForVisitSet.Add(timeA);
             patA.TimeForVisit.Add(timeA);
             timeA.Patient = patA;
+
+
+            Illness illA = ControlFunctions.CreateIllness("Что-то можно, что-то нельзя.", "Болезнь А");
+            Illness illAA = ControlFunctions.CreateIllness("Что-то можно, что-то нельзя.", "Болезнь А");
+            Illness illB = ControlFunctions.CreateIllness("Что-то можно, что-то нельзя.", "Болезнь Б");
+            db.IllnessSet.Add(illA);
+            illA.MedCard.Add(patA.MedCard);
+            patA.MedCard.Illness.Add(illA);
+
+            db.IllnessSet.Add(illB);
+            illB.MedCard.Add(patA.MedCard);
+            patA.MedCard.Illness.Add(illB);
+
+
             db.PersonSet.Add(patA);
+
+
+
+            Record recA = ControlFunctions.CreateRecord(DateTime.Now, docB, "111", patA.MedCard);
+            Record recB = ControlFunctions.CreateRecord(DateTime.Parse("11.11.2000"), docB, "222", patA.MedCard);
+            Record recC = ControlFunctions.CreateRecord(DateTime.Parse("11.11.2010"), docA, "333", patA.MedCard);
+
+            db.RecordSet.Add(recA);
+            db.RecordSet.Add(recB);
+            db.RecordSet.Add(recC);
 
             db.SaveChanges();
         }
@@ -52,7 +78,7 @@ namespace MedSys
         public ModelMedContainer()
             : base("name=ModelMedContainer")
         {
-            Database.SetInitializer<ModelMedContainer>(new MyContextInitializer());
+           // Database.SetInitializer<ModelMedContainer>(new MyContextInitializer());
         }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
