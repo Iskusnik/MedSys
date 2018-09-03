@@ -144,6 +144,12 @@
     <Compile Include="ShowIllnesses.Designer.cs">
       <DependentUpon>ShowIllnesses.cs</DependentUpon>
     </Compile>
+    <Compile Include="ShowInfoAboutRecord.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ShowInfoAboutRecord.Designer.cs">
+      <DependentUpon>ShowInfoAboutRecord.cs</DependentUpon>
+    </Compile>
     <Compile Include="ShowRecords.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -185,6 +191,9 @@
     </Compile>
     <EmbeddedResource Include="ShowIllnesses.resx">
       <DependentUpon>ShowIllnesses.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ShowInfoAboutRecord.resx">
+      <DependentUpon>ShowInfoAboutRecord.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ShowRecords.resx">
       <DependentUpon>ShowRecords.cs</DependentUpon>

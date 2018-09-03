@@ -22,6 +22,10 @@ namespace MedSys
 
         private void DoctorMenu_Load(object sender, EventArgs e)
         {
+            ReloadForm();
+        }
+        public void ReloadForm()
+        {
             textBoxBirthDate.Text = doctor.BirthDate.ToShortDateString();
             textBoxJob.Text = doctor.Job.Name;
             textBoxName.Text = doctor.FullName;

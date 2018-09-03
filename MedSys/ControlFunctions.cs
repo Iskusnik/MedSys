@@ -351,7 +351,9 @@ namespace MedSys
 
             person.Adress = adress;
             person.BirthDate = birthDate;
-            person.Document = CreateDocument(docType, docNum);
+            person.Document.Type = docType;
+            person.Document.Num = docNum;
+
             person.FullName = fullName;
             person.Gender = gender;
             person.InsuranceNum = insuranceNum;
@@ -369,7 +371,7 @@ namespace MedSys
                 (person as Doctor).Education = education;
             }
             else;
-
+            dbContext.Entry(person).State = System.Data.Entity.EntityState.Modified;
             dbContext.SaveChanges();
 
             return person;

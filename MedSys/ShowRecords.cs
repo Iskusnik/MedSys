@@ -31,7 +31,7 @@ namespace MedSys
             dataGridView1.Columns["Id"].Visible = false;
 
             foreach (var s in thisPersonVisits)
-                dataGridView1.Rows.Add(s.Время_записи, s.Имя_врача);
+                dataGridView1.Rows.Add(s.Время_записи, s.Имя_врача, s.id);
 
             dataGridView1.Sort(dataGridView1.Columns["Время записи"], ListSortDirection.Descending);
             dataGridView1.RowHeadersVisible = false;
@@ -48,8 +48,8 @@ namespace MedSys
                 int id = (int)dataGridView1.SelectedRows[0].Cells[2].Value;
                 Record temp = db.RecordSet.Find(id);
 
-               // Form showInfoAboutRecord = new ShowInfoAboutRecord(temp);
-               // showInfoAboutRecord.Show();
+                Form showInfoAboutRecord = new ShowInfoAboutRecord(temp);
+                showInfoAboutRecord.Show();
             }
         }
 

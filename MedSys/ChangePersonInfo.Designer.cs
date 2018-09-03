@@ -47,23 +47,23 @@
             this.labelBloodType = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.button2 = new System.Windows.Forms.Button();
-            this.comboBoxBloodType = new System.Windows.Forms.ComboBox();
             this.comboBoxDocType = new System.Windows.Forms.ComboBox();
-            this.comboBoxJob = new System.Windows.Forms.ComboBox();
             this.dateTimePickerBirthDate = new System.Windows.Forms.DateTimePicker();
             this.comboBoxGender = new System.Windows.Forms.ComboBox();
             this.textBoxPassword = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
+            this.comboBoxBlood = new System.Windows.Forms.ComboBox();
+            this.comboBoxJob = new System.Windows.Forms.ComboBox();
             this.SuspendLayout();
             // 
             // textBoxEducation
             // 
             this.textBoxEducation.Location = new System.Drawing.Point(152, 208);
             this.textBoxEducation.Name = "textBoxEducation";
-            this.textBoxEducation.ReadOnly = true;
             this.textBoxEducation.Size = new System.Drawing.Size(223, 20);
             this.textBoxEducation.TabIndex = 144;
             this.textBoxEducation.Text = "a";
+            this.textBoxEducation.TextChanged += new System.EventHandler(this.ChangedInfo);
             // 
             // labelEducation
             // 
@@ -99,15 +99,16 @@
             this.textBoxInsurance.Size = new System.Drawing.Size(223, 20);
             this.textBoxInsurance.TabIndex = 135;
             this.textBoxInsurance.Text = "a";
+            this.textBoxInsurance.TextChanged += new System.EventHandler(this.ChangedInfo);
             // 
             // textBoxDocumentNum
             // 
             this.textBoxDocumentNum.Location = new System.Drawing.Point(152, 302);
             this.textBoxDocumentNum.Name = "textBoxDocumentNum";
-            this.textBoxDocumentNum.ReadOnly = true;
             this.textBoxDocumentNum.Size = new System.Drawing.Size(223, 20);
             this.textBoxDocumentNum.TabIndex = 130;
             this.textBoxDocumentNum.Text = "1";
+            this.textBoxDocumentNum.TextChanged += new System.EventHandler(this.ChangedInfo);
             // 
             // label12
             // 
@@ -152,6 +153,7 @@
             this.textBoxAdress.Size = new System.Drawing.Size(223, 20);
             this.textBoxAdress.TabIndex = 122;
             this.textBoxAdress.Text = "a";
+            this.textBoxAdress.TextChanged += new System.EventHandler(this.ChangedInfo);
             // 
             // label5
             // 
@@ -175,10 +177,10 @@
             // 
             this.textBoxName.Location = new System.Drawing.Point(152, 51);
             this.textBoxName.Name = "textBoxName";
-            this.textBoxName.ReadOnly = true;
             this.textBoxName.Size = new System.Drawing.Size(223, 20);
             this.textBoxName.TabIndex = 117;
             this.textBoxName.Text = "a";
+            this.textBoxName.TextChanged += new System.EventHandler(this.ChangedInfo);
             // 
             // label1
             // 
@@ -228,25 +230,6 @@
             this.button2.UseVisualStyleBackColor = true;
             this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
-            // comboBoxBloodType
-            // 
-            this.comboBoxBloodType.AutoCompleteCustomSource.AddRange(new string[] {
-            "-1",
-            "-2",
-            "-3",
-            "-4",
-            "+1",
-            "+2",
-            "+3",
-            "+4",
-            "Неизвестно"});
-            this.comboBoxBloodType.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.comboBoxBloodType.FormattingEnabled = true;
-            this.comboBoxBloodType.Location = new System.Drawing.Point(152, 181);
-            this.comboBoxBloodType.Name = "comboBoxBloodType";
-            this.comboBoxBloodType.Size = new System.Drawing.Size(223, 21);
-            this.comboBoxBloodType.TabIndex = 156;
-            // 
             // comboBoxDocType
             // 
             this.comboBoxDocType.AutoCompleteCustomSource.AddRange(new string[] {
@@ -266,35 +249,7 @@
             this.comboBoxDocType.Name = "comboBoxDocType";
             this.comboBoxDocType.Size = new System.Drawing.Size(223, 21);
             this.comboBoxDocType.TabIndex = 157;
-            // 
-            // comboBoxJob
-            // 
-            this.comboBoxJob.AutoCompleteCustomSource.AddRange(new string[] {
-            "-1",
-            "-2",
-            "-3",
-            "-4",
-            "+1",
-            "+2",
-            "+3",
-            "+4",
-            "Неизвестно"});
-            this.comboBoxJob.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.comboBoxJob.FormattingEnabled = true;
-            this.comboBoxJob.Items.AddRange(new object[] {
-            "1+",
-            "2+",
-            "3+",
-            "4+",
-            "1-",
-            "2-",
-            "3-",
-            "4-",
-            "Неизвестно"});
-            this.comboBoxJob.Location = new System.Drawing.Point(152, 181);
-            this.comboBoxJob.Name = "comboBoxJob";
-            this.comboBoxJob.Size = new System.Drawing.Size(223, 21);
-            this.comboBoxJob.TabIndex = 158;
+            this.comboBoxDocType.TextChanged += new System.EventHandler(this.ChangedInfo);
             // 
             // dateTimePickerBirthDate
             // 
@@ -303,6 +258,7 @@
             this.dateTimePickerBirthDate.Name = "dateTimePickerBirthDate";
             this.dateTimePickerBirthDate.Size = new System.Drawing.Size(223, 20);
             this.dateTimePickerBirthDate.TabIndex = 159;
+            this.dateTimePickerBirthDate.ValueChanged += new System.EventHandler(this.ChangedInfo);
             // 
             // comboBoxGender
             // 
@@ -318,15 +274,16 @@
             this.comboBoxGender.Name = "comboBoxGender";
             this.comboBoxGender.Size = new System.Drawing.Size(223, 21);
             this.comboBoxGender.TabIndex = 160;
+            this.comboBoxGender.TextChanged += new System.EventHandler(this.ChangedInfo);
             // 
             // textBoxPassword
             // 
             this.textBoxPassword.Location = new System.Drawing.Point(152, 349);
             this.textBoxPassword.Name = "textBoxPassword";
-            this.textBoxPassword.ReadOnly = true;
             this.textBoxPassword.Size = new System.Drawing.Size(223, 20);
             this.textBoxPassword.TabIndex = 161;
             this.textBoxPassword.Text = "1";
+            this.textBoxPassword.TextChanged += new System.EventHandler(this.ChangedInfo);
             // 
             // label2
             // 
@@ -337,18 +294,57 @@
             this.label2.TabIndex = 162;
             this.label2.Text = "Пароль";
             // 
+            // comboBoxBlood
+            // 
+            this.comboBoxBlood.AutoCompleteCustomSource.AddRange(new string[] {
+            "1+",
+            "2+",
+            "3+",
+            "4+",
+            "1-",
+            "2-",
+            "3-",
+            "4-",
+            "Неизвестно"});
+            this.comboBoxBlood.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboBoxBlood.FormattingEnabled = true;
+            this.comboBoxBlood.Items.AddRange(new object[] {
+            "+1",
+            "+2",
+            "+3",
+            "+4",
+            "-1",
+            "-2",
+            "-3",
+            "-4",
+            "Неизвестно"});
+            this.comboBoxBlood.Location = new System.Drawing.Point(152, 181);
+            this.comboBoxBlood.Name = "comboBoxBlood";
+            this.comboBoxBlood.Size = new System.Drawing.Size(223, 21);
+            this.comboBoxBlood.TabIndex = 163;
+            // 
+            // comboBoxJob
+            // 
+            this.comboBoxJob.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboBoxJob.FormattingEnabled = true;
+            this.comboBoxJob.Location = new System.Drawing.Point(152, 181);
+            this.comboBoxJob.Name = "comboBoxJob";
+            this.comboBoxJob.Size = new System.Drawing.Size(223, 21);
+            this.comboBoxJob.TabIndex = 164;
+            this.comboBoxJob.TextChanged += new System.EventHandler(this.ChangedInfo);
+            // 
             // ChangePersonInfo
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(390, 410);
+            this.Controls.Add(this.comboBoxJob);
+            this.Controls.Add(this.comboBoxBlood);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.textBoxPassword);
             this.Controls.Add(this.comboBoxGender);
             this.Controls.Add(this.dateTimePickerBirthDate);
-            this.Controls.Add(this.comboBoxJob);
             this.Controls.Add(this.comboBoxDocType);
-            this.Controls.Add(this.comboBoxBloodType);
             this.Controls.Add(this.button2);
             this.Controls.Add(this.labelBloodType);
             this.Controls.Add(this.label3);
@@ -399,12 +395,12 @@
         private System.Windows.Forms.Label labelBloodType;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Button button2;
-        private System.Windows.Forms.ComboBox comboBoxBloodType;
-        private System.Windows.Forms.ComboBox comboBoxDocType;
-        private System.Windows.Forms.ComboBox comboBoxJob;
         private System.Windows.Forms.DateTimePicker dateTimePickerBirthDate;
-        private System.Windows.Forms.ComboBox comboBoxGender;
         public System.Windows.Forms.TextBox textBoxPassword;
         private System.Windows.Forms.Label label2;
+        public System.Windows.Forms.ComboBox comboBoxDocType;
+        public System.Windows.Forms.ComboBox comboBoxGender;
+        public System.Windows.Forms.ComboBox comboBoxBlood;
+        public System.Windows.Forms.ComboBox comboBoxJob;
     }
 }

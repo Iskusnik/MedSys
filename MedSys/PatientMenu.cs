@@ -21,6 +21,10 @@ namespace MedSys
 
         private void PatientMenu_Load(object sender, EventArgs e)
         {
+            ReloadForm();
+        }
+        public void ReloadForm()
+        {
             textBoxBirthDate.Text = patient.BirthDate.ToShortDateString();
             textBoxBloodType.Text = patient.BloodType;
             textBoxName.Text = patient.FullName;
@@ -30,7 +34,6 @@ namespace MedSys
             textBoxDocumentNum.Text = patient.Document.Num;
             textBoxAdress.Text = patient.Adress;
         }
-
         private void записатьсяToolStripMenuItem_Click(object sender, EventArgs e)
         {
             Form record = new PatientToDoctor(patient);
@@ -46,6 +49,7 @@ namespace MedSys
         private void изменитьДанныеToolStripMenuItem_Click(object sender, EventArgs e)
         {
             Form changePersonInfo = new ChangePersonInfo(patient);
+            changePersonInfo.Owner = this;
             changePersonInfo.Show();
         }
 
