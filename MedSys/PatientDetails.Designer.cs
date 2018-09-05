@@ -1,6 +1,6 @@
 ﻿namespace MedSys
 {
-    partial class PatientMenu
+    partial class PatientDetails
     {
         /// <summary>
         /// Required designer variable.
@@ -151,7 +151,7 @@
             // 
             this.записатьсяToolStripMenuItem.Name = "записатьсяToolStripMenuItem";
             this.записатьсяToolStripMenuItem.Size = new System.Drawing.Size(247, 22);
-            this.записатьсяToolStripMenuItem.Text = "Записаться";
+            this.записатьсяToolStripMenuItem.Text = "Записать на приём";
             this.записатьсяToolStripMenuItem.Click += new System.EventHandler(this.записатьсяToolStripMenuItem_Click);
             // 
             // приёмКВрачуToolStripMenuItem
@@ -171,7 +171,7 @@
             this.textBoxDocumentNum.Location = new System.Drawing.Point(123, 32);
             this.textBoxDocumentNum.Name = "textBoxDocumentNum";
             this.textBoxDocumentNum.ReadOnly = true;
-            this.textBoxDocumentNum.Size = new System.Drawing.Size(541, 20);
+            this.textBoxDocumentNum.Size = new System.Drawing.Size(638, 20);
             this.textBoxDocumentNum.TabIndex = 128;
             this.textBoxDocumentNum.Text = "1";
             // 
@@ -361,11 +361,11 @@
             this.textBoxDocType.Location = new System.Drawing.Point(123, 6);
             this.textBoxDocType.Name = "textBoxDocType";
             this.textBoxDocType.ReadOnly = true;
-            this.textBoxDocType.Size = new System.Drawing.Size(541, 20);
+            this.textBoxDocType.Size = new System.Drawing.Size(638, 20);
             this.textBoxDocType.TabIndex = 143;
             this.textBoxDocType.Text = "a";
             // 
-            // PatientMenu
+            // PatientDetails
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -376,7 +376,7 @@
             this.Controls.Add(this.menuStrip2);
             this.MaximumSize = new System.Drawing.Size(793, 251);
             this.MinimumSize = new System.Drawing.Size(392, 229);
-            this.Name = "PatientMenu";
+            this.Name = "PatientDetails";
             this.Text = "Меню пациента:";
             this.Load += new System.EventHandler(this.PatientMenu_Load);
             this.menuStrip2.ResumeLayout(false);

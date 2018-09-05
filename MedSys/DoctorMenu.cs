@@ -36,5 +36,17 @@ namespace MedSys
             textBoxAdress.Text = doctor.Adress;
             textBoxEducation.Text = doctor.Education;
         }
+
+        private void добавитьВрачаToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Form regist = new Registr(isDoctor: true);
+            regist.ShowDialog();
+        }
+
+        private void добавитьПациентаToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Form regist = new Registr(isDoctor: false);
+            regist.ShowDialog();
+        }
     }
 }

@@ -118,6 +118,12 @@
     <Compile Include="DoctorMenu.Designer.cs">
       <DependentUpon>DoctorMenu.cs</DependentUpon>
     </Compile>
+    <Compile Include="PatientDetails.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PatientDetails.Designer.cs">
+      <DependentUpon>PatientDetails.cs</DependentUpon>
+    </Compile>
     <Compile Include="PatientMenu.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -137,6 +143,18 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Record.cs">
       <DependentUpon>ModelMed.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Registr.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Registr.Designer.cs">
+      <DependentUpon>Registr.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ShowEditDeleteIllnesses.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ShowEditDeleteIllnesses.Designer.cs">
+      <DependentUpon>ShowEditDeleteIllnesses.cs</DependentUpon>
     </Compile>
     <Compile Include="ShowIllnesses.cs">
       <SubType>Form</SubType>
@@ -174,6 +192,9 @@
     <EmbeddedResource Include="DoctorMenu.resx">
       <DependentUpon>DoctorMenu.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="PatientDetails.resx">
+      <DependentUpon>PatientDetails.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="PatientMenu.resx">
       <DependentUpon>PatientMenu.cs</DependentUpon>
     </EmbeddedResource>
@@ -189,6 +210,12 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="Registr.resx">
+      <DependentUpon>Registr.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ShowEditDeleteIllnesses.resx">
+      <DependentUpon>ShowEditDeleteIllnesses.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="ShowIllnesses.resx">
       <DependentUpon>ShowIllnesses.cs</DependentUpon>
     </EmbeddedResource>

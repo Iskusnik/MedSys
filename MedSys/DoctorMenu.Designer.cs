@@ -31,13 +31,6 @@
             this.textBoxDocType = new System.Windows.Forms.TextBox();
             this.textBoxBirthDate = new System.Windows.Forms.TextBox();
             this.textBoxGender = new System.Windows.Forms.TextBox();
-            this.записиВрачейToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.просмотретьИсториюБолезнейToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.изменитьДанныеToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.редактироватьДанныеToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.просмотретьИсториюЗаписейToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.записатьсяToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.приёмКВрачуToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.textBoxDocumentNum = new System.Windows.Forms.TextBox();
             this.label12 = new System.Windows.Forms.Label();
             this.label10 = new System.Windows.Forms.Label();
@@ -58,6 +51,15 @@
             this.textBoxJob = new System.Windows.Forms.TextBox();
             this.label6 = new System.Windows.Forms.Label();
             this.textBoxEducation = new System.Windows.Forms.TextBox();
+            this.врачиToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.изменитьСписокСпециальностейToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.найтиЧеловекаИИзменитьДанныеToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.ClinicManageToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.конструкторЗапросовToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.добавитьВрачаToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.добавитьПациентаToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.приёмыПациентовToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.пациентыToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip2.SuspendLayout();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
@@ -100,55 +102,6 @@
             this.textBoxGender.Size = new System.Drawing.Size(634, 20);
             this.textBoxGender.TabIndex = 140;
             this.textBoxGender.Text = "a";
-            // 
-            // записиВрачейToolStripMenuItem
-            // 
-            this.записиВрачейToolStripMenuItem.Name = "записиВрачейToolStripMenuItem";
-            this.записиВрачейToolStripMenuItem.Size = new System.Drawing.Size(176, 22);
-            this.записиВрачейToolStripMenuItem.Text = "Записи врачей";
-            // 
-            // просмотретьИсториюБолезнейToolStripMenuItem
-            // 
-            this.просмотретьИсториюБолезнейToolStripMenuItem.Name = "просмотретьИсториюБолезнейToolStripMenuItem";
-            this.просмотретьИсториюБолезнейToolStripMenuItem.Size = new System.Drawing.Size(176, 22);
-            this.просмотретьИсториюБолезнейToolStripMenuItem.Text = "История болезней";
-            // 
-            // изменитьДанныеToolStripMenuItem
-            // 
-            this.изменитьДанныеToolStripMenuItem.Name = "изменитьДанныеToolStripMenuItem";
-            this.изменитьДанныеToolStripMenuItem.Size = new System.Drawing.Size(176, 22);
-            this.изменитьДанныеToolStripMenuItem.Text = "Изменить данные";
-            // 
-            // редактироватьДанныеToolStripMenuItem
-            // 
-            this.редактироватьДанныеToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.изменитьДанныеToolStripMenuItem,
-            this.просмотретьИсториюБолезнейToolStripMenuItem,
-            this.записиВрачейToolStripMenuItem});
-            this.редактироватьДанныеToolStripMenuItem.Name = "редактироватьДанныеToolStripMenuItem";
-            this.редактироватьДанныеToolStripMenuItem.Size = new System.Drawing.Size(75, 20);
-            this.редактироватьДанныеToolStripMenuItem.Text = "Мед карта";
-            // 
-            // просмотретьИсториюЗаписейToolStripMenuItem
-            // 
-            this.просмотретьИсториюЗаписейToolStripMenuItem.Name = "просмотретьИсториюЗаписейToolStripMenuItem";
-            this.просмотретьИсториюЗаписейToolStripMenuItem.Size = new System.Drawing.Size(247, 22);
-            this.просмотретьИсториюЗаписейToolStripMenuItem.Text = "Просмотреть историю записей";
-            // 
-            // записатьсяToolStripMenuItem
-            // 
-            this.записатьсяToolStripMenuItem.Name = "записатьсяToolStripMenuItem";
-            this.записатьсяToolStripMenuItem.Size = new System.Drawing.Size(247, 22);
-            this.записатьсяToolStripMenuItem.Text = "Записаться";
-            // 
-            // приёмКВрачуToolStripMenuItem
-            // 
-            this.приёмКВрачуToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.записатьсяToolStripMenuItem,
-            this.просмотретьИсториюЗаписейToolStripMenuItem});
-            this.приёмКВрачуToolStripMenuItem.Name = "приёмКВрачуToolStripMenuItem";
-            this.приёмКВрачуToolStripMenuItem.Size = new System.Drawing.Size(101, 20);
-            this.приёмКВрачуToolStripMenuItem.Text = "Приём к врачу";
             // 
             // textBoxDocumentNum
             // 
@@ -261,8 +214,9 @@
             // menuStrip2
             // 
             this.menuStrip2.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.приёмКВрачуToolStripMenuItem,
-            this.редактироватьДанныеToolStripMenuItem});
+            this.ClinicManageToolStripMenuItem,
+            this.приёмыПациентовToolStripMenuItem,
+            this.пациентыToolStripMenuItem});
             this.menuStrip2.Location = new System.Drawing.Point(0, 0);
             this.menuStrip2.Name = "menuStrip2";
             this.menuStrip2.Size = new System.Drawing.Size(777, 24);
@@ -402,6 +356,70 @@
             this.textBoxEducation.TabIndex = 146;
             this.textBoxEducation.Text = "1";
             // 
+            // врачиToolStripMenuItem
+            // 
+            this.врачиToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.добавитьВрачаToolStripMenuItem,
+            this.добавитьПациентаToolStripMenuItem});
+            this.врачиToolStripMenuItem.Name = "врачиToolStripMenuItem";
+            this.врачиToolStripMenuItem.Size = new System.Drawing.Size(271, 22);
+            this.врачиToolStripMenuItem.Text = "Регистрация";
+            // 
+            // изменитьСписокСпециальностейToolStripMenuItem
+            // 
+            this.изменитьСписокСпециальностейToolStripMenuItem.Name = "изменитьСписокСпециальностейToolStripMenuItem";
+            this.изменитьСписокСпециальностейToolStripMenuItem.Size = new System.Drawing.Size(271, 22);
+            this.изменитьСписокСпециальностейToolStripMenuItem.Text = "Изменить список специальностей";
+            // 
+            // найтиЧеловекаИИзменитьДанныеToolStripMenuItem
+            // 
+            this.найтиЧеловекаИИзменитьДанныеToolStripMenuItem.Name = "найтиЧеловекаИИзменитьДанныеToolStripMenuItem";
+            this.найтиЧеловекаИИзменитьДанныеToolStripMenuItem.Size = new System.Drawing.Size(271, 22);
+            this.найтиЧеловекаИИзменитьДанныеToolStripMenuItem.Text = "Найти человека и изменить данные";
+            // 
+            // ClinicManageToolStripMenuItem
+            // 
+            this.ClinicManageToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.врачиToolStripMenuItem,
+            this.изменитьСписокСпециальностейToolStripMenuItem,
+            this.найтиЧеловекаИИзменитьДанныеToolStripMenuItem,
+            this.конструкторЗапросовToolStripMenuItem});
+            this.ClinicManageToolStripMenuItem.Name = "ClinicManageToolStripMenuItem";
+            this.ClinicManageToolStripMenuItem.Size = new System.Drawing.Size(170, 20);
+            this.ClinicManageToolStripMenuItem.Text = "Управление поликлиникой";
+            // 
+            // конструкторЗапросовToolStripMenuItem
+            // 
+            this.конструкторЗапросовToolStripMenuItem.Name = "конструкторЗапросовToolStripMenuItem";
+            this.конструкторЗапросовToolStripMenuItem.Size = new System.Drawing.Size(271, 22);
+            this.конструкторЗапросовToolStripMenuItem.Text = "Конструктор запросов";
+            // 
+            // добавитьВрачаToolStripMenuItem
+            // 
+            this.добавитьВрачаToolStripMenuItem.Name = "добавитьВрачаToolStripMenuItem";
+            this.добавитьВрачаToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.добавитьВрачаToolStripMenuItem.Text = "Добавить врача";
+            this.добавитьВрачаToolStripMenuItem.Click += new System.EventHandler(this.добавитьВрачаToolStripMenuItem_Click);
+            // 
+            // добавитьПациентаToolStripMenuItem
+            // 
+            this.добавитьПациентаToolStripMenuItem.Name = "добавитьПациентаToolStripMenuItem";
+            this.добавитьПациентаToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.добавитьПациентаToolStripMenuItem.Text = "Добавить пациента";
+            this.добавитьПациентаToolStripMenuItem.Click += new System.EventHandler(this.добавитьПациентаToolStripMenuItem_Click);
+            // 
+            // приёмыПациентовToolStripMenuItem
+            // 
+            this.приёмыПациентовToolStripMenuItem.Name = "приёмыПациентовToolStripMenuItem";
+            this.приёмыПациентовToolStripMenuItem.Size = new System.Drawing.Size(84, 20);
+            this.приёмыПациентовToolStripMenuItem.Text = "Расписание";
+            // 
+            // пациентыToolStripMenuItem
+            // 
+            this.пациентыToolStripMenuItem.Name = "пациентыToolStripMenuItem";
+            this.пациентыToolStripMenuItem.Size = new System.Drawing.Size(75, 20);
+            this.пациентыToolStripMenuItem.Text = "Пациенты";
+            // 
             // DoctorMenu
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -434,13 +452,6 @@
         public System.Windows.Forms.TextBox textBoxDocType;
         public System.Windows.Forms.TextBox textBoxBirthDate;
         public System.Windows.Forms.TextBox textBoxGender;
-        private System.Windows.Forms.ToolStripMenuItem записиВрачейToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem просмотретьИсториюБолезнейToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem изменитьДанныеToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem редактироватьДанныеToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem просмотретьИсториюЗаписейToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem записатьсяToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem приёмКВрачуToolStripMenuItem;
         public System.Windows.Forms.TextBox textBoxDocumentNum;
         private System.Windows.Forms.Label label12;
         private System.Windows.Forms.Label label10;
@@ -461,5 +472,14 @@
         public System.Windows.Forms.TextBox textBoxJob;
         private System.Windows.Forms.Label label6;
         public System.Windows.Forms.TextBox textBoxEducation;
+        private System.Windows.Forms.ToolStripMenuItem ClinicManageToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem врачиToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem изменитьСписокСпециальностейToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem найтиЧеловекаИИзменитьДанныеToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem конструкторЗапросовToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem добавитьВрачаToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem добавитьПациентаToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem приёмыПациентовToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem пациентыToolStripMenuItem;
     }
 }
