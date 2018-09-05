@@ -48,5 +48,10 @@ namespace MedSys
             Form regist = new Registr(isDoctor: false);
             regist.ShowDialog();
         }
+
+        private void пациентыToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }

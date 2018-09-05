@@ -150,6 +150,12 @@
     <Compile Include="Registr.Designer.cs">
       <DependentUpon>Registr.cs</DependentUpon>
     </Compile>
+    <Compile Include="SelectPerson.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="SelectPerson.Designer.cs">
+      <DependentUpon>SelectPerson.cs</DependentUpon>
+    </Compile>
     <Compile Include="ShowEditDeleteIllnesses.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -212,6 +218,9 @@
     </Compile>
     <EmbeddedResource Include="Registr.resx">
       <DependentUpon>Registr.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SelectPerson.resx">
+      <DependentUpon>SelectPerson.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ShowEditDeleteIllnesses.resx">
       <DependentUpon>ShowEditDeleteIllnesses.cs</DependentUpon>
