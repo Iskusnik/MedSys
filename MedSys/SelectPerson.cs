@@ -8,34 +8,15 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace Med2
+namespace MedSys
 {
     public partial class SelectPerson : Form
     {
-        int function;
+        ModelMedContainer db = new ModelMedContainer();
+
         public SelectPerson(int func = 0)
         {
-            function = func;
             InitializeComponent();
-            if (func == 0)
-            {
-                checkBoxDocs.Show();
-                checkBoxPat.Show();
-                buttonDelete.Show();
-                using (ModelMedDBContainer db = new ModelMedDBContainer())
-                {
-                    foreach (Person per in db.PersonSet)
-                        comboBox1.Items.Add(per.FullName + "_" + per.BirthDate.ToShortDateString());
-                    comboBox1.SelectedIndex = 0;
-                }
-            }
-            if (func == 1)
-            {
-                checkBoxDocs.Hide();
-                checkBoxPat.Hide();
-                buttonDelete.Hide();
-                checkBoxPat.Checked = true;
-            }
         }
 
         private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
@@ -46,68 +27,59 @@ namespace Med2
         private void buttonFind_Click(object sender, EventArgs e)
         {
 
-            using (ModelMedDBContainer db = new ModelMedDBContainer())
+            string name = textBoxName.Text;
+            DateTime date = dateTimePicker1.Value.Date;
+            List<Person> searchResult = db.PersonSet.ToList();
+
+            try
             {
-                string name = textBoxName.Text;
-                DateTime date = dateTimePicker1.Value.Date;
-                List<Person> searchResult = db.PersonSet.ToList();
+                if (checkBoxName.Checked)
+                    searchResult = (from d in searchResult where (d.FullName == name) select d).ToList();
 
-                try
+                if (checkBoxBirth.Checked)
                 {
-                    if (checkBoxName.Checked)
-                        searchResult = (from d in searchResult where (d.FullName == name) select d).ToList();
-
-                    if (checkBoxBirth.Checked)
+                    switch (comboBoxBirth.SelectedIndex)
                     {
-                        switch (comboBoxBirth.SelectedIndex)
-                        {
-                            case 0: searchResult = (from d in searchResult where (d.BirthDate < date) select d).ToList(); break;
-                            case 1: searchResult = (from d in searchResult where (d.BirthDate <= date) select d).ToList(); break;
-                            case 2: searchResult = (from d in searchResult where (d.BirthDate == date) select d).ToList(); break;
-                            case 3: searchResult = (from d in searchResult where (d.BirthDate > date) select d).ToList(); break;
-                            case 4: searchResult = (from d in searchResult where (d.BirthDate >= date) select d).ToList(); break;
-                        }
+                        case 0: searchResult = (from d in searchResult where (d.BirthDate < date) select d).ToList(); break;
+                        case 1: searchResult = (from d in searchResult where (d.BirthDate <= date) select d).ToList(); break;
+                        case 2: searchResult = (from d in searchResult where (d.BirthDate == date) select d).ToList(); break;
+                        case 3: searchResult = (from d in searchResult where (d.BirthDate > date) select d).ToList(); break;
+                        case 4: searchResult = (from d in searchResult where (d.BirthDate >= date) select d).ToList(); break;
                     }
-                    if (checkBoxDocs.Checked)
-                        searchResult = (from d in searchResult where (d is Doctor) select d).ToList();
-                    if (checkBoxPat.Checked)
-                        searchResult = (from d in searchResult where (d is Patient) select d).ToList();
+                }
+                if (checkBoxDocs.Checked)
+                    searchResult = (from d in searchResult where (d is Doctor) select d).ToList();
+                if (checkBoxPat.Checked)
+                    searchResult = (from d in searchResult where (d is Patient) select d).ToList();
 
-                    comboBox1.Items.Clear();
-                    foreach (Person per in searchResult)
-                        comboBox1.Items.Add(per.FullName + "_" + per.BirthDate.ToShortDateString());
-                    if (comboBox1.Items.Count != 0)
-                        comboBox1.SelectedIndex = 0;
-                }
-                catch (NullReferenceException)
-                {
-                    MessageBox.Show("Искомые люди не обнаружены");
-                }
+                FillDataGridView(searchResult);
+            }
+            catch (NullReferenceException)
+            {
+                MessageBox.Show("Искомые люди не обнаружены");
             }
         }
 
+
         private void buttonSelectPerson_Click(object sender, EventArgs e)
         {
-            if (comboBox1.Text != "")
-                using (ModelMedDBContainer db = new ModelMedDBContainer())
+            if (dataGridView1.SelectedRows.Count != 0)
+            {
+                int columnIndex = dataGridView1.Columns["Id"].Index;
+                int id = (int)dataGridView1.SelectedCells[columnIndex].Value;
+                Person person = db.PersonSet.Find(id);
+
+                if (person is Patient)
                 {
-                    string[] personInfo = comboBox1.Text.Split('_');
-                    string[] birthInfo = personInfo[1].Split('.');
-                    long hash = (long)(personInfo[0]).GetHashCode();
-                    DateTime birth = new DateTime(int.Parse(birthInfo[2]), int.Parse(birthInfo[1]), int.Parse(birthInfo[0]));
-                    Person pers = db.PersonSet.Find(birth, hash);
-                    if (function == 0)
-                    {
-                        Form changeInfo = new ChangePersonInfo(pers);
-                        changeInfo.Owner = this;
-                        changeInfo.ShowDialog();
-                    }
-                    if (function == 1)
-                    {
-                        Form changeMedCard = new ChangeMedCard(((DoctorMenu)Owner).thisDoctor, (Patient)pers);
-                        changeMedCard.Show();
-                    }
+                    Form patientDetails = new PatientDetails(person as Patient);
+                    patientDetails.ShowDialog();
                 }
+                else
+                {
+                    Form doctorDetails = new DoctorDetails(person as Doctor);
+                    doctorDetails.ShowDialog();
+                }
+            }
             else
                 MessageBox.Show("Человек не выбран");
         }
@@ -131,16 +103,10 @@ namespace Med2
 
         private void buttonDelete_Click(object sender, EventArgs e)
         {
-            if (comboBox1.Text != "")
-                using (ModelMedDBContainer db = new ModelMedDBContainer())
-                {
-                    string[] personInfo = comboBox1.Text.Split('_');
-                    string[] birthInfo = personInfo[1].Split('.');
-                    long hash = (long)(personInfo[0]).GetHashCode();
-                    DateTime birth = new DateTime(int.Parse(birthInfo[2]), int.Parse(birthInfo[1]), int.Parse(birthInfo[0]));
-                    Person pers = db.PersonSet.Find(birth, hash);
-                    db.PersonSet.Remove(pers);
-                }
+            if (dataGridView1.SelectedRows.Count != 0)
+            {
+                ControlFunctions.RemovePerson(dataGridView1.SelectedRows[0].Index);
+            }
             else
                 MessageBox.Show("Человек не выбран");
         }
@@ -148,6 +114,78 @@ namespace Med2
         private void SelectPerson_Load(object sender, EventArgs e)
         {
             comboBoxBirth.SelectedIndex = 2;
+
+            dataGridView1.ReadOnly = true;
+
+            var doctors = (from pers in db.PersonSet
+                           where pers is Doctor
+                           select new
+                             { ФИО = pers.FullName,
+                               ДР = pers.BirthDate,
+                               Пол = pers.Gender,
+                               Врач = "Врач",
+                               Id = pers.Id}).ToList();
+
+            var patients = (from pers in db.PersonSet
+                            where pers is Patient
+                            select new
+                            {
+                                ФИО = pers.FullName,
+                                ДР = pers.BirthDate,
+                                Пол = pers.Gender,
+                                Врач = "Пациент",
+                                Id = pers.Id
+                            }).ToList();
+
+            dataGridView1.Columns.Add("ФИО", "ФИО");
+            dataGridView1.Columns.Add("ДР", "ДР");
+            dataGridView1.Columns.Add("Пол", "Пол");
+            dataGridView1.Columns.Add("Врач", "Врач");
+            dataGridView1.Columns.Add("Id", "Id");
+            dataGridView1.Columns["Id"].Visible = false;
+
+            foreach (var pers in doctors)
+                dataGridView1.Rows.Add(pers.ФИО, pers.ДР, pers.Пол, pers.Врач, pers.Id);
+            foreach (var pers in patients)
+                dataGridView1.Rows.Add(pers.ФИО, pers.ДР, pers.Пол, pers.Врач, pers.Id);
+
+            dataGridView1.RowHeadersVisible = false;
+            dataGridView1.Refresh();
+        }
+
+
+        private void FillDataGridView(List<Person> people)
+        {
+            var doctors = (from pers in people
+                           where pers is Doctor
+                           select new
+                           {
+                               ФИО = pers.FullName,
+                               ДР = pers.BirthDate,
+                               Пол = pers.Gender,
+                               Врач = "Врач",
+                               Id = pers.Id
+                           }).ToList();
+
+            var patients = (from pers in people
+                            where pers is Patient
+                            select new
+                            {
+                                ФИО = pers.FullName,
+                                ДР = pers.BirthDate,
+                                Пол = pers.Gender,
+                                Врач = "Пациент",
+                                Id = pers.Id
+                            }).ToList();
+
+            foreach (var pers in doctors)
+                dataGridView1.Rows.Add(pers.ФИО, pers.ДР, pers.Пол, pers.Врач, pers.Id);
+
+            foreach (var pers in patients)
+                dataGridView1.Rows.Add(pers.ФИО, pers.ДР, pers.Пол, pers.Врач, pers.Id);
+
+            dataGridView1.Rows.Clear();
+
         }
     }
 }

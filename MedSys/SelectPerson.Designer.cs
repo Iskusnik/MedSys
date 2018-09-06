@@ -1,4 +1,4 @@
-﻿namespace Med2
+﻿namespace MedSys
 {
     partial class SelectPerson
     {
@@ -65,7 +65,7 @@
             this.buttonSelectPerson.Name = "buttonSelectPerson";
             this.buttonSelectPerson.Size = new System.Drawing.Size(206, 23);
             this.buttonSelectPerson.TabIndex = 8;
-            this.buttonSelectPerson.Text = "Изменить данные";
+            this.buttonSelectPerson.Text = "Подробнее";
             this.buttonSelectPerson.UseVisualStyleBackColor = true;
             this.buttonSelectPerson.Click += new System.EventHandler(this.buttonSelectPerson_Click);
             // 
@@ -149,6 +149,7 @@
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridView1.Dock = System.Windows.Forms.DockStyle.Right;
             this.dataGridView1.Location = new System.Drawing.Point(224, 0);
+            this.dataGridView1.MultiSelect = false;
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.Size = new System.Drawing.Size(398, 489);
             this.dataGridView1.TabIndex = 18;

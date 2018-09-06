@@ -199,7 +199,7 @@ namespace MedSys
             else if (!Regex.IsMatch(textBoxDocumentNum.Text, @"[0-9]+$"))
                 return "Номер документа содержит только цифры от 0 до 9";
             else if (person is Doctor)
-                if (!Regex.IsMatch(textBoxEducation.Text, @"[0-9]+$"))
+                if (textBoxEducation.Text == "")
                     return "В образовании не должно быть пустой строки";
                 else;
             else;

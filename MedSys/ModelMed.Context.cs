@@ -18,13 +18,30 @@ namespace MedSys
         protected override void Seed(ModelMedContainer db)
         {
             Job jobA = ControlFunctions.CreateJob("Главврач");
-            Doctor docA = ControlFunctions.CreateDoctor("Александров Александр Иванович", DateTime.Parse("11.11.1990"), "Паспорт РФ", "0000000001", jobA, "Home,1", "Enough", "Мужской", "12345", "2");
-            db.PersonSet.Add(docA);
-
+            db.JobSet.Add(jobA);
             Job jobB = ControlFunctions.CreateJob("Терапевт");
             db.JobSet.Add(jobB);
-            Doctor docB = ControlFunctions.CreateDoctor("Иванов Иван Иванович", DateTime.Parse("11.11.1980"), "Паспорт РФ", "0000000002", jobB, "Home,2", "Enough", "Мужской", "12346", "2");
+            db.SaveChanges();
+
+            Doctor docA = ControlFunctions.CreateDoctor("Александров Александр Иванович", DateTime.Parse("11.11.1990"), "Паспорт РФ", "0000000001", "Главврач", "Home,1", "Enough", "Мужской", "12345", "2");
+            db.PersonSet.Add(docA);
+
+            
+            Doctor docB = ControlFunctions.CreateDoctor("Иванов Иван Иванович", DateTime.Parse("11.11.1980"), "Паспорт РФ", "0000000002", "Терапевт", "Home,2", "Enough", "Мужской", "12346", "2");
             db.PersonSet.Add(docB);
+
+
+            db.SaveChanges();
+
+
+
+
+            Doctor docC = ControlFunctions.CreateDoctor("Иванов Иван Иванович", DateTime.Parse("11.11.1955"), "Паспорт РФ", "0000000003", "Терапевт", "Home,2", "Enough", "Мужской", "123473", "2");
+            ControlFunctions.AddPerson(docC);
+           // db.PersonSet.Add(docC);
+
+
+
 
 
             Patient patA = ControlFunctions.CreatePatient("Иванов Иван Иванович", DateTime.Parse("11.12.1980"), "Паспорт РФ", "0000000003", "Home,3", "+1", "Мужской", "12347", "2");
@@ -63,6 +80,7 @@ namespace MedSys
             db.RecordSet.Add(recB);
             db.RecordSet.Add(recC);
 
+            db.JobSet.Add(ControlFunctions.CreateJob("testJob"));
             db.SaveChanges();
         }
     }

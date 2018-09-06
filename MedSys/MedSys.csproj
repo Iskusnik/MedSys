@@ -70,6 +70,12 @@
     <Compile Include="Doctor.cs">
       <DependentUpon>ModelMed.tt</DependentUpon>
     </Compile>
+    <Compile Include="DoctorDetails.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="DoctorDetails.Designer.cs">
+      <DependentUpon>DoctorDetails.cs</DependentUpon>
+    </Compile>
     <Compile Include="DocTypes.cs">
       <DependentUpon>ModelMed.tt</DependentUpon>
     </Compile>
@@ -191,6 +197,9 @@
     </Compile>
     <EmbeddedResource Include="ChangePersonInfo.resx">
       <DependentUpon>ChangePersonInfo.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="DoctorDetails.resx">
+      <DependentUpon>DoctorDetails.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Login.resx">
       <DependentUpon>Login.cs</DependentUpon>

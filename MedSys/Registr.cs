@@ -69,6 +69,12 @@ namespace MedSys
 
         private string TextBoxesCheck()
         {
+
+            if (comboBoxDocType.SelectedIndex < 0)
+                return "Выберите тип документа.";
+
+            if (comboBoxGender.SelectedIndex < 0)
+                return "Выберите пол.";
             if (dateTimePickerBirthDate.Value > DateTime.Now)
                 return "Дата рождения не может стоять в будущем.";
 
@@ -84,10 +90,15 @@ namespace MedSys
             else if (!Regex.IsMatch(textBoxDocumentNum.Text, @"[0-9]+$"))
                 return "Номер документа содержит только цифры от 0 до 9";
             else if (isDoctor)
-                if (!Regex.IsMatch(textBoxEducation.Text, @"[0-9]+$"))
+            { if (textBoxEducation.Text == "")
                     return "В образовании не должно быть пустой строки";
                 else;
-            else;
+                if (comboBoxJob.SelectedIndex < 0)
+                    return "Выберите должность.";
+            }
+            else
+                if (comboBoxBlood.SelectedIndex < 0)
+                    return "Выберите группу крови.";
 
             return null;
         }
@@ -109,14 +120,14 @@ namespace MedSys
                 Person newPerson;
                 if (isDoctor)
                 {
-                    var jobs = (from j in db.JobSet where j.Name == comboBoxJob.Text select j).ToArray();
-                    job = jobs[0];
+                   // var jobs = (from j in db.JobSet where j.Name == comboBoxJob.Text select j).ToArray();
+                   // job = jobs[0];
 
                     newPerson = ControlFunctions.CreateDoctor(textBoxName.Text,
                                                   dateTimePickerBirthDate.Value,
                                                   comboBoxDocType.Text,
                                                   textBoxDocumentNum.Text,
-                                                  job,
+                                                  comboBoxJob.Text,
                                                   textBoxAdress.Text,
                                                   textBoxEducation.Text,
                                                   comboBoxGender.Text,

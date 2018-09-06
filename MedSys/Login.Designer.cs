@@ -49,7 +49,7 @@
             this.textBoxFullName.Name = "textBoxFullName";
             this.textBoxFullName.Size = new System.Drawing.Size(260, 20);
             this.textBoxFullName.TabIndex = 1;
-            this.textBoxFullName.Text = "Иванов Иван Иванович_11.12.1980";
+            this.textBoxFullName.Text = "Александров Александр Иванович_11.11.1990";
             // 
             // textBoxPassword
             // 

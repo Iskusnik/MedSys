@@ -70,7 +70,7 @@ namespace MedSys
         {
             Patient newPatient = new Patient();
             newPatient.Adress = adress;
-            newPatient.BirthDate = birthDate;
+            newPatient.BirthDate = birthDate.Date;
             newPatient.Document = CreateDocument(docType, docNum);
             newPatient.BloodType = bloodType;
             newPatient.FullName = fullName;
@@ -90,25 +90,27 @@ namespace MedSys
                                           DateTime birthDate, 
                                           string docType, 
                                           string docNum, 
-                                          Job job, 
+                                          string jobName, 
                                           string adress,
                                           string education,
                                           string gender,
                                           string insuranceNum,
                                           string password)
         {
+            var jobs = (from j in dbContext.JobSet where j.Name == jobName select j).ToArray();
+            Job job = jobs[0];
+            birthDate = birthDate.Date;
             Doctor newDoctor = new Doctor();
             newDoctor.Adress = adress;
             newDoctor.BirthDate = birthDate;
             newDoctor.Document = CreateDocument(docType, docNum);
+            
             newDoctor.Education = education;
             newDoctor.FullName = fullName;
             newDoctor.Gender = gender;
             newDoctor.InsuranceNum = insuranceNum;
             newDoctor.Job = job;
             newDoctor.Password = password;
-            newDoctor.Record = new List<Record>();
-            newDoctor.TimeForVisit = new List<TimeForVisit>();
 
             return newDoctor;
         }
@@ -200,7 +202,7 @@ namespace MedSys
             //Проверка ФИО и ДР
             var searchResult = (from Person p in dbContext.PersonSet
                                where p.FullName == person.FullName && p.BirthDate == person.BirthDate select p).ToList();
-            if (searchResult != null)
+            if (searchResult.Count != 0)
                 return "Человек с таким ФИО и датой рождения уже зарегистрирован";
             else;
 
@@ -208,7 +210,7 @@ namespace MedSys
             searchResult = (from Person p in dbContext.PersonSet
                                 where p.Document.Type == person.Document.Type && p.Document.Num == person.Document.Num
                                 select p).ToList();
-            if (searchResult != null)
+            if (searchResult.Count != 0)
                 return "Человек с таким удостоверением личности уже зарегистрирован";
             else;
 
@@ -216,7 +218,7 @@ namespace MedSys
             searchResult = (from Person p in dbContext.PersonSet
                             where p.InsuranceNum == person.InsuranceNum
                             select p).ToList();
-            if (searchResult != null)
+            if (searchResult.Count != 0)
                 return "Номер страхового полиса занят";
 
             //Добавление в БД
@@ -241,7 +243,7 @@ namespace MedSys
             var searchResult = (from Job j in dbContext.JobSet
                                 where j.Name == job.Name
                                 select j).ToList();
-            if (searchResult != null)
+            if (searchResult.Count != 0)
                 return "Такая работа уже есть";
             else;
 
@@ -264,7 +266,7 @@ namespace MedSys
                                 where t.VisitTime == timeForVisit.VisitTime &&
                                       t.Doctor.Id == timeForVisit.Doctor.Id
                                 select t).ToList();
-            if (searchResult != null)
+            if (searchResult.Count != 0)
                 return "Такое время у такого врача уже занято";
             else;
             
@@ -273,7 +275,7 @@ namespace MedSys
                             where t.VisitTime == timeForVisit.VisitTime &&
                                   t.Cabinet.Id == timeForVisit.Cabinet.Id
                             select t).ToList();
-            if (searchResult != null)
+            if (searchResult.Count != 0)
                 return "Кабинет занят в это время";
 
             //Добавление в БД
@@ -291,7 +293,7 @@ namespace MedSys
                                       c.Floor == cabinet.Floor &&
                                       c.Num == cabinet.Num
                                 select c).ToList();
-            if (searchResult != null)
+            if (searchResult.Count != 0)
                 return "Такой кабинет уже существует";
             else;
             
@@ -308,7 +310,7 @@ namespace MedSys
             var searchResult = (from ill in dbContext.IllnessSet
                                 where ill.Name == illness.Name
                                 select ill).ToList();
-            if (searchResult != null)
+            if (searchResult.Count != 0)
                 return "Такая болезнь уже записана";
             else;
 
@@ -325,7 +327,7 @@ namespace MedSys
                                 where rec.Date == record.Date &&
                                       rec.Doctor == record.Doctor
                                 select rec).ToList();
-            if (searchResult != null)
+            if (searchResult.Count != 0)
                 return "Доктор уже делал такую запись в это время";
             else;
 
@@ -378,6 +380,50 @@ namespace MedSys
         }
 
 
+
+
+        static public void RemovePerson(int id)
+        {
+            Person pers = dbContext.PersonSet.Find(id);
+            dbContext.PersonSet.Remove(pers);
+            dbContext.DocumentSet.Remove(pers.Document);
+
+            if (pers is Patient)
+            {
+                dbContext.MedCardSet.Remove((pers as Patient).MedCard);
+
+                foreach (Record rec in (pers as Patient).MedCard.Record)
+                    dbContext.RecordSet.Remove(rec);
+               
+
+                foreach (Illness ill in (pers as Patient).MedCard.Illness)
+                    ill.MedCard.Remove((pers as Patient).MedCard);
+
+                (pers as Patient).MedCard.Illness.Clear();
+
+
+
+                foreach (TimeForVisit t in (pers as Patient).TimeForVisit)
+                    dbContext.TimeForVisitSet.Remove(t);
+
+                (pers as Patient).TimeForVisit.Clear();
+
+            }
+            else
+            {
+                (pers as Doctor).Job.Doctor.Remove((pers as Doctor));
+
+                foreach (TimeForVisit t in (pers as Doctor).TimeForVisit)
+                    dbContext.TimeForVisitSet.Remove(t);
+
+                (pers as Doctor).TimeForVisit.Clear();
+
+
+                foreach (Record rec in (pers as Doctor).Record)
+                    dbContext.RecordSet.Remove(rec);
+            }
+            dbContext.SaveChanges();
+        }
 
 
         }

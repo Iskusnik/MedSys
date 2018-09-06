@@ -10,11 +10,11 @@ using System.Windows.Forms;
 
 namespace MedSys
 {
-    public partial class DoctorMenu : Form
+    public partial class DoctorDetails : Form
     {
         public Doctor doctor;
 
-        public DoctorMenu(Doctor doctor)
+        public DoctorDetails(Doctor doctor)
         {
             this.doctor = doctor;
             InitializeComponent();
@@ -57,17 +57,6 @@ namespace MedSys
         private void ClinicManageToolStripMenuItem_Click(object sender, EventArgs e)
         {
 
-        }
-
-        private void приёмыПациентовToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void найтиЧеловекаИИзменитьДанныеToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            Form selectPerson = new SelectPerson();
-            selectPerson.ShowDialog();
         }
 
         private void редактироватьДанныеToolStripMenuItem_Click(object sender, EventArgs e)

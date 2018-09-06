@@ -111,7 +111,7 @@
             this.textBoxPassword.Name = "textBoxPassword";
             this.textBoxPassword.Size = new System.Drawing.Size(223, 20);
             this.textBoxPassword.TabIndex = 187;
-            this.textBoxPassword.Text = " ";
+            this.textBoxPassword.Text = "2";
             this.textBoxPassword.TextChanged += new System.EventHandler(this.ChangedInfo);
             // 
             // comboBoxGender
@@ -204,7 +204,7 @@
             this.textBoxEducation.Name = "textBoxEducation";
             this.textBoxEducation.Size = new System.Drawing.Size(223, 20);
             this.textBoxEducation.TabIndex = 179;
-            this.textBoxEducation.Text = " ";
+            this.textBoxEducation.Text = "3454такое-то";
             this.textBoxEducation.TextChanged += new System.EventHandler(this.ChangedInfo);
             // 
             // labelEducation
@@ -240,7 +240,7 @@
             this.textBoxInsurance.Name = "textBoxInsurance";
             this.textBoxInsurance.Size = new System.Drawing.Size(223, 20);
             this.textBoxInsurance.TabIndex = 175;
-            this.textBoxInsurance.Text = " ";
+            this.textBoxInsurance.Text = "2345678654321";
             this.textBoxInsurance.TextChanged += new System.EventHandler(this.ChangedInfo);
             // 
             // textBoxDocumentNum
@@ -249,7 +249,7 @@
             this.textBoxDocumentNum.Name = "textBoxDocumentNum";
             this.textBoxDocumentNum.Size = new System.Drawing.Size(223, 20);
             this.textBoxDocumentNum.TabIndex = 174;
-            this.textBoxDocumentNum.Text = " ";
+            this.textBoxDocumentNum.Text = "12441424241";
             this.textBoxDocumentNum.TextChanged += new System.EventHandler(this.ChangedInfo);
             // 
             // label12
@@ -295,7 +295,7 @@
             this.textBoxAdress.Name = "textBoxAdress";
             this.textBoxAdress.Size = new System.Drawing.Size(223, 20);
             this.textBoxAdress.TabIndex = 169;
-            this.textBoxAdress.Text = " ";
+            this.textBoxAdress.Text = "Домовая 5, 15";
             this.textBoxAdress.TextChanged += new System.EventHandler(this.ChangedInfo);
             // 
             // label5
@@ -322,7 +322,7 @@
             this.textBoxName.Name = "textBoxName";
             this.textBoxName.Size = new System.Drawing.Size(223, 20);
             this.textBoxName.TabIndex = 166;
-            this.textBoxName.Text = " ";
+            this.textBoxName.Text = "Кириенко Кирилл Кириллович";
             this.textBoxName.TextChanged += new System.EventHandler(this.ChangedInfo);
             // 
             // label1
