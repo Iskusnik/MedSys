@@ -13,9 +13,10 @@ namespace MedSys
     public partial class SelectPerson : Form
     {
         ModelMedContainer db = new ModelMedContainer();
-
-        public SelectPerson(int func = 0)
+        int function;
+        public SelectPerson(int function = 0)
         {
+            this.function = function;
             InitializeComponent();
         }
 
@@ -53,6 +54,7 @@ namespace MedSys
                     searchResult = (from d in searchResult where (d is Patient) select d).ToList();
 
                 FillDataGridView(searchResult);
+                dataGridView1.Refresh();
             }
             catch (NullReferenceException)
             {
@@ -113,18 +115,50 @@ namespace MedSys
 
         private void SelectPerson_Load(object sender, EventArgs e)
         {
-            comboBoxBirth.SelectedIndex = 2;
 
-            dataGridView1.ReadOnly = true;
 
-            var doctors = (from pers in db.PersonSet
-                           where pers is Doctor
-                           select new
-                             { ФИО = pers.FullName,
-                               ДР = pers.BirthDate,
-                               Пол = pers.Gender,
-                               Врач = "Врач",
-                               Id = pers.Id}).ToList();
+            dataGridView1.Columns.Add("ФИО", "ФИО");
+            dataGridView1.Columns.Add("ДР", "ДР");
+            dataGridView1.Columns.Add("Пол", "Пол");
+            dataGridView1.Columns.Add("Врач", "Врач");
+            dataGridView1.Columns.Add("Id", "Id");
+            dataGridView1.Columns["Id"].Visible = false;
+
+            if (function == 0)
+            {
+                comboBoxBirth.SelectedIndex = 2;
+
+                dataGridView1.ReadOnly = true;
+
+                var doctors = (from pers in db.PersonSet
+                               where pers is Doctor
+                               select new
+                               {
+                                   ФИО = pers.FullName,
+                                   ДР = pers.BirthDate,
+                                   Пол = pers.Gender,
+                                   Врач = "Врач",
+                                   Id = pers.Id
+                               }).ToList();
+
+                
+
+                
+                foreach (var pers in doctors)
+                    dataGridView1.Rows.Add(pers.ФИО, pers.ДР, pers.Пол, pers.Врач, pers.Id);
+                
+
+               
+            }
+            else
+            {
+                checkBoxDocs.Visible = false;
+                checkBoxDocs.Checked = false;
+
+                checkBoxPat.Visible = false;
+                checkBoxPat.Checked = true;
+
+            }
 
             var patients = (from pers in db.PersonSet
                             where pers is Patient
@@ -137,18 +171,8 @@ namespace MedSys
                                 Id = pers.Id
                             }).ToList();
 
-            dataGridView1.Columns.Add("ФИО", "ФИО");
-            dataGridView1.Columns.Add("ДР", "ДР");
-            dataGridView1.Columns.Add("Пол", "Пол");
-            dataGridView1.Columns.Add("Врач", "Врач");
-            dataGridView1.Columns.Add("Id", "Id");
-            dataGridView1.Columns["Id"].Visible = false;
-
-            foreach (var pers in doctors)
-                dataGridView1.Rows.Add(pers.ФИО, pers.ДР, pers.Пол, pers.Врач, pers.Id);
             foreach (var pers in patients)
-                dataGridView1.Rows.Add(pers.ФИО, pers.ДР, pers.Пол, pers.Врач, pers.Id);
-
+                dataGridView1.Rows.Add(pers.ФИО, pers.ДР.Date, pers.Пол, pers.Врач, pers.Id);
             dataGridView1.RowHeadersVisible = false;
             dataGridView1.Refresh();
         }
@@ -156,6 +180,9 @@ namespace MedSys
 
         private void FillDataGridView(List<Person> people)
         {
+
+            dataGridView1.Rows.Clear();
+
             var doctors = (from pers in people
                            where pers is Doctor
                            select new
@@ -179,12 +206,11 @@ namespace MedSys
                             }).ToList();
 
             foreach (var pers in doctors)
-                dataGridView1.Rows.Add(pers.ФИО, pers.ДР, pers.Пол, pers.Врач, pers.Id);
+                dataGridView1.Rows.Add(pers.ФИО, pers.ДР.Date, pers.Пол, pers.Врач, pers.Id);
 
             foreach (var pers in patients)
-                dataGridView1.Rows.Add(pers.ФИО, pers.ДР, pers.Пол, pers.Врач, pers.Id);
+                dataGridView1.Rows.Add(pers.ФИО, pers.ДР.Date, pers.Пол, pers.Врач, pers.Id);
 
-            dataGridView1.Rows.Clear();
 
         }
     }

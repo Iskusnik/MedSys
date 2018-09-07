@@ -51,7 +51,8 @@ namespace MedSys
 
         private void пациентыToolStripMenuItem_Click(object sender, EventArgs e)
         {
-
+            Form selectPerson = new SelectPerson(1);
+            selectPerson.ShowDialog();
         }
 
         private void ClinicManageToolStripMenuItem_Click(object sender, EventArgs e)
@@ -66,7 +67,7 @@ namespace MedSys
 
         private void найтиЧеловекаИИзменитьДанныеToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            Form selectPerson = new SelectPerson();
+            Form selectPerson = new SelectPerson(0);
             selectPerson.ShowDialog();
         }
 
