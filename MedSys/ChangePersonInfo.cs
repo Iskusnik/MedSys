@@ -40,9 +40,7 @@ namespace MedSys
             {
                 string bloodType = (person as Patient).BloodType;
                 comboBoxBlood.Text = bloodType;
-
-                labelJob.Hide();
-                comboBoxJob.Hide();
+                
 
                 labelEducation.Hide();
                 textBoxEducation.Hide();
@@ -56,14 +54,10 @@ namespace MedSys
 
                 var jobs = db.JobSet;
                 foreach (Job j in jobs)
-                    comboBoxJob.Items.Add(j.Name);
-
-                comboBoxJob.Text = (person as Doctor).Job.Name;
+                    
                 textBoxEducation.Text = (person as Doctor).Education;
 
-
-                labelJob.Show();
-                comboBoxJob.Show();
+                
 
                 labelEducation.Show();
                 textBoxEducation.Show();
@@ -85,14 +79,7 @@ namespace MedSys
             }
             else
             {
-                Job job;
-                if (person is Doctor)
-                {
-                    var jobs = (from j in db.JobSet where j.Name == comboBoxJob.Text select j).ToArray();
-                    job = jobs[0];
-                }
-                else
-                    job = null;
+                
 
                 ControlFunctions.EditPerson(person,
                                             textBoxName.Text,
@@ -104,7 +91,6 @@ namespace MedSys
                                             textBoxInsurance.Text,
                                             textBoxPassword.Text,
                                             comboBoxBlood.Text,
-                                            job,
                                             textBoxEducation.Text);
                 saved = true;
                 this.Close();
@@ -140,15 +126,6 @@ namespace MedSys
                         }
                         else
                         {
-                            Job job;
-                            if (person is Doctor)
-                            {
-                                var jobs = (from j in db.JobSet where j.Name == comboBoxJob.Text select j).ToArray();
-                                job = jobs[0];
-                            }
-                            else
-                                job = null;
-
                             ControlFunctions.EditPerson(person,
                                                         textBoxName.Text,
                                                         dateTimePickerBirthDate.Value,
@@ -159,7 +136,6 @@ namespace MedSys
                                                         textBoxInsurance.Text,
                                                         textBoxPassword.Text,
                                                         comboBoxBlood.Text,
-                                                        job,
                                                         textBoxEducation.Text);
 
                             this.Owner.Refresh();

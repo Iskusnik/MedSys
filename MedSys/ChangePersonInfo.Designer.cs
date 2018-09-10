@@ -30,7 +30,6 @@
         {
             this.textBoxEducation = new System.Windows.Forms.TextBox();
             this.labelEducation = new System.Windows.Forms.Label();
-            this.labelJob = new System.Windows.Forms.Label();
             this.label16 = new System.Windows.Forms.Label();
             this.textBoxInsurance = new System.Windows.Forms.TextBox();
             this.textBoxDocumentNum = new System.Windows.Forms.TextBox();
@@ -53,7 +52,6 @@
             this.textBoxPassword = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
             this.comboBoxBlood = new System.Windows.Forms.ComboBox();
-            this.comboBoxJob = new System.Windows.Forms.ComboBox();
             this.SuspendLayout();
             // 
             // textBoxEducation
@@ -73,15 +71,6 @@
             this.labelEducation.Size = new System.Drawing.Size(75, 13);
             this.labelEducation.TabIndex = 143;
             this.labelEducation.Text = "Образование";
-            // 
-            // labelJob
-            // 
-            this.labelJob.AutoSize = true;
-            this.labelJob.Location = new System.Drawing.Point(30, 168);
-            this.labelJob.Name = "labelJob";
-            this.labelJob.Size = new System.Drawing.Size(65, 13);
-            this.labelJob.TabIndex = 138;
-            this.labelJob.Text = "Должность";
             // 
             // label16
             // 
@@ -323,22 +312,11 @@
             this.comboBoxBlood.Size = new System.Drawing.Size(223, 21);
             this.comboBoxBlood.TabIndex = 163;
             // 
-            // comboBoxJob
-            // 
-            this.comboBoxJob.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.comboBoxJob.FormattingEnabled = true;
-            this.comboBoxJob.Location = new System.Drawing.Point(154, 165);
-            this.comboBoxJob.Name = "comboBoxJob";
-            this.comboBoxJob.Size = new System.Drawing.Size(223, 21);
-            this.comboBoxJob.TabIndex = 164;
-            this.comboBoxJob.TextChanged += new System.EventHandler(this.ChangedInfo);
-            // 
             // ChangePersonInfo
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(398, 398);
-            this.Controls.Add(this.comboBoxJob);
             this.Controls.Add(this.comboBoxBlood);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.textBoxPassword);
@@ -351,7 +329,6 @@
             this.Controls.Add(this.button1);
             this.Controls.Add(this.textBoxEducation);
             this.Controls.Add(this.labelEducation);
-            this.Controls.Add(this.labelJob);
             this.Controls.Add(this.label16);
             this.Controls.Add(this.textBoxInsurance);
             this.Controls.Add(this.textBoxDocumentNum);
@@ -378,7 +355,6 @@
 
         public System.Windows.Forms.TextBox textBoxEducation;
         private System.Windows.Forms.Label labelEducation;
-        private System.Windows.Forms.Label labelJob;
         public System.Windows.Forms.Label label16;
         public System.Windows.Forms.TextBox textBoxInsurance;
         public System.Windows.Forms.TextBox textBoxDocumentNum;
@@ -401,6 +377,5 @@
         public System.Windows.Forms.ComboBox comboBoxDocType;
         public System.Windows.Forms.ComboBox comboBoxGender;
         public System.Windows.Forms.ComboBox comboBoxBlood;
-        public System.Windows.Forms.ComboBox comboBoxJob;
     }
 }

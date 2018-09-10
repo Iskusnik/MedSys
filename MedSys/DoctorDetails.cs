@@ -27,7 +27,12 @@ namespace MedSys
         public void ReloadForm()
         {
             textBoxBirthDate.Text = doctor.BirthDate.ToShortDateString();
-            textBoxJob.Text = doctor.Job.Name;
+            string jobs = "";
+
+            foreach (Job j in doctor.Job)
+                jobs += j.Name + " ";
+
+            textBoxJob.Text = jobs;
             textBoxName.Text = doctor.FullName;
             textBoxGender.Text = doctor.Gender;
             textBoxInsuranceNum.Text = doctor.InsuranceNum;

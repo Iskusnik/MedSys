@@ -36,8 +36,6 @@ namespace MedSys
             
             if (!isDoctor)
             {
-                labelJob.Hide();
-                comboBoxJob.Hide();
 
                 labelEducation.Hide();
                 textBoxEducation.Hide();
@@ -48,14 +46,6 @@ namespace MedSys
             else;
             if (isDoctor)
             {
-
-                var jobs = db.JobSet;
-                foreach (Job j in jobs)
-                    comboBoxJob.Items.Add(j.Name);
-
-                labelJob.Show();
-                comboBoxJob.Show();
-
                 labelEducation.Show();
                 textBoxEducation.Show();
 
@@ -90,16 +80,14 @@ namespace MedSys
             else if (!Regex.IsMatch(textBoxDocumentNum.Text, @"[0-9]+$"))
                 return "Номер документа содержит только цифры от 0 до 9";
             else if (isDoctor)
-            { if (textBoxEducation.Text == "")
+            {
+                if (textBoxEducation.Text == "")
                     return "В образовании не должно быть пустой строки";
                 else;
-                if (comboBoxJob.SelectedIndex < 0)
-                    return "Выберите должность.";
             }
-            else
-                if (comboBoxBlood.SelectedIndex < 0)
-                    return "Выберите группу крови.";
-
+            else if (comboBoxBlood.SelectedIndex < 0)
+                return "Выберите группу крови.";
+            else;
             return null;
         }
         private void ChangedInfo(object sender, EventArgs e)
@@ -116,7 +104,6 @@ namespace MedSys
             }
             else
             {
-                Job job;
                 Person newPerson;
                 if (isDoctor)
                 {
@@ -127,7 +114,7 @@ namespace MedSys
                                                   dateTimePickerBirthDate.Value,
                                                   comboBoxDocType.Text,
                                                   textBoxDocumentNum.Text,
-                                                  comboBoxJob.Text,
+                                                  "Нет должности",
                                                   textBoxAdress.Text,
                                                   textBoxEducation.Text,
                                                   comboBoxGender.Text,

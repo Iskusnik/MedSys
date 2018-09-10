@@ -264,7 +264,8 @@
             // 
             this.изменитьСписокСпециальностейToolStripMenuItem.Name = "изменитьСписокСпециальностейToolStripMenuItem";
             this.изменитьСписокСпециальностейToolStripMenuItem.Size = new System.Drawing.Size(271, 22);
-            this.изменитьСписокСпециальностейToolStripMenuItem.Text = "Изменить список специальностей";
+            this.изменитьСписокСпециальностейToolStripMenuItem.Text = "Управление должностями";
+            this.изменитьСписокСпециальностейToolStripMenuItem.Click += new System.EventHandler(this.изменитьСписокСпециальностейToolStripMenuItem_Click);
             // 
             // найтиЧеловекаИИзменитьДанныеToolStripMenuItem
             // 

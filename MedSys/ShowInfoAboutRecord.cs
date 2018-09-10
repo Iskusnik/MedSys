@@ -23,7 +23,6 @@ namespace MedSys
         {
             richTextBoxInfo.Text = "Время записи: " + record.Date.ToShortDateString() + "\n";
             richTextBoxInfo.Text += "Врач: " + record.Doctor.FullName + "\n";
-            richTextBoxInfo.Text += "Специальность: " + record.Doctor.Job.Name + "\n";
             richTextBoxInfo.Text += "Запись: " + record.Info + "\n";
         }
 

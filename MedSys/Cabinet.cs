@@ -23,9 +23,9 @@ namespace MedSys
         public int Id { get; set; }
         public int Num { get; set; }
         public int Floor { get; set; }
-        public string Corpus { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<TimeForVisit> TimeForVisit { get; set; }
+        public virtual Corpus Corpus { get; set; }
     }
 }

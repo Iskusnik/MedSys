@@ -14,16 +14,22 @@
     <EntitySet Name="JobSet" EntityType="ModelMed.Store.JobSet" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="DocumentSet" EntityType="ModelMed.Store.DocumentSet" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="CabinetSet" EntityType="ModelMed.Store.CabinetSet" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="CorpusSet" EntityType="ModelMed.Store.CorpusSet" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="PersonSet_Doctor" EntityType="ModelMed.Store.PersonSet_Doctor" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="PersonSet_Patient" EntityType="ModelMed.Store.PersonSet_Patient" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="JobDoctor" EntityType="ModelMed.Store.JobDoctor" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="IllnessMedCard" EntityType="ModelMed.Store.IllnessMedCard" store:Type="Tables" Schema="dbo" />
     <AssociationSet Name="PersonDocument" Association="ModelMed.Store.PersonDocument">
       <End Role="Person" EntitySet="PersonSet" />
       <End Role="Document" EntitySet="DocumentSet" />
     </AssociationSet>
-    <AssociationSet Name="JobDoctor" Association="ModelMed.Store.JobDoctor">
+    <AssociationSet Name="FK_JobDoctor_Job" Association="ModelMed.Store.FK_JobDoctor_Job">
       <End Role="Job" EntitySet="JobSet" />
+      <End Role="JobDoctor" EntitySet="JobDoctor" />
+    </AssociationSet>
+    <AssociationSet Name="FK_JobDoctor_Doctor" Association="ModelMed.Store.FK_JobDoctor_Doctor">
       <End Role="Doctor" EntitySet="PersonSet_Doctor" />
+      <End Role="JobDoctor" EntitySet="JobDoctor" />
     </AssociationSet>
     <AssociationSet Name="DoctorTimeForVisit" Association="ModelMed.Store.DoctorTimeForVisit">
       <End Role="Doctor" EntitySet="PersonSet_Doctor" />
@@ -56,6 +62,10 @@
     <AssociationSet Name="TimeForVisitPatient" Association="ModelMed.Store.TimeForVisitPatient">
       <End Role="TimeForVisit" EntitySet="TimeForVisitSet" />
       <End Role="Patient" EntitySet="PersonSet_Patient" />
+    </AssociationSet>
+    <AssociationSet Name="CabinetCorpus" Association="ModelMed.Store.CabinetCorpus">
+      <End Role="Cabinet" EntitySet="CabinetSet" />
+      <End Role="Corpus" EntitySet="CorpusSet" />
     </AssociationSet>
     <AssociationSet Name="FK_Doctor_inherits_Person" Association="ModelMed.Store.FK_Doctor_inherits_Person">
       <End Role="Person" EntitySet="PersonSet" />
@@ -137,7 +147,15 @@
     <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="Num" Type="int" Nullable="false" />
     <Property Name="Floor" Type="int" Nullable="false" />
-    <Property Name="Corpus" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Corpus_Id" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="CorpusSet">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Floors" Type="int" Nullable="false" />
   </EntityType>
   <EntityType Name="PersonSet_Doctor">
     <Key>
@@ -145,7 +163,6 @@
     </Key>
     <Property Name="Education" Type="nvarchar(max)" Nullable="false" />
     <Property Name="Id" Type="int" Nullable="false" />
-    <Property Name="Job_Id" Type="int" Nullable="false" />
   </EntityType>
   <EntityType Name="PersonSet_Patient">
     <Key>
@@ -153,6 +170,14 @@
     </Key>
     <Property Name="BloodType" Type="nvarchar(max)" Nullable="false" />
     <Property Name="Id" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="JobDoctor">
+    <Key>
+      <PropertyRef Name="Job_Id" />
+      <PropertyRef Name="Doctor_Id" />
+    </Key>
+    <Property Name="Job_Id" Type="int" Nullable="false" />
+    <Property Name="Doctor_Id" Type="int" Nullable="false" />
   </EntityType>
   <EntityType Name="IllnessMedCard">
     <Key>
@@ -171,18 +196,6 @@
       </Principal>
       <Dependent Role="Person">
         <PropertyRef Name="Document_Id" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="JobDoctor">
-    <End Role="Job" Type="ModelMed.Store.JobSet" Multiplicity="1" />
-    <End Role="Doctor" Type="ModelMed.Store.PersonSet_Doctor" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Job">
-        <PropertyRef Name="Id" />
-      </Principal>
-      <Dependent Role="Doctor">
-        <PropertyRef Name="Job_Id" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -255,6 +268,42 @@
       </Principal>
       <Dependent Role="TimeForVisit">
         <PropertyRef Name="Patient_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="CabinetCorpus">
+    <End Role="Cabinet" Type="ModelMed.Store.CabinetSet" Multiplicity="*" />
+    <End Role="Corpus" Type="ModelMed.Store.CorpusSet" Multiplicity="1" />
+    <ReferentialConstraint>
+      <Principal Role="Corpus">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Cabinet">
+        <PropertyRef Name="Corpus_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_JobDoctor_Job">
+    <End Role="Job" Type="ModelMed.Store.JobSet" Multiplicity="1" />
+    <End Role="JobDoctor" Type="ModelMed.Store.JobDoctor" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Job">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="JobDoctor">
+        <PropertyRef Name="Job_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_JobDoctor_Doctor">
+    <End Role="JobDoctor" Type="ModelMed.Store.JobDoctor" Multiplicity="*" />
+    <End Role="Doctor" Type="ModelMed.Store.PersonSet_Doctor" Multiplicity="1" />
+    <ReferentialConstraint>
+      <Principal Role="Doctor">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="JobDoctor">
+        <PropertyRef Name="Doctor_Id" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -359,6 +408,11 @@
             <End Role="TimeForVisit" EntitySet="TimeForVisitSet" />
             <End Role="Patient" EntitySet="PersonSet" />
           </AssociationSet>
+          <EntitySet Name="CorpusSet" EntityType="ModelMed.Corpus" />
+          <AssociationSet Name="CabinetCorpus" Association="ModelMed.CabinetCorpus">
+            <End Role="Cabinet" EntitySet="CabinetSet" />
+            <End Role="Corpus" EntitySet="CorpusSet" />
+          </AssociationSet>
         </EntityContainer>
         <EntityType Name="Person">
           <Key>
@@ -452,7 +506,7 @@
           <End Type="ModelMed.Document" Role="Document" Multiplicity="1" />
         </Association>
         <Association Name="JobDoctor">
-          <End Type="ModelMed.Job" Role="Job" Multiplicity="1" />
+          <End Type="ModelMed.Job" Role="Job" Multiplicity="*" />
           <End Type="ModelMed.Doctor" Role="Doctor" Multiplicity="*" />
         </Association>
         <Association Name="DoctorTimeForVisit">
@@ -482,8 +536,8 @@
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Num" Type="Int32" Nullable="false" />
           <Property Name="Floor" Type="Int32" Nullable="false" />
-          <Property Name="Corpus" Type="String" Nullable="false" />
           <NavigationProperty Name="TimeForVisit" Relationship="ModelMed.CabinetTimeForVisit" FromRole="Cabinet" ToRole="TimeForVisit" />
+          <NavigationProperty Name="Corpus" Relationship="ModelMed.CabinetCorpus" FromRole="Cabinet" ToRole="Corpus" />
         </EntityType>
         <Association Name="CabinetTimeForVisit">
           <End Type="ModelMed.Cabinet" Role="Cabinet" Multiplicity="1" />
@@ -497,6 +551,19 @@
           <Member Name="Мужской" Value="1" />
           <Member Name="Женский" Value="2" />
         </EnumType>
+        <EntityType Name="Corpus">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" Nullable="false" />
+          <Property Name="Floors" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Cabinet" Relationship="ModelMed.CabinetCorpus" FromRole="Corpus" ToRole="Cabinet" />
+        </EntityType>
+        <Association Name="CabinetCorpus">
+          <End Type="ModelMed.Cabinet" Role="Cabinet" Multiplicity="*" />
+          <End Type="ModelMed.Corpus" Role="Corpus" Multiplicity="1" />
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -585,7 +652,15 @@
           <ScalarProperty Name="Id" ColumnName="Id" />
           <ScalarProperty Name="Num" ColumnName="Num" />
           <ScalarProperty Name="Floor" ColumnName="Floor" />
-          <ScalarProperty Name="Corpus" ColumnName="Corpus" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="CorpusSet">
+      <EntityTypeMapping TypeName="IsTypeOf(ModelMed.Corpus)">
+        <MappingFragment StoreEntitySet="CorpusSet">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Floors" ColumnName="Floors" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -597,12 +672,12 @@
         <ScalarProperty Name="Id" ColumnName="Id" />
       </EndProperty>
     </AssociationSetMapping>
-    <AssociationSetMapping Name="JobDoctor" TypeName="ModelMed.JobDoctor" StoreEntitySet="PersonSet_Doctor">
+    <AssociationSetMapping Name="JobDoctor" TypeName="ModelMed.JobDoctor" StoreEntitySet="JobDoctor">
       <EndProperty Name="Job">
         <ScalarProperty Name="Id" ColumnName="Job_Id" />
       </EndProperty>
       <EndProperty Name="Doctor">
-        <ScalarProperty Name="Id" ColumnName="Id" />
+        <ScalarProperty Name="Id" ColumnName="Doctor_Id" />
       </EndProperty>
     </AssociationSetMapping>
     <AssociationSetMapping Name="DoctorTimeForVisit" TypeName="ModelMed.DoctorTimeForVisit" StoreEntitySet="TimeForVisitSet">
@@ -661,6 +736,14 @@
         <ScalarProperty Name="Id" ColumnName="Id" />
       </EndProperty>
       <Condition ColumnName="Patient_Id" IsNull="false" />
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="CabinetCorpus" TypeName="ModelMed.CabinetCorpus" StoreEntitySet="CabinetSet">
+      <EndProperty Name="Corpus">
+        <ScalarProperty Name="Id" ColumnName="Corpus_Id" />
+      </EndProperty>
+      <EndProperty Name="Cabinet">
+        <ScalarProperty Name="Id" ColumnName="Id" />
+      </EndProperty>
     </AssociationSetMapping>
   </EntityContainerMapping>
 </Mapping></edmx:Mappings>

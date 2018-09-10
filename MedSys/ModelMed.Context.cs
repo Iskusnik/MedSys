@@ -17,6 +17,8 @@ namespace MedSys
     {
         protected override void Seed(ModelMedContainer db)
         {
+            Job jobNull = ControlFunctions.CreateJob("Нет должности");
+            db.JobSet.Add(jobNull);
             Job jobA = ControlFunctions.CreateJob("Главврач");
             db.JobSet.Add(jobA);
             Job jobB = ControlFunctions.CreateJob("Терапевт");
@@ -26,7 +28,7 @@ namespace MedSys
             Doctor docA = ControlFunctions.CreateDoctor("Александров Александр Иванович", DateTime.Parse("11.11.1990"), "Паспорт РФ", "0000000001", "Главврач", "Home,1", "Enough", "Мужской", "12345", "2");
             db.PersonSet.Add(docA);
 
-            
+
             Doctor docB = ControlFunctions.CreateDoctor("Иванов Иван Иванович", DateTime.Parse("11.11.1980"), "Паспорт РФ", "0000000002", "Терапевт", "Home,2", "Enough", "Мужской", "12346", "2");
             db.PersonSet.Add(docB);
 
@@ -38,18 +40,19 @@ namespace MedSys
 
             Doctor docC = ControlFunctions.CreateDoctor("Иванов Иван Иванович", DateTime.Parse("11.11.1955"), "Паспорт РФ", "0000000003", "Терапевт", "Home,2", "Enough", "Мужской", "123473", "2");
             ControlFunctions.AddPerson(docC);
-           // db.PersonSet.Add(docC);
+            // db.PersonSet.Add(docC);
 
 
 
 
 
             Patient patA = ControlFunctions.CreatePatient("Иванов Иван Иванович", DateTime.Parse("11.12.1980"), "Паспорт РФ", "0000000003", "Home,3", "+1", "Мужской", "12347", "2");
-            Cabinet cabA = ControlFunctions.CreateCabinet("1", 1, 1);
+            Corpus corpA = ControlFunctions.CreateCorpus(3, "Корпус 1");
+            Cabinet cabA = ControlFunctions.CreateCabinet(corpA, 1, 1);
 
 
             TimeForVisit timeA = ControlFunctions.CreateTimeForVisit(cabA, docB, DateTime.Parse("11.11.2000"));
-            TimeForVisit timeB = ControlFunctions.CreateTimeForVisit(cabA, docB, new DateTime(2000,12,11,13,15,17));
+            TimeForVisit timeB = ControlFunctions.CreateTimeForVisit(cabA, docB, new DateTime(2000, 12, 11, 13, 15, 17));
             db.TimeForVisitSet.Add(timeB);
             db.TimeForVisitSet.Add(timeA);
             patA.TimeForVisit.Add(timeA);
@@ -93,17 +96,11 @@ namespace MedSys
             Database.SetInitializer<ModelMedContainer>(new MyContextInitializer());
         }
 
-        public ModelMedContainer()
-            : base("name=ModelMedContainer")
-        {
-            Database.SetInitializer<ModelMedContainer>(new MyContextInitializer());
-        }
-
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             throw new UnintentionalCodeFirstException();
         }
-
+    
         public virtual DbSet<Person> PersonSet { get; set; }
         public virtual DbSet<MedCard> MedCardSet { get; set; }
         public virtual DbSet<Record> RecordSet { get; set; }
@@ -112,5 +109,6 @@ namespace MedSys
         public virtual DbSet<Job> JobSet { get; set; }
         public virtual DbSet<Document> DocumentSet { get; set; }
         public virtual DbSet<Cabinet> CabinetSet { get; set; }
+        public virtual DbSet<Corpus> CorpusSet { get; set; }
     }
 }

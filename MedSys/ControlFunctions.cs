@@ -21,9 +21,9 @@ namespace MedSys
         /// <param name="msg"> Сообщение об ошибке </param>
         /// <param name="searchResult"> Результат - человек с таким логином и паролем </param>
         /// <returns></returns>
-        static public bool LoginResult(string login, 
-                                       string password, 
-                                       out string msg, 
+        static public bool LoginResult(string login,
+                                       string password,
+                                       out string msg,
                                        out Person searchResult)
         {
             msg = null;
@@ -39,7 +39,12 @@ namespace MedSys
             {
                 string fullnName = login.Split('_')[0];
                 DateTime birthDate = DateTime.Parse(login.Split('_')[1]);
-                var info = (from Person p in dbContext.PersonSet where p.BirthDate == birthDate && p.FullName == fullnName select p).ToList();
+
+                var info = (from Person p in dbContext.PersonSet
+                            where p.BirthDate == birthDate
+                            && p.FullName == fullnName
+                            select p).ToList();
+
                 searchResult = info.First();
                 if (searchResult.Password == password)
                     return true;
@@ -50,13 +55,13 @@ namespace MedSys
                     return false;
                 }
             }
-            catch(Exception e)
+            catch (Exception e)
             {
                 msg = "Неверный формат";
                 return false;
             }
         }
-       
+
         //Создание сущностей
         static public Patient CreatePatient(string fullName,
                                             DateTime birthDate,
@@ -86,11 +91,11 @@ namespace MedSys
             return newPatient;
         }
 
-        static public Doctor CreateDoctor(string fullName, 
-                                          DateTime birthDate, 
-                                          string docType, 
-                                          string docNum, 
-                                          string jobName, 
+        static public Doctor CreateDoctor(string fullName,
+                                          DateTime birthDate,
+                                          string docType,
+                                          string docNum,
+                                          string jobName,
                                           string adress,
                                           string education,
                                           string gender,
@@ -104,12 +109,12 @@ namespace MedSys
             newDoctor.Adress = adress;
             newDoctor.BirthDate = birthDate;
             newDoctor.Document = CreateDocument(docType, docNum);
-            
+
             newDoctor.Education = education;
             newDoctor.FullName = fullName;
             newDoctor.Gender = gender;
             newDoctor.InsuranceNum = insuranceNum;
-            newDoctor.Job = job;
+            newDoctor.Job.Add(job);
             newDoctor.Password = password;
 
             return newDoctor;
@@ -131,9 +136,9 @@ namespace MedSys
             return job;
         }
 
-        static public Record CreateRecord(DateTime date, 
-                                          Doctor doctor, 
-                                          string info, 
+        static public Record CreateRecord(DateTime date,
+                                          Doctor doctor,
+                                          string info,
                                           MedCard medCard)
         {
             Record record = new Record();
@@ -155,7 +160,7 @@ namespace MedSys
             return medCard;
         }
 
-        static public TimeForVisit CreateTimeForVisit(Cabinet cabinet, 
+        static public TimeForVisit CreateTimeForVisit(Cabinet cabinet,
                                                       Doctor doctor,
                                                       DateTime visitTime)
         {
@@ -163,11 +168,11 @@ namespace MedSys
             timeForVisit.Cabinet = cabinet;
             timeForVisit.Doctor = doctor;
             timeForVisit.VisitTime = visitTime;
-            
+
             return timeForVisit;
         }
 
-        static public Cabinet CreateCabinet(string corpus,
+        static public Cabinet CreateCabinet(Corpus corpus,
                                             int floor,
                                             int num)
         {
@@ -178,6 +183,16 @@ namespace MedSys
             cabinet.TimeForVisit = new List<TimeForVisit>();
 
             return cabinet;
+        }
+
+        static public Corpus CreateCorpus(int floors, string name)
+        {
+            Corpus corpus = new Corpus();
+            corpus.Cabinet = new List<Cabinet>();
+            corpus.Floors = floors;
+            corpus.Name = name;
+
+            return corpus;
         }
 
         static public Illness CreateIllness(string info,
@@ -201,15 +216,15 @@ namespace MedSys
         {
             //Проверка ФИО и ДР
             var searchResult = (from Person p in dbContext.PersonSet
-                               where p.FullName == person.FullName && p.BirthDate == person.BirthDate select p).ToList();
+                                where p.FullName == person.FullName && p.BirthDate == person.BirthDate select p).ToList();
             if (searchResult.Count != 0)
                 return "Человек с таким ФИО и датой рождения уже зарегистрирован";
             else;
 
             //Проверка документов
             searchResult = (from Person p in dbContext.PersonSet
-                                where p.Document.Type == person.Document.Type && p.Document.Num == person.Document.Num
-                                select p).ToList();
+                            where p.Document.Type == person.Document.Type && p.Document.Num == person.Document.Num
+                            select p).ToList();
             if (searchResult.Count != 0)
                 return "Человек с таким удостоверением личности уже зарегистрирован";
             else;
@@ -236,6 +251,28 @@ namespace MedSys
             dbContext.SaveChanges();
             return null;
         }
+        static public string AddJobToDoctor(Doctor doctor, Job job)
+        {
+            job = dbContext.JobSet.Find(job.Id);
+            doctor = (Doctor)dbContext.PersonSet.Find(doctor.Id);
+
+            if (job.Name == "Нет должности")
+            {
+                doctor.Job.Clear();
+            }
+            else
+                if (doctor.Job.Count != 0 && doctor.Job.First().Name == "Нет должности")
+                doctor.Job.Remove(doctor.Job.First());
+            else;
+
+
+            job.Doctor.Add(doctor);
+            doctor.Job.Add(job);
+
+            dbContext.SaveChanges();
+            return null;
+        }
+
 
         static public string AddJob(Job job)
         {
@@ -269,7 +306,7 @@ namespace MedSys
             if (searchResult.Count != 0)
                 return "Такое время у такого врача уже занято";
             else;
-            
+
             //Проверка кабинета
             searchResult = (from t in dbContext.TimeForVisitSet
                             where t.VisitTime == timeForVisit.VisitTime &&
@@ -286,7 +323,7 @@ namespace MedSys
 
         static public string AddCabinet(Cabinet cabinet)
         {
-            
+
             //Проверка наличия совпадений по этажу, комнате, корпусу
             var searchResult = (from c in dbContext.CabinetSet
                                 where c.Corpus == cabinet.Corpus &&
@@ -296,9 +333,26 @@ namespace MedSys
             if (searchResult.Count != 0)
                 return "Такой кабинет уже существует";
             else;
-            
+
             //Добавление в БД
             dbContext.CabinetSet.Add(cabinet);
+            dbContext.SaveChanges();
+            return null;
+        }
+
+        static public string AddCorpus(Corpus corpus)
+        {
+
+            //Проверка наличия совпадений по этажу, комнате, корпусу
+            var searchResult = (from c in dbContext.CorpusSet
+                                where c.Name == corpus.Name
+                                select c).ToList();
+            if (searchResult.Count != 0)
+                return "Такой корпус уже существует";
+            else;
+
+            //Добавление в БД
+            dbContext.CorpusSet.Add(corpus);
             dbContext.SaveChanges();
             return null;
         }
@@ -346,7 +400,6 @@ namespace MedSys
                                             string insuranceNum,
                                             string password,
                                             string bloodType = "0000",
-                                            Job    job = null,
                                             string education = "0000")
         {
             person = dbContext.PersonSet.Find(person.Id);
@@ -369,7 +422,6 @@ namespace MedSys
 
             if (person is Doctor)
             {
-                (person as Doctor).Job = job;
                 (person as Doctor).Education = education;
             }
             else;
@@ -394,7 +446,7 @@ namespace MedSys
 
                 foreach (Record rec in (pers as Patient).MedCard.Record)
                     dbContext.RecordSet.Remove(rec);
-               
+
 
                 foreach (Illness ill in (pers as Patient).MedCard.Illness)
                     ill.MedCard.Remove((pers as Patient).MedCard);
@@ -411,7 +463,8 @@ namespace MedSys
             }
             else
             {
-                (pers as Doctor).Job.Doctor.Remove((pers as Doctor));
+                foreach (Job j in (pers as Doctor).Job)
+                    j.Doctor.Remove((pers as Doctor));
 
                 foreach (TimeForVisit t in (pers as Doctor).TimeForVisit)
                     dbContext.TimeForVisitSet.Remove(t);
@@ -424,13 +477,109 @@ namespace MedSys
             }
             dbContext.SaveChanges();
         }
+        static public void RemoveJob(string jobName)
+        {
+            Job job = (from j in dbContext.JobSet where j.Name == jobName select j).ToList()[0];
+            Job jobNull = (from j in dbContext.JobSet where j.Name == "Нет должности" select j).ToList()[0];
 
-
+            foreach (Doctor d in job.Doctor)
+            {
+                d.Job.Remove(job);
+                if (d.Job.Count == 0)
+                    d.Job.Add(jobNull);
+            }
+            dbContext.JobSet.Remove(job);
+            dbContext.SaveChanges();
         }
+
+    }
 }
+//Предупреждение об удалении
+//Таблица корпусов
+//Несколько работ 
+//Врач может быть пациентом?
+
+/*class MyContextInitializer : DropCreateDatabaseAlways<ModelMedContainer>
+    {
+        protected override void Seed(ModelMedContainer db)
+        {
+            Job jobA = ControlFunctions.CreateJob("Главврач");
+            db.JobSet.Add(jobA);
+            Job jobB = ControlFunctions.CreateJob("Терапевт");
+            db.JobSet.Add(jobB);
+            db.SaveChanges();
+
+            Doctor docA = ControlFunctions.CreateDoctor("Александров Александр Иванович", DateTime.Parse("11.11.1990"), "Паспорт РФ", "0000000001", "Главврач", "Home,1", "Enough", "Мужской", "12345", "2");
+            db.PersonSet.Add(docA);
+
+            
+            Doctor docB = ControlFunctions.CreateDoctor("Иванов Иван Иванович", DateTime.Parse("11.11.1980"), "Паспорт РФ", "0000000002", "Терапевт", "Home,2", "Enough", "Мужской", "12346", "2");
+            db.PersonSet.Add(docB);
 
 
-/*
+            db.SaveChanges();
+
+
+
+
+            Doctor docC = ControlFunctions.CreateDoctor("Иванов Иван Иванович", DateTime.Parse("11.11.1955"), "Паспорт РФ", "0000000003", "Терапевт", "Home,2", "Enough", "Мужской", "123473", "2");
+            ControlFunctions.AddPerson(docC);
+           // db.PersonSet.Add(docC);
+
+
+
+
+
+            Patient patA = ControlFunctions.CreatePatient("Иванов Иван Иванович", DateTime.Parse("11.12.1980"), "Паспорт РФ", "0000000003", "Home,3", "+1", "Мужской", "12347", "2");
+            Cabinet cabA = ControlFunctions.CreateCabinet("1", 1, 1);
+
+
+            TimeForVisit timeA = ControlFunctions.CreateTimeForVisit(cabA, docB, DateTime.Parse("11.11.2000"));
+            TimeForVisit timeB = ControlFunctions.CreateTimeForVisit(cabA, docB, new DateTime(2000,12,11,13,15,17));
+            db.TimeForVisitSet.Add(timeB);
+            db.TimeForVisitSet.Add(timeA);
+            patA.TimeForVisit.Add(timeA);
+            timeA.Patient = patA;
+
+
+            Illness illA = ControlFunctions.CreateIllness("Что-то можно, что-то нельзя.", "Болезнь А");
+            Illness illAA = ControlFunctions.CreateIllness("Что-то можно, что-то нельзя.", "Болезнь А");
+            Illness illB = ControlFunctions.CreateIllness("Что-то можно, что-то нельзя.", "Болезнь Б");
+            db.IllnessSet.Add(illA);
+            illA.MedCard.Add(patA.MedCard);
+            patA.MedCard.Illness.Add(illA);
+
+            db.IllnessSet.Add(illB);
+            illB.MedCard.Add(patA.MedCard);
+            patA.MedCard.Illness.Add(illB);
+
+
+            db.PersonSet.Add(patA);
+
+
+
+            Record recA = ControlFunctions.CreateRecord(DateTime.Now, docB, "111", patA.MedCard);
+            Record recB = ControlFunctions.CreateRecord(DateTime.Parse("11.11.2000"), docB, "222", patA.MedCard);
+            Record recC = ControlFunctions.CreateRecord(DateTime.Parse("11.11.2010"), docA, "333", patA.MedCard);
+
+            db.RecordSet.Add(recA);
+            db.RecordSet.Add(recB);
+            db.RecordSet.Add(recC);
+
+            db.JobSet.Add(ControlFunctions.CreateJob("testJob"));
+            db.SaveChanges();
+        }
+    }
+
+    public partial class ModelMedContainer : DbContext
+    {
+
+        static ModelMedContainer()
+        {
+            Database.SetInitializer<ModelMedContainer>(new MyContextInitializer());
+        }*/
+        
+    /*
 //------------------------------------------------------------------------------
 // <auto-generated>
 //     Этот код создан по шаблону.

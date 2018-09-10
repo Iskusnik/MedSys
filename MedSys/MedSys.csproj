@@ -60,6 +60,18 @@
     <Compile Include="Cabinet.cs">
       <DependentUpon>ModelMed.tt</DependentUpon>
     </Compile>
+    <Compile Include="ChangeDoctorsJobs.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ChangeDoctorsJobs.Designer.cs">
+      <DependentUpon>ChangeDoctorsJobs.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ChangeJobs.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ChangeJobs.Designer.cs">
+      <DependentUpon>ChangeJobs.cs</DependentUpon>
+    </Compile>
     <Compile Include="ChangePersonInfo.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -67,6 +79,9 @@
       <DependentUpon>ChangePersonInfo.cs</DependentUpon>
     </Compile>
     <Compile Include="ControlFunctions.cs" />
+    <Compile Include="Corpus.cs">
+      <DependentUpon>ModelMed.tt</DependentUpon>
+    </Compile>
     <Compile Include="Doctor.cs">
       <DependentUpon>ModelMed.tt</DependentUpon>
     </Compile>
@@ -186,15 +201,27 @@
     <Compile Include="ShowRecords.Designer.cs">
       <DependentUpon>ShowRecords.cs</DependentUpon>
     </Compile>
-    <Compile Include="ShowVisits.cs">
+    <Compile Include="ShowVisitsForDoctor.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="ShowVisits.Designer.cs">
-      <DependentUpon>ShowVisits.cs</DependentUpon>
+    <Compile Include="ShowVisitsForDoctor.Designer.cs">
+      <DependentUpon>ShowVisitsForDoctor.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ShowVisitsForPatient.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ShowVisitsForPatient.Designer.cs">
+      <DependentUpon>ShowVisitsForPatient.cs</DependentUpon>
     </Compile>
     <Compile Include="TimeForVisit.cs">
       <DependentUpon>ModelMed.tt</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="ChangeDoctorsJobs.resx">
+      <DependentUpon>ChangeDoctorsJobs.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ChangeJobs.resx">
+      <DependentUpon>ChangeJobs.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="ChangePersonInfo.resx">
       <DependentUpon>ChangePersonInfo.cs</DependentUpon>
     </EmbeddedResource>
@@ -243,8 +270,11 @@
     <EmbeddedResource Include="ShowRecords.resx">
       <DependentUpon>ShowRecords.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="ShowVisits.resx">
-      <DependentUpon>ShowVisits.cs</DependentUpon>
+    <EmbeddedResource Include="ShowVisitsForDoctor.resx">
+      <DependentUpon>ShowVisitsForDoctor.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ShowVisitsForPatient.resx">
+      <DependentUpon>ShowVisitsForPatient.cs</DependentUpon>
     </EmbeddedResource>
     <EntityDeploy Include="ModelMed.edmx">
       <Generator>EntityModelCodeGenerator</Generator>

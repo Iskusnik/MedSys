@@ -27,7 +27,13 @@ namespace MedSys
         public void ReloadForm()
         {
             textBoxBirthDate.Text = doctor.BirthDate.ToShortDateString();
-            textBoxJob.Text = doctor.Job.Name;
+
+
+            string jobs = "";
+            foreach (Job j in doctor.Job)
+                jobs += j.Name + " ";
+
+            textBoxJob.Text = jobs;
             textBoxName.Text = doctor.FullName;
             textBoxGender.Text = doctor.Gender;
             textBoxInsuranceNum.Text = doctor.InsuranceNum;
@@ -62,7 +68,8 @@ namespace MedSys
 
         private void приёмыПациентовToolStripMenuItem_Click(object sender, EventArgs e)
         {
-
+            Form showVisits = new ShowVisitsForDoctor(doctor);
+            showVisits.ShowDialog();
         }
 
         private void найтиЧеловекаИИзменитьДанныеToolStripMenuItem_Click(object sender, EventArgs e)
@@ -76,6 +83,12 @@ namespace MedSys
             Form changePersonInfo = new ChangePersonInfo(doctor);
             changePersonInfo.Owner = this;
             changePersonInfo.Show();
+        }
+
+        private void изменитьСписокСпециальностейToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Form changeJobs = new ChangeJobs();
+            changeJobs.ShowDialog();
         }
     }
 }

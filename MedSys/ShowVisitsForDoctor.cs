@@ -10,12 +10,12 @@ using System.Windows.Forms;
 
 namespace MedSys
 {
-    public partial class ShowVisits : Form
+    public partial class ShowVisitsForDoctor : Form
     {
-        Patient patient;
-        public ShowVisits(Patient patient)
+        Doctor doctor;
+        public ShowVisitsForDoctor(Doctor doctor)
         {
-            this.patient = patient;
+            this.doctor = doctor;
             InitializeComponent();
         }
 
@@ -23,12 +23,12 @@ namespace MedSys
         {
             using (ModelMedContainer db = new ModelMedContainer())
             {
-                patient = (Patient)db.PersonSet.Find(patient.Id);
+                doctor = (Doctor)db.PersonSet.Find(doctor.Id);
 
-                var thisPersonVisits = (from visit in patient.TimeForVisit select new { Время_начала_приёма = visit.VisitTime, Имя_врача = visit.Doctor.FullName, Корпус = visit.Cabinet.Corpus, Этаж = visit.Cabinet.Floor.ToString(), Кабинет = visit.Cabinet.Num.ToString() }).ToList();
+                var thisPersonVisits = (from visit in doctor.TimeForVisit select new { Время_начала_приёма = visit.VisitTime, Имя_пациента = visit.Patient.FullName, Корпус = visit.Cabinet.Corpus.Name, Этаж = visit.Cabinet.Floor.ToString(), Кабинет = visit.Cabinet.Num.ToString() }).ToList();
                 dataGridView1.Columns.Clear();
                 dataGridView1.Columns.Add("Время начала приёма", "Время начала приёма");
-                dataGridView1.Columns.Add("Имя врача", "Имя врача");
+                dataGridView1.Columns.Add("Имя пациента", "Имя пациента");
                 dataGridView1.Columns.Add("Корпус", "Корпус");
                 dataGridView1.Columns.Add("Этаж", "Этаж");
                 dataGridView1.Columns.Add("Кабинет", "Кабинет");
@@ -36,7 +36,7 @@ namespace MedSys
                 foreach (var s in thisPersonVisits)
                 {
                     string date = s.Время_начала_приёма.ToString();
-                    string name = s.Имя_врача;
+                    string name = s.Имя_пациента;
                     string corpus = s.Корпус;
                     string floor = s.Этаж;
                     string cabinet = s.Кабинет;
@@ -52,12 +52,12 @@ namespace MedSys
         {
             using (ModelMedContainer db = new ModelMedContainer())
             {
-                patient = (Patient)db.PersonSet.Find(patient.Id);
+                doctor = (Doctor)db.PersonSet.Find(doctor.Id);
                 switch (comboBox1.SelectedIndex)
                 {
                     case 0:
                         {
-                            var thisPersonVisits = (from visit in patient.TimeForVisit select new { Время_начала_приёма = visit.VisitTime, Имя_врача = visit.Doctor.FullName, Корпус = visit.Cabinet.Corpus, Этаж = visit.Cabinet.Floor.ToString(), Кабинет = visit.Cabinet.Num.ToString() }).ToList();
+                            var thisPersonVisits = (from visit in doctor.TimeForVisit select new { Время_начала_приёма = visit.VisitTime, Имя_пациента = visit.Patient.FullName, Корпус = visit.Cabinet.Corpus.Name, Этаж = visit.Cabinet.Floor.ToString(), Кабинет = visit.Cabinet.Num.ToString() }).ToList();
                             dataGridView1.Columns.Clear();
                             dataGridView1.Columns.Add("Время начала приёма", "Время начала приёма");
                             dataGridView1.Columns.Add("Имя врача", "Имя врача");
@@ -68,7 +68,7 @@ namespace MedSys
                             foreach (var s in thisPersonVisits)
                             {
                                 string date = s.Время_начала_приёма.ToString();
-                                string name = s.Имя_врача;
+                                string name = s.Имя_пациента;
                                 string corpus = s.Корпус;
                                 string floor = s.Этаж;
                                 string cabinet = s.Кабинет;
@@ -81,7 +81,7 @@ namespace MedSys
                         }
                     case 1:
                         {
-                            var thisPersonVisits = (from visit in patient.TimeForVisit where (visit.VisitTime > DateTime.Now) select new { Время_начала_приёма = visit.VisitTime, Имя_врача = visit.Doctor.FullName, Корпус = visit.Cabinet.Corpus, Этаж = visit.Cabinet.Floor.ToString(), Кабинет = visit.Cabinet.Num.ToString() }).ToList();
+                            var thisPersonVisits = (from visit in doctor.TimeForVisit where (visit.VisitTime > DateTime.Now) select new { Время_начала_приёма = visit.VisitTime, Имя_пациента = visit.Patient.FullName, Корпус = visit.Cabinet.Corpus.Name, Этаж = visit.Cabinet.Floor.ToString(), Кабинет = visit.Cabinet.Num.ToString() }).ToList();
                             dataGridView1.Columns.Clear();
                             dataGridView1.Columns.Add("Время начала приёма", "Время начала приёма");
                             dataGridView1.Columns.Add("Имя врача", "Имя врача");
@@ -92,7 +92,7 @@ namespace MedSys
                             foreach (var s in thisPersonVisits)
                             {
                                 string date = s.Время_начала_приёма.ToString();
-                                string name = s.Имя_врача;
+                                string name = s.Имя_пациента;
                                 string corpus = s.Корпус;
                                 string floor = s.Этаж;
                                 string cabinet = s.Кабинет;
@@ -106,7 +106,7 @@ namespace MedSys
                         }
                     case 2:
                         {
-                            var thisPersonVisits = (from visit in patient.TimeForVisit where (visit.VisitTime <= DateTime.Now) select new { Время_начала_приёма = visit.VisitTime, Имя_врача = visit.Doctor.FullName, Корпус = visit.Cabinet.Corpus, Этаж = visit.Cabinet.Floor.ToString(), Кабинет = visit.Cabinet.Num.ToString() }).ToList();
+                            var thisPersonVisits = (from visit in doctor.TimeForVisit where (visit.VisitTime <= DateTime.Now) select new { Время_начала_приёма = visit.VisitTime, Имя_пациента = visit.Patient.FullName, Корпус = visit.Cabinet.Corpus.Name, Этаж = visit.Cabinet.Floor.ToString(), Кабинет = visit.Cabinet.Num.ToString() }).ToList();
                             dataGridView1.Columns.Clear();
                             dataGridView1.Columns.Add("Время начала приёма", "Время начала приёма");
                             dataGridView1.Columns.Add("Имя врача", "Имя врача");
@@ -117,7 +117,7 @@ namespace MedSys
                             foreach (var s in thisPersonVisits)
                             {
                                 string date = s.Время_начала_приёма.ToString();
-                                string name = s.Имя_врача;
+                                string name = s.Имя_пациента;
                                 string corpus = s.Корпус;
                                 string floor = s.Этаж;
                                 string cabinet = s.Кабинет;

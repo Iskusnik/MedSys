@@ -93,7 +93,8 @@ namespace MedSys
 
             object[] temp = (from doctor in db.PersonSet where (doctor is Doctor) select (doctor)).ToArray();
             string s = comboBoxJob.Text;
-            DoctorsList = (from doctor in temp where ((Doctor)doctor).Job.Name == s select (Doctor)doctor).ToArray();
+            Job selectedJob = (from Job j in db.JobSet where j.Name == s select j).ToArray()[0];
+            DoctorsList = (selectedJob.Doctor).ToArray();
 
 
             foreach (Doctor doct in DoctorsList)

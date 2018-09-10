@@ -12,23 +12,19 @@ namespace MedSys
     using System;
     using System.Collections.Generic;
     
-    public partial class Doctor : Person
+    public partial class Corpus
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Doctor()
+        public Corpus()
         {
-            this.Job = new HashSet<Job>();
-            this.TimeForVisit = new HashSet<TimeForVisit>();
-            this.Record = new HashSet<Record>();
+            this.Cabinet = new HashSet<Cabinet>();
         }
     
-        public string Education { get; set; }
+        public int Id { get; set; }
+        public string Name { get; set; }
+        public int Floors { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Job> Job { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<TimeForVisit> TimeForVisit { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Record> Record { get; set; }
+        public virtual ICollection<Cabinet> Cabinet { get; set; }
     }
 }

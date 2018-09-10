@@ -42,7 +42,7 @@ namespace MedSys
 
         private void просмотретьИсториюЗаписейToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            Form showVisits = new ShowVisits(patient);
+            Form showVisits = new ShowVisitsForPatient(patient);
             showVisits.Show();
         }
 

@@ -1,6 +1,6 @@
 ﻿namespace MedSys
 {
-    partial class ShowVisits
+    partial class ShowVisitsForPatient
     {
         /// <summary>
         /// Required designer variable.

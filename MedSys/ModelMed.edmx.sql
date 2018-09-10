@@ -2,7 +2,7 @@
 -- --------------------------------------------------
 -- Entity Designer DDL Script for SQL Server 2005, 2008, 2012 and Azure
 -- --------------------------------------------------
--- Date Created: 08/27/2018 18:58:27
+-- Date Created: 09/10/2018 18:20:03
 -- Generated from EDMX file: C:\Users\IskusnikXD\Documents\Visual Studio 2015\Projects\MedSys\MedSys\ModelMed.edmx
 -- --------------------------------------------------
 
@@ -47,6 +47,9 @@ GO
 IF OBJECT_ID(N'[dbo].[FK_TimeForVisitPatient]', 'F') IS NOT NULL
     ALTER TABLE [dbo].[TimeForVisitSet] DROP CONSTRAINT [FK_TimeForVisitPatient];
 GO
+IF OBJECT_ID(N'[dbo].[FK_CabinetCorpus]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[CabinetSet] DROP CONSTRAINT [FK_CabinetCorpus];
+GO
 IF OBJECT_ID(N'[dbo].[FK_Doctor_inherits_Person]', 'F') IS NOT NULL
     ALTER TABLE [dbo].[PersonSet_Doctor] DROP CONSTRAINT [FK_Doctor_inherits_Person];
 GO
@@ -81,6 +84,9 @@ IF OBJECT_ID(N'[dbo].[DocumentSet]', 'U') IS NOT NULL
 GO
 IF OBJECT_ID(N'[dbo].[CabinetSet]', 'U') IS NOT NULL
     DROP TABLE [dbo].[CabinetSet];
+GO
+IF OBJECT_ID(N'[dbo].[CorpusSet]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[CorpusSet];
 GO
 IF OBJECT_ID(N'[dbo].[PersonSet_Doctor]', 'U') IS NOT NULL
     DROP TABLE [dbo].[PersonSet_Doctor];
@@ -165,15 +171,22 @@ CREATE TABLE [dbo].[CabinetSet] (
     [Id] int IDENTITY(1,1) NOT NULL,
     [Num] int  NOT NULL,
     [Floor] int  NOT NULL,
-    [Corpus] nvarchar(max)  NOT NULL
+    [Corpus_Id] int  NOT NULL
+);
+GO
+
+-- Creating table 'CorpusSet'
+CREATE TABLE [dbo].[CorpusSet] (
+    [Id] int IDENTITY(1,1) NOT NULL,
+    [Name] nvarchar(max)  NOT NULL,
+    [Floors] int  NOT NULL
 );
 GO
 
 -- Creating table 'PersonSet_Doctor'
 CREATE TABLE [dbo].[PersonSet_Doctor] (
     [Education] nvarchar(max)  NOT NULL,
-    [Id] int  NOT NULL,
-    [Job_Id] int  NOT NULL
+    [Id] int  NOT NULL
 );
 GO
 
@@ -181,6 +194,13 @@ GO
 CREATE TABLE [dbo].[PersonSet_Patient] (
     [BloodType] nvarchar(max)  NOT NULL,
     [Id] int  NOT NULL
+);
+GO
+
+-- Creating table 'JobDoctor'
+CREATE TABLE [dbo].[JobDoctor] (
+    [Job_Id] int  NOT NULL,
+    [Doctor_Id] int  NOT NULL
 );
 GO
 
@@ -243,6 +263,12 @@ ADD CONSTRAINT [PK_CabinetSet]
     PRIMARY KEY CLUSTERED ([Id] ASC);
 GO
 
+-- Creating primary key on [Id] in table 'CorpusSet'
+ALTER TABLE [dbo].[CorpusSet]
+ADD CONSTRAINT [PK_CorpusSet]
+    PRIMARY KEY CLUSTERED ([Id] ASC);
+GO
+
 -- Creating primary key on [Id] in table 'PersonSet_Doctor'
 ALTER TABLE [dbo].[PersonSet_Doctor]
 ADD CONSTRAINT [PK_PersonSet_Doctor]
@@ -253,6 +279,12 @@ GO
 ALTER TABLE [dbo].[PersonSet_Patient]
 ADD CONSTRAINT [PK_PersonSet_Patient]
     PRIMARY KEY CLUSTERED ([Id] ASC);
+GO
+
+-- Creating primary key on [Job_Id], [Doctor_Id] in table 'JobDoctor'
+ALTER TABLE [dbo].[JobDoctor]
+ADD CONSTRAINT [PK_JobDoctor]
+    PRIMARY KEY CLUSTERED ([Job_Id], [Doctor_Id] ASC);
 GO
 
 -- Creating primary key on [Illness_Id], [MedCard_Id] in table 'IllnessMedCard'
@@ -280,19 +312,28 @@ ON [dbo].[PersonSet]
     ([Document_Id]);
 GO
 
--- Creating foreign key on [Job_Id] in table 'PersonSet_Doctor'
-ALTER TABLE [dbo].[PersonSet_Doctor]
-ADD CONSTRAINT [FK_JobDoctor]
+-- Creating foreign key on [Job_Id] in table 'JobDoctor'
+ALTER TABLE [dbo].[JobDoctor]
+ADD CONSTRAINT [FK_JobDoctor_Job]
     FOREIGN KEY ([Job_Id])
     REFERENCES [dbo].[JobSet]
         ([Id])
     ON DELETE NO ACTION ON UPDATE NO ACTION;
 GO
 
--- Creating non-clustered index for FOREIGN KEY 'FK_JobDoctor'
-CREATE INDEX [IX_FK_JobDoctor]
-ON [dbo].[PersonSet_Doctor]
-    ([Job_Id]);
+-- Creating foreign key on [Doctor_Id] in table 'JobDoctor'
+ALTER TABLE [dbo].[JobDoctor]
+ADD CONSTRAINT [FK_JobDoctor_Doctor]
+    FOREIGN KEY ([Doctor_Id])
+    REFERENCES [dbo].[PersonSet_Doctor]
+        ([Id])
+    ON DELETE NO ACTION ON UPDATE NO ACTION;
+GO
+
+-- Creating non-clustered index for FOREIGN KEY 'FK_JobDoctor_Doctor'
+CREATE INDEX [IX_FK_JobDoctor_Doctor]
+ON [dbo].[JobDoctor]
+    ([Doctor_Id]);
 GO
 
 -- Creating foreign key on [Doctor_Id] in table 'TimeForVisitSet'
@@ -407,6 +448,21 @@ GO
 CREATE INDEX [IX_FK_TimeForVisitPatient]
 ON [dbo].[TimeForVisitSet]
     ([Patient_Id]);
+GO
+
+-- Creating foreign key on [Corpus_Id] in table 'CabinetSet'
+ALTER TABLE [dbo].[CabinetSet]
+ADD CONSTRAINT [FK_CabinetCorpus]
+    FOREIGN KEY ([Corpus_Id])
+    REFERENCES [dbo].[CorpusSet]
+        ([Id])
+    ON DELETE NO ACTION ON UPDATE NO ACTION;
+GO
+
+-- Creating non-clustered index for FOREIGN KEY 'FK_CabinetCorpus'
+CREATE INDEX [IX_FK_CabinetCorpus]
+ON [dbo].[CabinetSet]
+    ([Corpus_Id]);
 GO
 
 -- Creating foreign key on [Id] in table 'PersonSet_Doctor'
