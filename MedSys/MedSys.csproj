@@ -66,6 +66,12 @@
     <Compile Include="ChangeDoctorsJobs.Designer.cs">
       <DependentUpon>ChangeDoctorsJobs.cs</DependentUpon>
     </Compile>
+    <Compile Include="ChangeIllnesses.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ChangeIllnesses.Designer.cs">
+      <DependentUpon>ChangeIllnesses.cs</DependentUpon>
+    </Compile>
     <Compile Include="ChangeJobs.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -218,6 +224,9 @@
     </Compile>
     <EmbeddedResource Include="ChangeDoctorsJobs.resx">
       <DependentUpon>ChangeDoctorsJobs.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ChangeIllnesses.resx">
+      <DependentUpon>ChangeIllnesses.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ChangeJobs.resx">
       <DependentUpon>ChangeJobs.cs</DependentUpon>

@@ -251,10 +251,10 @@ namespace MedSys
             dbContext.SaveChanges();
             return null;
         }
-        static public string AddJobToDoctor(Doctor doctor, Job job)
+        static public string AddJobToDoctor(int id, string jobName)
         {
-            job = dbContext.JobSet.Find(job.Id);
-            doctor = (Doctor)dbContext.PersonSet.Find(doctor.Id);
+            Job job = (from Job j in dbContext.JobSet where j.Name == jobName select j).ToList()[0];
+            Doctor doctor = (Doctor)dbContext.PersonSet.Find(id);
 
             if (job.Name == "Нет должности")
             {
@@ -268,6 +268,17 @@ namespace MedSys
 
             job.Doctor.Add(doctor);
             doctor.Job.Add(job);
+
+            dbContext.SaveChanges();
+            return null;
+        }
+        static public string RemoveJobFromDoctor(int id, string jobName)
+        {
+            Job job = (from Job j in dbContext.JobSet where j.Name == jobName select j).ToList()[0];
+            Doctor doctor = (Doctor)dbContext.PersonSet.Find(id);
+
+            job.Doctor.Remove(doctor);
+            doctor.Job.Remove(job);
 
             dbContext.SaveChanges();
             return null;

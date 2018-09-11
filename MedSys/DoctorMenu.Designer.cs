@@ -61,6 +61,7 @@
             this.textBoxJob = new System.Windows.Forms.TextBox();
             this.label6 = new System.Windows.Forms.Label();
             this.textBoxEducation = new System.Windows.Forms.TextBox();
+            this.управлениеБолезнямиToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip2.SuspendLayout();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
@@ -230,6 +231,7 @@
             this.ClinicManageToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.врачиToolStripMenuItem,
             this.изменитьСписокСпециальностейToolStripMenuItem,
+            this.управлениеБолезнямиToolStripMenuItem,
             this.найтиЧеловекаИИзменитьДанныеToolStripMenuItem,
             this.конструкторЗапросовToolStripMenuItem});
             this.ClinicManageToolStripMenuItem.Name = "ClinicManageToolStripMenuItem";
@@ -434,6 +436,13 @@
             this.textBoxEducation.TabIndex = 146;
             this.textBoxEducation.Text = "1";
             // 
+            // управлениеБолезнямиToolStripMenuItem
+            // 
+            this.управлениеБолезнямиToolStripMenuItem.Name = "управлениеБолезнямиToolStripMenuItem";
+            this.управлениеБолезнямиToolStripMenuItem.Size = new System.Drawing.Size(271, 22);
+            this.управлениеБолезнямиToolStripMenuItem.Text = "Управление болезнями";
+            this.управлениеБолезнямиToolStripMenuItem.Click += new System.EventHandler(this.управлениеБолезнямиToolStripMenuItem_Click);
+            // 
             // DoctorMenu
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -496,5 +505,6 @@
         private System.Windows.Forms.ToolStripMenuItem пациентыToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem приёмыПациентовToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem редактироватьДанныеToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem управлениеБолезнямиToolStripMenuItem;
     }
 }

@@ -90,5 +90,11 @@ namespace MedSys
             Form changeJobs = new ChangeJobs();
             changeJobs.ShowDialog();
         }
+
+        private void управлениеБолезнямиToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Form changeIllnesses = new ChangeIllnesses();
+            changeIllnesses.ShowDialog();
+        }
     }
 }
