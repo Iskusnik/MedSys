@@ -66,17 +66,29 @@
     <Compile Include="ChangeDoctorsJobs.Designer.cs">
       <DependentUpon>ChangeDoctorsJobs.cs</DependentUpon>
     </Compile>
-    <Compile Include="ChangeIllnesses.cs">
+    <Compile Include="ControlCorpuses.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="ChangeIllnesses.Designer.cs">
-      <DependentUpon>ChangeIllnesses.cs</DependentUpon>
+    <Compile Include="ControlCorpuses.Designer.cs">
+      <DependentUpon>ControlCorpuses.cs</DependentUpon>
     </Compile>
-    <Compile Include="ChangeJobs.cs">
+    <Compile Include="ControlIllnesses.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="ChangeJobs.Designer.cs">
-      <DependentUpon>ChangeJobs.cs</DependentUpon>
+    <Compile Include="ControlIllnesses.Designer.cs">
+      <DependentUpon>ControlIllnesses.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ControlCabinets.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ControlCabinets.Designer.cs">
+      <DependentUpon>ControlCabinets.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ControlJobs.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ControlJobs.Designer.cs">
+      <DependentUpon>ControlJobs.cs</DependentUpon>
     </Compile>
     <Compile Include="ChangePersonInfo.cs">
       <SubType>Form</SubType>
@@ -102,6 +114,36 @@
     </Compile>
     <Compile Include="Document.cs">
       <DependentUpon>ModelMed.tt</DependentUpon>
+    </Compile>
+    <Compile Include="AddVisit.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="AddVisit.Designer.cs">
+      <DependentUpon>AddVisit.cs</DependentUpon>
+    </Compile>
+    <Compile Include="AddRecord.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="AddRecord.Designer.cs">
+      <DependentUpon>AddRecord.cs</DependentUpon>
+    </Compile>
+    <Compile Include="EditRecord.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="EditRecord.Designer.cs">
+      <DependentUpon>EditRecord.cs</DependentUpon>
+    </Compile>
+    <Compile Include="EditCabinet.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="EditCabinet.Designer.cs">
+      <DependentUpon>EditCabinet.cs</DependentUpon>
+    </Compile>
+    <Compile Include="EditVisit.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="EditVisit.Designer.cs">
+      <DependentUpon>EditVisit.cs</DependentUpon>
     </Compile>
     <Compile Include="Login.cs">
       <SubType>Form</SubType>
@@ -225,17 +267,38 @@
     <EmbeddedResource Include="ChangeDoctorsJobs.resx">
       <DependentUpon>ChangeDoctorsJobs.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="ChangeIllnesses.resx">
-      <DependentUpon>ChangeIllnesses.cs</DependentUpon>
+    <EmbeddedResource Include="ControlCorpuses.resx">
+      <DependentUpon>ControlCorpuses.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="ChangeJobs.resx">
-      <DependentUpon>ChangeJobs.cs</DependentUpon>
+    <EmbeddedResource Include="ControlIllnesses.resx">
+      <DependentUpon>ControlIllnesses.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ControlCabinets.resx">
+      <DependentUpon>ControlCabinets.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ControlJobs.resx">
+      <DependentUpon>ControlJobs.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ChangePersonInfo.resx">
       <DependentUpon>ChangePersonInfo.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="DoctorDetails.resx">
       <DependentUpon>DoctorDetails.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="AddVisit.resx">
+      <DependentUpon>AddVisit.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="AddRecord.resx">
+      <DependentUpon>AddRecord.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="EditRecord.resx">
+      <DependentUpon>EditRecord.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="EditCabinet.resx">
+      <DependentUpon>EditCabinet.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="EditVisit.resx">
+      <DependentUpon>EditVisit.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Login.resx">
       <DependentUpon>Login.cs</DependentUpon>

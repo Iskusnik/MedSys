@@ -71,7 +71,7 @@
             this.dataGridView1.Size = new System.Drawing.Size(471, 212);
             this.dataGridView1.TabIndex = 3;
             // 
-            // ShowVisits
+            // ShowVisitsForDoctor
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -79,7 +79,7 @@
             this.Controls.Add(this.button1);
             this.Controls.Add(this.comboBox1);
             this.Controls.Add(this.dataGridView1);
-            this.Name = "ShowVisits";
+            this.Name = "ShowVisitsForDoctor";
             this.Text = "Записи на приём";
             this.Load += new System.EventHandler(this.ShowVisits_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();

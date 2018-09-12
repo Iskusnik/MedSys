@@ -13,15 +13,39 @@ namespace MedSys
     public partial class ShowRecords : Form
     {
         Patient patient;
+        Doctor doctor;
         ModelMedContainer db = new ModelMedContainer();
-        public ShowRecords(Patient patient)
+        int function;
+
+        public ShowRecords(Patient patient, int function = 0, Doctor doctor = null)
         {
+            this.function = function;
             this.patient = patient;
+            this.doctor = doctor;
+
             InitializeComponent();
         }
 
         private void ShowVisitRecords_Load(object sender, EventArgs e)
         {
+            if (function == 1)
+            {
+                buttonRemove.Visible = true;
+                buttonAdd.Visible = true;
+            }
+            else
+            {
+                buttonRemove.Visible = false;
+                buttonAdd.Visible = false;
+            }
+
+            RefreshData();
+        }
+
+        private void RefreshData()
+        {
+            dataGridView1.Columns.Clear();
+
             patient = (Patient)db.PersonSet.Find(patient.Id);
             var thisPersonVisits = (from record in patient.MedCard.Record select new { Время_записи = record.Date, Имя_врача = record.Doctor.FullName, id = record.Id }).ToList();
             dataGridView1.Columns.Clear();
@@ -37,7 +61,6 @@ namespace MedSys
             dataGridView1.RowHeadersVisible = false;
             dataGridView1.Refresh();
         }
-
        
 
         private void button2_Click(object sender, EventArgs e)
@@ -56,6 +79,20 @@ namespace MedSys
         private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
 
+        }
+
+        private void buttonRemove_Click(object sender, EventArgs e)
+        {
+            int id = (int)dataGridView1.SelectedRows[0].Cells[2].Value;
+            ControlFunctions.RemoveRecord(id);
+            RefreshData();
+        }
+
+        private void buttonAdd_Click(object sender, EventArgs e)
+        {
+            Form addRecord = new AddRecord(patient, doctor);
+            addRecord.ShowDialog();
+            RefreshData();
         }
     }
 }

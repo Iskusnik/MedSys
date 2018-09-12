@@ -1,6 +1,6 @@
 ﻿namespace MedSys
 {
-    partial class ChangeIllnesses
+    partial class ControlIllnesses
     {
         /// <summary>
         /// Required designer variable.
@@ -30,12 +30,14 @@
         {
             this.comboBoxJobs = new System.Windows.Forms.ComboBox();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
-            this.buttonDeleteJob = new System.Windows.Forms.Button();
-            this.buttonAddJob = new System.Windows.Forms.Button();
+            this.buttonDeleteIllness = new System.Windows.Forms.Button();
+            this.buttonAddIllness = new System.Windows.Forms.Button();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.label3 = new System.Windows.Forms.Label();
+            this.textBox1 = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
             this.textBoxNewJob = new System.Windows.Forms.TextBox();
-            this.buttonRemoveDocFromJob = new System.Windows.Forms.Button();
+            this.buttonRemoveIllnesses = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.panel1 = new System.Windows.Forms.Panel();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
@@ -51,6 +53,7 @@
             this.comboBoxJobs.Name = "comboBoxJobs";
             this.comboBoxJobs.Size = new System.Drawing.Size(226, 21);
             this.comboBoxJobs.TabIndex = 1;
+            this.comboBoxJobs.SelectedIndexChanged += new System.EventHandler(this.comboBoxJobs_SelectedIndexChanged);
             // 
             // dataGridView1
             // 
@@ -61,42 +64,60 @@
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.ReadOnly = true;
             this.dataGridView1.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dataGridView1.Size = new System.Drawing.Size(515, 257);
+            this.dataGridView1.Size = new System.Drawing.Size(543, 352);
             this.dataGridView1.TabIndex = 2;
             // 
-            // buttonDeleteJob
+            // buttonDeleteIllness
             // 
-            this.buttonDeleteJob.Location = new System.Drawing.Point(6, 46);
-            this.buttonDeleteJob.Name = "buttonDeleteJob";
-            this.buttonDeleteJob.Size = new System.Drawing.Size(226, 23);
-            this.buttonDeleteJob.TabIndex = 3;
-            this.buttonDeleteJob.Text = "Удалить болезнь";
-            this.buttonDeleteJob.UseVisualStyleBackColor = true;
-            this.buttonDeleteJob.Click += new System.EventHandler(this.buttonDeleteJob_Click);
+            this.buttonDeleteIllness.Location = new System.Drawing.Point(6, 46);
+            this.buttonDeleteIllness.Name = "buttonDeleteIllness";
+            this.buttonDeleteIllness.Size = new System.Drawing.Size(226, 23);
+            this.buttonDeleteIllness.TabIndex = 3;
+            this.buttonDeleteIllness.Text = "Удалить болезнь";
+            this.buttonDeleteIllness.UseVisualStyleBackColor = true;
+            this.buttonDeleteIllness.Click += new System.EventHandler(this.buttonDeleteJob_Click);
             // 
-            // buttonAddJob
+            // buttonAddIllness
             // 
-            this.buttonAddJob.Location = new System.Drawing.Point(6, 125);
-            this.buttonAddJob.Name = "buttonAddJob";
-            this.buttonAddJob.Size = new System.Drawing.Size(226, 23);
-            this.buttonAddJob.TabIndex = 4;
-            this.buttonAddJob.Text = "Добавить болезнь";
-            this.buttonAddJob.UseVisualStyleBackColor = true;
-            this.buttonAddJob.Click += new System.EventHandler(this.buttonAddJob_Click);
+            this.buttonAddIllness.Location = new System.Drawing.Point(6, 164);
+            this.buttonAddIllness.Name = "buttonAddIllness";
+            this.buttonAddIllness.Size = new System.Drawing.Size(226, 23);
+            this.buttonAddIllness.TabIndex = 4;
+            this.buttonAddIllness.Text = "Добавить болезнь";
+            this.buttonAddIllness.UseVisualStyleBackColor = true;
+            this.buttonAddIllness.Click += new System.EventHandler(this.buttonAddJob_Click);
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.label3);
+            this.groupBox1.Controls.Add(this.textBox1);
             this.groupBox1.Controls.Add(this.label2);
             this.groupBox1.Controls.Add(this.textBoxNewJob);
             this.groupBox1.Controls.Add(this.comboBoxJobs);
-            this.groupBox1.Controls.Add(this.buttonDeleteJob);
-            this.groupBox1.Controls.Add(this.buttonAddJob);
+            this.groupBox1.Controls.Add(this.buttonDeleteIllness);
+            this.groupBox1.Controls.Add(this.buttonAddIllness);
             this.groupBox1.Location = new System.Drawing.Point(12, 12);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(238, 154);
+            this.groupBox1.Size = new System.Drawing.Size(238, 196);
             this.groupBox1.TabIndex = 6;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Болезни";
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(0, 122);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(57, 13);
+            this.label3.TabIndex = 8;
+            this.label3.Text = "Описание";
+            // 
+            // textBox1
+            // 
+            this.textBox1.Location = new System.Drawing.Point(6, 138);
+            this.textBox1.Name = "textBox1";
+            this.textBox1.Size = new System.Drawing.Size(226, 20);
+            this.textBox1.TabIndex = 7;
             // 
             // label2
             // 
@@ -114,20 +135,20 @@
             this.textBoxNewJob.Size = new System.Drawing.Size(226, 20);
             this.textBoxNewJob.TabIndex = 5;
             // 
-            // buttonRemoveDocFromJob
+            // buttonRemoveIllnesses
             // 
-            this.buttonRemoveDocFromJob.Location = new System.Drawing.Point(18, 222);
-            this.buttonRemoveDocFromJob.Name = "buttonRemoveDocFromJob";
-            this.buttonRemoveDocFromJob.Size = new System.Drawing.Size(226, 23);
-            this.buttonRemoveDocFromJob.TabIndex = 5;
-            this.buttonRemoveDocFromJob.Text = "Изменить болезни пациента";
-            this.buttonRemoveDocFromJob.UseVisualStyleBackColor = true;
-            this.buttonRemoveDocFromJob.Click += new System.EventHandler(this.buttonRemoveDocFromJob_Click);
+            this.buttonRemoveIllnesses.Location = new System.Drawing.Point(12, 269);
+            this.buttonRemoveIllnesses.Name = "buttonRemoveIllnesses";
+            this.buttonRemoveIllnesses.Size = new System.Drawing.Size(226, 23);
+            this.buttonRemoveIllnesses.TabIndex = 5;
+            this.buttonRemoveIllnesses.Text = "Изменить болезни пациента";
+            this.buttonRemoveIllnesses.UseVisualStyleBackColor = true;
+            this.buttonRemoveIllnesses.Click += new System.EventHandler(this.buttonRemoveDocFromJob_Click);
             // 
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(9, 206);
+            this.label1.Location = new System.Drawing.Point(3, 253);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(50, 13);
             this.label1.TabIndex = 7;
@@ -135,25 +156,25 @@
             // 
             // panel1
             // 
-            this.panel1.Controls.Add(this.buttonRemoveDocFromJob);
+            this.panel1.Controls.Add(this.buttonRemoveIllnesses);
             this.panel1.Controls.Add(this.groupBox1);
             this.panel1.Controls.Add(this.label1);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Left;
             this.panel1.Location = new System.Drawing.Point(0, 0);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(255, 257);
+            this.panel1.Size = new System.Drawing.Size(255, 352);
             this.panel1.TabIndex = 8;
             this.panel1.Paint += new System.Windows.Forms.PaintEventHandler(this.panel1_Paint);
             // 
-            // ChangeIllnesses
+            // ControlIllnesses
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(515, 257);
+            this.ClientSize = new System.Drawing.Size(543, 352);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.dataGridView1);
-            this.Name = "ChangeIllnesses";
-            this.Text = "ChangeJobs";
+            this.Name = "ControlIllnesses";
+            this.Text = "Управление болезнями";
             this.Load += new System.EventHandler(this.ChangeJobs_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             this.groupBox1.ResumeLayout(false);
@@ -168,13 +189,15 @@
 
         private System.Windows.Forms.ComboBox comboBoxJobs;
         private System.Windows.Forms.DataGridView dataGridView1;
-        private System.Windows.Forms.Button buttonDeleteJob;
-        private System.Windows.Forms.Button buttonAddJob;
+        private System.Windows.Forms.Button buttonDeleteIllness;
+        private System.Windows.Forms.Button buttonAddIllness;
         private System.Windows.Forms.GroupBox groupBox1;
-        private System.Windows.Forms.Button buttonRemoveDocFromJob;
+        private System.Windows.Forms.Button buttonRemoveIllnesses;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.TextBox textBoxNewJob;
         private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.TextBox textBox1;
     }
 }

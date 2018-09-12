@@ -160,11 +160,35 @@ namespace MedSys
             return medCard;
         }
 
-        static public TimeForVisit CreateTimeForVisit(Cabinet cabinet,
-                                                      Doctor doctor,
-                                                      DateTime visitTime)
+        static public TimeForVisit CreateTimeForVisit(string docInfo,
+                                                      string corpusName,
+                                                      string cabinetNum,
+                                                      string date,
+                                                      string time)
         {
             TimeForVisit timeForVisit = new TimeForVisit();
+
+
+
+
+            string[] docFIODB = docInfo.Split('_');
+            string docFIO = docFIODB[0];
+            DateTime docDB = DateTime.Parse(docFIODB[1]);
+            Doctor doctor = (Doctor)(from pers in dbContext.PersonSet where pers is Doctor && pers.FullName == docFIO && pers.BirthDate == docDB select pers).ToList()[0];
+
+
+
+            Corpus corpus = (from c in dbContext.CorpusSet where c.Name == corpusName select c).ToArray()[0];
+            int num = int.Parse(cabinetNum);
+            Cabinet cabinet = (from c in corpus.Cabinet where c.Num == num select c).ToArray()[0];
+
+
+            DateTime dateValue = DateTime.Parse(date);
+            DateTime timeValue = DateTime.Parse(time);
+            DateTime visitTime = dateValue.Add(timeValue.TimeOfDay);
+
+
+
             timeForVisit.Cabinet = cabinet;
             timeForVisit.Doctor = doctor;
             timeForVisit.VisitTime = visitTime;
@@ -172,11 +196,12 @@ namespace MedSys
             return timeForVisit;
         }
 
-        static public Cabinet CreateCabinet(Corpus corpus,
+        static public Cabinet CreateCabinet(string corpusName,
                                             int floor,
                                             int num)
         {
             Cabinet cabinet = new Cabinet();
+            Corpus corpus = (from c in dbContext.CorpusSet where c.Name == corpusName select c).ToList()[0];
             cabinet.Corpus = corpus;
             cabinet.Floor = floor;
             cabinet.Num = num;
@@ -338,7 +363,6 @@ namespace MedSys
             //Проверка наличия совпадений по этажу, комнате, корпусу
             var searchResult = (from c in dbContext.CabinetSet
                                 where c.Corpus == cabinet.Corpus &&
-                                      c.Floor == cabinet.Floor &&
                                       c.Num == cabinet.Num
                                 select c).ToList();
             if (searchResult.Count != 0)
@@ -402,6 +426,8 @@ namespace MedSys
             return null;
         }
 
+
+
         static public Person EditPerson(Person person, string fullName,
                                             DateTime birthDate,
                                             string docType,
@@ -442,8 +468,116 @@ namespace MedSys
             return person;
         }
 
+        static public TimeForVisit EditVisit(TimeForVisit visit,
+                                             string docInfo,
+                                             string patInfo,
+                                             string corpusName,
+                                             string cabinetNum,
+                                             string date,
+                                             string time)
+        {
+
+            visit = dbContext.TimeForVisitSet.Find(visit.Id);
 
 
+
+
+            string[] docFIODB = docInfo.Split('_');
+            string docFIO = docFIODB[0];
+            DateTime docDB = DateTime.Parse(docFIODB[1]);
+            Doctor doctor = (Doctor)(from pers in dbContext.PersonSet where pers is Doctor && pers.FullName == docFIO && pers.BirthDate == docDB select pers).ToList()[0];
+
+
+            Patient patient = null;
+            if (patInfo != "Нет пациента")
+            {
+                string[] patFIODB = patInfo.Split('_');
+                string patFIO = patFIODB[0];
+                DateTime patDB = DateTime.Parse(patFIODB[1]);
+                patient = (Patient)(from pers in dbContext.PersonSet where pers is Patient && pers.FullName == patFIO && pers.BirthDate == patDB select pers).ToList()[0];
+            }
+
+
+            Corpus corpus = (from c in dbContext.CorpusSet where c.Name == corpusName select c).ToArray()[0];
+            int num = int.Parse(cabinetNum);
+            Cabinet cabinet = (from c in corpus.Cabinet where c.Num == num select c).ToArray()[0];
+
+
+            DateTime dateValue = DateTime.Parse(date);
+            DateTime timeValue = DateTime.Parse(time);
+            DateTime visitTime = dateValue.Add(timeValue.TimeOfDay);
+
+            visit.Cabinet = cabinet;
+            visit.Doctor = doctor;
+            visit.Patient = patient;
+            visit.VisitTime = visitTime;
+
+            dbContext.Entry(visit).State = System.Data.Entity.EntityState.Modified;
+            dbContext.SaveChanges();
+
+            return visit;
+        }
+
+        static public Record EditRecord(Record record,
+                                             string docInfo,
+                                             string patInfo,
+                                             string info,
+                                             string date,
+                                             string time)
+        {
+
+            record = dbContext.RecordSet.Find(record.Id);
+
+
+
+
+            string[] docFIODB = docInfo.Split('_');
+            string docFIO = docFIODB[0];
+            DateTime docDB = DateTime.Parse(docFIODB[1]);
+            Doctor doctor = (Doctor)(from pers in dbContext.PersonSet where pers is Doctor && pers.FullName == docFIO && pers.BirthDate == docDB select pers).ToList()[0];
+
+
+            Patient patient = null;
+            string[] patFIODB = patInfo.Split('_');
+            string patFIO = patFIODB[0];
+            DateTime patDB = DateTime.Parse(patFIODB[1]);
+            patient = (Patient)(from pers in dbContext.PersonSet where pers is Patient && pers.FullName == patFIO && pers.BirthDate == patDB select pers).ToList()[0];
+
+
+
+            DateTime dateValue = DateTime.Parse(date);
+            DateTime timeValue = DateTime.Parse(time);
+            DateTime dateResult = dateValue.Add(timeValue.TimeOfDay);
+
+            record.Doctor = doctor;
+            record.MedCard = patient.MedCard;
+            record.Date = dateResult;
+
+            dbContext.Entry(record).State = System.Data.Entity.EntityState.Modified;
+            dbContext.SaveChanges();
+
+            return record;
+        }
+
+        static public Cabinet EditCabinet(Cabinet cabinet,
+                                         string corpusName,
+                                         int floor,
+                                         int num)
+        {
+
+            cabinet = dbContext.CabinetSet.Find(cabinet.Id);
+
+            Corpus corpus = (from c in dbContext.CorpusSet where c.Name == corpusName select c).ToList()[0];
+
+            cabinet.Corpus = corpus;
+            cabinet.Floor = floor;
+            cabinet.Num = num;
+
+            dbContext.Entry(cabinet).State = System.Data.Entity.EntityState.Modified;
+            dbContext.SaveChanges();
+
+            return cabinet;
+        }
 
         static public void RemovePerson(int id)
         {
@@ -502,7 +636,50 @@ namespace MedSys
             dbContext.JobSet.Remove(job);
             dbContext.SaveChanges();
         }
+        static public void RemoveIllness(string illnessName)
+        {
+            Illness illness = (from j in dbContext.IllnessSet where j.Name == illnessName select j).ToList()[0];
+            
+            foreach (MedCard m in illness.MedCard)
+            {
+                m.Illness.Remove(illness);
+            }
 
+            dbContext.IllnessSet.Remove(illness);
+            dbContext.SaveChanges();
+        }
+        static public void RemoveCabinet(string cabinetName)
+        {
+            string corpusName = cabinetName.Split(':')[0];
+            int cabinetNum = int.Parse(cabinetName.Split(':')[1]);
+            Corpus corpus = (from c in dbContext.CorpusSet where c.Name == corpusName select c).ToArray()[0];
+            Cabinet cabinet = (from c in corpus.Cabinet where c.Num == cabinetNum select c).ToArray()[0];
+
+            foreach (TimeForVisit tfv in cabinet.TimeForVisit)
+                RemoveVisit(tfv.Id);
+            
+
+            dbContext.CabinetSet.Remove(cabinet);
+            dbContext.SaveChanges();
+        }
+        static public void RemoveRecord(int id)
+        {
+            Record record = dbContext.RecordSet.Find(id);
+            dbContext.RecordSet.Remove(record);
+            dbContext.SaveChanges();
+        }
+        static public void RemoveVisit(int id)
+        {
+            TimeForVisit visit = dbContext.TimeForVisitSet.Find(id);
+            dbContext.TimeForVisitSet.Remove(visit);
+            dbContext.SaveChanges();
+        }
+        static public void RemoveCorpus(string corpusName)
+        {
+            Corpus corpus = (from c in dbContext.CorpusSet where c.Name == corpusName select c).ToList()[0];
+            dbContext.CorpusSet.Remove(corpus);
+            dbContext.SaveChanges();
+        }
     }
 }
 //Предупреждение об удалении

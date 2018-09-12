@@ -87,14 +87,39 @@ namespace MedSys
 
         private void изменитьСписокСпециальностейToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            Form changeJobs = new ChangeJobs();
+            Form changeJobs = new ControlJobs();
             changeJobs.ShowDialog();
         }
 
         private void управлениеБолезнямиToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            Form changeIllnesses = new ChangeIllnesses();
+            Form changeIllnesses = new ControlIllnesses();
             changeIllnesses.ShowDialog();
+        }
+
+        private void управлениеКабинетамиToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Form changeCabinets = new ControlCabinets();
+            changeCabinets.ShowDialog();
+        }
+        
+
+        private void управлениеРасписаниемВрачейToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Form changeCabinets = new ControlVisits();
+            changeCabinets.ShowDialog();
+        }
+
+        private void управлениеЗаписямиВрачейToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Form changeRecords = new ControlRecords();
+            changeRecords.ShowDialog();
+        }
+
+        private void управлениеКорпусамиToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Form changeVisits = new ControlCorpuses();
+            changeVisits.ShowDialog();
         }
     }
 }

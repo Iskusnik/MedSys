@@ -10,11 +10,11 @@ using System.Windows.Forms;
 
 namespace MedSys
 {
-    public partial class ChangeJobs : Form
+    public partial class ControlJobs : Form
     {
         ModelMedContainer db = new ModelMedContainer();
 
-        public ChangeJobs()
+        public ControlJobs()
         {
             InitializeComponent();
         }
@@ -24,10 +24,7 @@ namespace MedSys
         }
         private void ReloadForm(bool RefreshDataGrid)
         {
-            comboBoxJobs.Items.Clear();
-            var jobs = (from Job j in db.JobSet select j.Name).ToList();
-            foreach (string j in jobs)
-                comboBoxJobs.Items.Add(j);
+            
 
             if (RefreshDataGrid)
             {
@@ -54,7 +51,13 @@ namespace MedSys
 
                 dataGridView1.Refresh();
             }
-            else;
+            else
+            {
+                comboBoxJobs.Items.Clear();
+                var jobs = (from Job j in db.JobSet select j.Name).ToList();
+                foreach (string j in jobs)
+                    comboBoxJobs.Items.Add(j);
+            }
         }
 
         private void ChangeJobs_Load(object sender, EventArgs e)
@@ -73,6 +76,7 @@ namespace MedSys
 
                 Form changeDoctorsJobs = new ChangeDoctorsJobs(doctor);
                 changeDoctorsJobs.ShowDialog();
+                ReloadForm(true);
             }
         }
 
@@ -92,6 +96,7 @@ namespace MedSys
                                      icon: MessageBoxIcon.Question) == DialogResult.Yes)
                 ControlFunctions.RemoveJob(jobName);
             else;
+            ReloadForm(true);
         }
 
         private void buttonAddJob_Click(object sender, EventArgs e)
@@ -105,6 +110,32 @@ namespace MedSys
             result = ControlFunctions.AddJob(newJob);
             if (result != null)
                 MessageBox.Show(result, "Ошибка");
+        }
+
+        private void comboBoxJobs_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            Job jobSelected = (from j in db.JobSet where j.Name == textBoxNewJob.Text select j).ToList()[0];
+            var doctorsInfo = (from doctor in jobSelected.Doctor select new { Имя_врача = doctor.FullName, Работы = (doctor as Doctor).Job, id = doctor.Id }).ToList();
+            dataGridView1.Columns.Clear();
+            dataGridView1.Columns.Add("Имя врача", "Имя врача");
+            dataGridView1.Columns.Add("Должность", "Должность");
+            dataGridView1.Columns.Add("Id", "Id");
+            dataGridView1.Columns["Id"].Visible = false;
+
+            foreach (var s in doctorsInfo)
+            {
+                string doctorsJobs = "";
+
+                foreach (Job j in s.Работы)
+                    doctorsJobs += j.Name + " ";
+
+                dataGridView1.Rows.Add(s.Имя_врача, doctorsJobs, s.id);
+            }
+            dataGridView1.Sort(dataGridView1.Columns["Время записи"], ListSortDirection.Descending);
+            dataGridView1.RowHeadersVisible = false;
+            dataGridView1.Refresh();
+
+            dataGridView1.Refresh();
         }
     }
 }

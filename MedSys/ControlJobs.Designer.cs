@@ -1,6 +1,6 @@
 ﻿namespace MedSys
 {
-    partial class ChangeJobs
+    partial class ControlJobs
     {
         /// <summary>
         /// Required designer variable.
@@ -33,11 +33,11 @@
             this.buttonDeleteJob = new System.Windows.Forms.Button();
             this.buttonAddJob = new System.Windows.Forms.Button();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.label2 = new System.Windows.Forms.Label();
+            this.textBoxNewJob = new System.Windows.Forms.TextBox();
             this.buttonRemoveDocFromJob = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.panel1 = new System.Windows.Forms.Panel();
-            this.textBoxNewJob = new System.Windows.Forms.TextBox();
-            this.label2 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.groupBox1.SuspendLayout();
             this.panel1.SuspendLayout();
@@ -51,6 +51,7 @@
             this.comboBoxJobs.Name = "comboBoxJobs";
             this.comboBoxJobs.Size = new System.Drawing.Size(226, 21);
             this.comboBoxJobs.TabIndex = 1;
+            this.comboBoxJobs.SelectedIndexChanged += new System.EventHandler(this.comboBoxJobs_SelectedIndexChanged);
             // 
             // dataGridView1
             // 
@@ -98,6 +99,22 @@
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Должности";
             // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(0, 83);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(148, 13);
+            this.label2.TabIndex = 6;
+            this.label2.Text = "Название новой должности";
+            // 
+            // textBoxNewJob
+            // 
+            this.textBoxNewJob.Location = new System.Drawing.Point(6, 99);
+            this.textBoxNewJob.Name = "textBoxNewJob";
+            this.textBoxNewJob.Size = new System.Drawing.Size(226, 20);
+            this.textBoxNewJob.TabIndex = 5;
+            // 
             // buttonRemoveDocFromJob
             // 
             this.buttonRemoveDocFromJob.Location = new System.Drawing.Point(18, 222);
@@ -129,31 +146,15 @@
             this.panel1.TabIndex = 8;
             this.panel1.Paint += new System.Windows.Forms.PaintEventHandler(this.panel1_Paint);
             // 
-            // textBoxNewJob
-            // 
-            this.textBoxNewJob.Location = new System.Drawing.Point(6, 99);
-            this.textBoxNewJob.Name = "textBoxNewJob";
-            this.textBoxNewJob.Size = new System.Drawing.Size(226, 20);
-            this.textBoxNewJob.TabIndex = 5;
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(0, 83);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(148, 13);
-            this.label2.TabIndex = 6;
-            this.label2.Text = "Название новой должности";
-            // 
-            // ChangeJobs
+            // ControlJobs
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(515, 257);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.dataGridView1);
-            this.Name = "ChangeJobs";
-            this.Text = "ChangeJobs";
+            this.Name = "ControlJobs";
+            this.Text = "Управление должностями";
             this.Load += new System.EventHandler(this.ChangeJobs_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             this.groupBox1.ResumeLayout(false);

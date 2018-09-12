@@ -55,6 +55,7 @@
             this.textBoxInsuranceNum = new System.Windows.Forms.TextBox();
             this.tabPage2 = new System.Windows.Forms.TabPage();
             this.textBoxDocType = new System.Windows.Forms.TextBox();
+            this.просмотретьToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip2.SuspendLayout();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
@@ -111,6 +112,8 @@
             // 
             // записиВрачейToolStripMenuItem
             // 
+            this.записиВрачейToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.просмотретьToolStripMenuItem});
             this.записиВрачейToolStripMenuItem.Name = "записиВрачейToolStripMenuItem";
             this.записиВрачейToolStripMenuItem.Size = new System.Drawing.Size(172, 22);
             this.записиВрачейToolStripMenuItem.Text = "Записи врачей";
@@ -365,6 +368,12 @@
             this.textBoxDocType.TabIndex = 143;
             this.textBoxDocType.Text = "a";
             // 
+            // просмотретьToolStripMenuItem
+            // 
+            this.просмотретьToolStripMenuItem.Name = "просмотретьToolStripMenuItem";
+            this.просмотретьToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.просмотретьToolStripMenuItem.Text = "Просмотреть";
+            // 
             // PatientDetails
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -419,5 +428,6 @@
         private System.Windows.Forms.Label label2;
         public System.Windows.Forms.TextBox textBoxInsuranceNum;
         public System.Windows.Forms.TextBox textBoxDocType;
+        private System.Windows.Forms.ToolStripMenuItem просмотретьToolStripMenuItem;
     }
 }
