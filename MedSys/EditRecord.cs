@@ -13,7 +13,7 @@ namespace MedSys
     public partial class EditRecord : Form
     {
         Record record;
-        ModelMedContainer db = new ModelMedContainer();
+        ModelMedContainer db = ControlFunctions.dbContext;
 
 
         public EditRecord(Record record)

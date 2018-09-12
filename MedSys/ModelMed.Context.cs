@@ -48,11 +48,14 @@ namespace MedSys
 
             Patient patA = ControlFunctions.CreatePatient("Иванов Иван Иванович", DateTime.Parse("11.12.1980"), "Паспорт РФ", "0000000003", "Home,3", "+1", "Мужской", "12347", "2");
             Corpus corpA = ControlFunctions.CreateCorpus(3, "Корпус 1");
-            Cabinet cabA = ControlFunctions.CreateCabinet(corpA, 1, 1);
+            db.CorpusSet.Add(corpA);
+            db.SaveChanges();
+            Cabinet cabA = ControlFunctions.CreateCabinet("Корпус 1", 1, 1);
+            db.CabinetSet.Add(cabA);
+            db.SaveChanges();
 
-
-            TimeForVisit timeA = ControlFunctions.CreateTimeForVisit(cabA, docB, DateTime.Parse("11.11.2000"));
-            TimeForVisit timeB = ControlFunctions.CreateTimeForVisit(cabA, docB, new DateTime(2000, 12, 11, 13, 15, 17));
+            TimeForVisit timeA = ControlFunctions.CreateTimeForVisit("Иванов Иван Иванович_11.11.1980", "Корпус 1", "1", "11.11.2000", "00:00:00");
+            TimeForVisit timeB = ControlFunctions.CreateTimeForVisit("Иванов Иван Иванович_11.11.1980", "Корпус 1", "1", "11.11.2000", "12:13:17");
             db.TimeForVisitSet.Add(timeB);
             db.TimeForVisitSet.Add(timeA);
             patA.TimeForVisit.Add(timeA);

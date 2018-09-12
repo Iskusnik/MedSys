@@ -12,7 +12,7 @@ namespace MedSys
 {
     public partial class AddVisit : Form
     {
-        ModelMedContainer db = new ModelMedContainer();
+        ModelMedContainer db = ControlFunctions.dbContext;
 
 
         public AddVisit()

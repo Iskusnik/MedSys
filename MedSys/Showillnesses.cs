@@ -14,7 +14,7 @@ namespace MedSys
     public partial class ShowIllnesses : Form
     {
         Patient patient;
-        ModelMedContainer db = new ModelMedContainer();
+        ModelMedContainer db = ControlFunctions.dbContext;
 
         public ShowIllnesses(Patient patient)
         {

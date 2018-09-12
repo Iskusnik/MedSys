@@ -97,6 +97,12 @@
       <DependentUpon>ChangePersonInfo.cs</DependentUpon>
     </Compile>
     <Compile Include="ControlFunctions.cs" />
+    <Compile Include="ControlVisits.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ControlVisits.Designer.cs">
+      <DependentUpon>ControlVisits.cs</DependentUpon>
+    </Compile>
     <Compile Include="Corpus.cs">
       <DependentUpon>ModelMed.tt</DependentUpon>
     </Compile>
@@ -281,6 +287,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="ChangePersonInfo.resx">
       <DependentUpon>ChangePersonInfo.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ControlVisits.resx">
+      <DependentUpon>ControlVisits.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="DoctorDetails.resx">
       <DependentUpon>DoctorDetails.cs</DependentUpon>

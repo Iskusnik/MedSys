@@ -13,7 +13,7 @@ namespace MedSys
     public partial class EditCabinet : Form
     {
         Cabinet cabinet;
-        ModelMedContainer db = new ModelMedContainer();
+        ModelMedContainer db = ControlFunctions.dbContext;
 
 
         public EditCabinet(Cabinet cabinet)

@@ -15,7 +15,7 @@ namespace MedSys
         Doctor doctor;
         string[] freeJobs;
         string[] currJobs;
-        ModelMedContainer db = new ModelMedContainer();
+        ModelMedContainer db = ControlFunctions.dbContext;
 
         public ChangeDoctorsJobs(Doctor doctor)
         {
@@ -25,13 +25,20 @@ namespace MedSys
 
         private void button1_Click(object sender, EventArgs e)
         {
-            string selectedJob = (string)listBoxFreeJobs.SelectedItem;
-            string result = ControlFunctions.AddJobToDoctor(doctor.Id, selectedJob);
-            if (result != null)
-                MessageBox.Show(result);
+            if (listBoxFreeJobs.SelectedItem != null)
+            {
+                string selectedJob = (string)listBoxFreeJobs.SelectedItem;
+                string result = ControlFunctions.AddJobToDoctor(doctor.Id, selectedJob);
+                if (result != null)
+                    MessageBox.Show(result);
+                else
+                    RefreshForm();
+            }
             else
-                RefreshForm();
-        }
+            {
+                MessageBox.Show("Выберите работу");
+            }
+}
 
         private void ChangeDoctorsJobs_Load(object sender, EventArgs e)
         {
@@ -55,12 +62,19 @@ namespace MedSys
 
         private void buttonDelete_Click(object sender, EventArgs e)
         {
-            string selectedJob = (string)listBoxCurrentJobs.SelectedItem;
-            string result = ControlFunctions.RemoveJobFromDoctor(doctor.Id, selectedJob);
-            if (result != null)
-                MessageBox.Show(result);
+            if (listBoxCurrentJobs.SelectedItem != null)
+            {
+                string selectedJob = (string)listBoxCurrentJobs.SelectedItem;
+                string result = ControlFunctions.RemoveJobFromDoctor(doctor.Id, selectedJob);
+                if (result != null)
+                    MessageBox.Show(result);
+                else
+                    RefreshForm();
+            }
             else
-                RefreshForm();
+            {
+                MessageBox.Show("Выберите работу");
+            }
         }
     }
 }

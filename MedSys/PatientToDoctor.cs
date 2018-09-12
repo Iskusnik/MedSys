@@ -16,7 +16,7 @@ namespace MedSys
         Doctor[] DoctorsList;
         int index;
         Patient patient;
-        ModelMedContainer db = new ModelMedContainer();
+        ModelMedContainer db = ControlFunctions.dbContext;
 
         public PatientToDoctor(Patient patient)
         {

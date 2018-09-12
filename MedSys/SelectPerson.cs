@@ -12,7 +12,7 @@ namespace MedSys
 {
     public partial class SelectPerson : Form
     {
-        ModelMedContainer db = new ModelMedContainer();
+        ModelMedContainer db = ControlFunctions.dbContext;
         int function;
         public SelectPerson(int function = 0)
         {
@@ -65,7 +65,7 @@ namespace MedSys
 
         private void buttonSelectPerson_Click(object sender, EventArgs e)
         {
-            if (dataGridView1.SelectedRows.Count != 0)
+            if (dataGridView1.SelectedRows.Count != 0 && dataGridView1.SelectedCells[0].Value != null)
             {
                 int columnIndex = dataGridView1.Columns["Id"].Index;
                 int id = (int)dataGridView1.SelectedCells[columnIndex].Value;
@@ -105,7 +105,7 @@ namespace MedSys
 
         private void buttonDelete_Click(object sender, EventArgs e)
         {
-            if (dataGridView1.SelectedRows.Count != 0)
+            if (dataGridView1.SelectedRows.Count != 0 && dataGridView1.SelectedCells[0] != null)
             {
                 ControlFunctions.RemovePerson(dataGridView1.SelectedRows[0].Index);
             }
@@ -211,7 +211,7 @@ namespace MedSys
             foreach (var pers in patients)
                 dataGridView1.Rows.Add(pers.ФИО, pers.ДР.Date, pers.Пол, pers.Врач, pers.Id);
 
-
+            //dataGridView1.Rows.RemoveAt(patients.Count + doctors.Count);
         }
     }
 }

@@ -9,7 +9,7 @@ namespace MedSys
 {
     public class ControlFunctions
     {
-        static ModelMedContainer dbContext = new ModelMedContainer();
+        public static ModelMedContainer dbContext = new ModelMedContainer();
         static Regex nameCheck = new Regex("([А-Я]{1})([а-я]*)$");
         static Regex numCheck = new Regex("[0-9]*$");
 
@@ -299,12 +299,15 @@ namespace MedSys
         }
         static public string RemoveJobFromDoctor(int id, string jobName)
         {
+            
             Job job = (from Job j in dbContext.JobSet where j.Name == jobName select j).ToList()[0];
             Doctor doctor = (Doctor)dbContext.PersonSet.Find(id);
 
             job.Doctor.Remove(doctor);
             doctor.Job.Remove(job);
-
+            if (doctor.Job.Count == 0)
+                AddJobToDoctor(doctor.Id, "Нет должности");
+            
             dbContext.SaveChanges();
             return null;
         }
@@ -633,6 +636,11 @@ namespace MedSys
                 if (d.Job.Count == 0)
                     d.Job.Add(jobNull);
             }
+            Doctor[] doctors = job.Doctor.ToArray();
+
+            foreach (Doctor d in doctors)
+                job.Doctor.Remove(d);
+
             dbContext.JobSet.Remove(job);
             dbContext.SaveChanges();
         }

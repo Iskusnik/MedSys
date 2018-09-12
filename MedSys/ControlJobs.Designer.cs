@@ -55,14 +55,15 @@
             // 
             // dataGridView1
             // 
+            this.dataGridView1.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.dataGridView1.Location = new System.Drawing.Point(0, 0);
+            this.dataGridView1.Dock = System.Windows.Forms.DockStyle.Right;
+            this.dataGridView1.Location = new System.Drawing.Point(256, 0);
             this.dataGridView1.MultiSelect = false;
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.ReadOnly = true;
             this.dataGridView1.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dataGridView1.Size = new System.Drawing.Size(515, 257);
+            this.dataGridView1.Size = new System.Drawing.Size(355, 436);
             this.dataGridView1.TabIndex = 2;
             // 
             // buttonDeleteJob
@@ -139,10 +140,9 @@
             this.panel1.Controls.Add(this.buttonRemoveDocFromJob);
             this.panel1.Controls.Add(this.groupBox1);
             this.panel1.Controls.Add(this.label1);
-            this.panel1.Dock = System.Windows.Forms.DockStyle.Left;
             this.panel1.Location = new System.Drawing.Point(0, 0);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(255, 257);
+            this.panel1.Size = new System.Drawing.Size(255, 433);
             this.panel1.TabIndex = 8;
             this.panel1.Paint += new System.Windows.Forms.PaintEventHandler(this.panel1_Paint);
             // 
@@ -150,7 +150,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(515, 257);
+            this.ClientSize = new System.Drawing.Size(611, 436);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.dataGridView1);
             this.Name = "ControlJobs";

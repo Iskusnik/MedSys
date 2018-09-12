@@ -15,7 +15,7 @@ namespace MedSys
     {
 
         bool isDoctor;
-        ModelMedContainer db = new ModelMedContainer();
+        ModelMedContainer db = ControlFunctions.dbContext;
         bool saved;
 
         public Registr(bool isDoctor)

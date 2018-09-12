@@ -15,7 +15,7 @@ namespace MedSys
     public partial class ChangePersonInfo : Form
     {
         Person person;
-        ModelMedContainer db = new ModelMedContainer();
+        ModelMedContainer db = ControlFunctions.dbContext;
         bool saved;
         public ChangePersonInfo(Person person)
         {

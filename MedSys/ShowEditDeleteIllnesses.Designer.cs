@@ -67,6 +67,7 @@
             this.buttonDelete.TabIndex = 3;
             this.buttonDelete.Text = "Удалить";
             this.buttonDelete.UseVisualStyleBackColor = true;
+            this.buttonDelete.Click += new System.EventHandler(this.buttonDelete_Click);
             // 
             // comboBox1
             // 

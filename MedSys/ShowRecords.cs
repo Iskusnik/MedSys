@@ -14,7 +14,7 @@ namespace MedSys
     {
         Patient patient;
         Doctor doctor;
-        ModelMedContainer db = new ModelMedContainer();
+        ModelMedContainer db = ControlFunctions.dbContext;
         int function;
 
         public ShowRecords(Patient patient, int function = 0, Doctor doctor = null)

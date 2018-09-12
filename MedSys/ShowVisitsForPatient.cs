@@ -13,6 +13,7 @@ namespace MedSys
     public partial class ShowVisitsForPatient : Form
     {
         Patient patient;
+        ModelMedContainer db = ControlFunctions.dbContext;
         public ShowVisitsForPatient(Patient patient)
         {
             this.patient = patient;
@@ -21,8 +22,6 @@ namespace MedSys
 
         private void ShowVisits_Load(object sender, EventArgs e)
         {
-            using (ModelMedContainer db = new ModelMedContainer())
-            {
                 patient = (Patient)db.PersonSet.Find(patient.Id);
 
                 var thisPersonVisits = (from visit in patient.TimeForVisit select new { Время_начала_приёма = visit.VisitTime, Имя_врача = visit.Doctor.FullName, Корпус = visit.Cabinet.Corpus.Name, Этаж = visit.Cabinet.Floor.ToString(), Кабинет = visit.Cabinet.Num.ToString() }).ToList();
@@ -45,13 +44,11 @@ namespace MedSys
                 }
                 dataGridView1.RowHeadersVisible = false;
                 dataGridView1.Refresh();
-            }
+            
         }
 
         private void button1_Click(object sender, EventArgs e)
         {
-            using (ModelMedContainer db = new ModelMedContainer())
-            {
                 patient = (Patient)db.PersonSet.Find(patient.Id);
                 switch (comboBox1.SelectedIndex)
                 {
@@ -129,7 +126,6 @@ namespace MedSys
                             dataGridView1.Refresh();
                             break;
                         }
-                }
             }
         }
     }

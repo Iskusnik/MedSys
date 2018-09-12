@@ -51,7 +51,6 @@
             this.управлениеКабинетамиToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.управлениеКорпусамиToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.управлениеРасписаниемВрачейToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.управлениеЗаписямиВрачейToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.конструкторЗапросовToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.приёмыПациентовToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.пациентыToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -240,7 +239,6 @@
             this.управлениеКабинетамиToolStripMenuItem,
             this.управлениеКорпусамиToolStripMenuItem,
             this.управлениеРасписаниемВрачейToolStripMenuItem,
-            this.управлениеЗаписямиВрачейToolStripMenuItem,
             this.конструкторЗапросовToolStripMenuItem});
             this.ClinicManageToolStripMenuItem.Name = "ClinicManageToolStripMenuItem";
             this.ClinicManageToolStripMenuItem.Size = new System.Drawing.Size(170, 20);
@@ -312,18 +310,12 @@
             this.управлениеРасписаниемВрачейToolStripMenuItem.Text = "Управление расписанием врачей";
             this.управлениеРасписаниемВрачейToolStripMenuItem.Click += new System.EventHandler(this.управлениеРасписаниемВрачейToolStripMenuItem_Click);
             // 
-            // управлениеЗаписямиВрачейToolStripMenuItem
-            // 
-            this.управлениеЗаписямиВрачейToolStripMenuItem.Name = "управлениеЗаписямиВрачейToolStripMenuItem";
-            this.управлениеЗаписямиВрачейToolStripMenuItem.Size = new System.Drawing.Size(271, 22);
-            this.управлениеЗаписямиВрачейToolStripMenuItem.Text = "Управление записями врачей";
-            this.управлениеЗаписямиВрачейToolStripMenuItem.Click += new System.EventHandler(this.управлениеЗаписямиВрачейToolStripMenuItem_Click);
-            // 
             // конструкторЗапросовToolStripMenuItem
             // 
             this.конструкторЗапросовToolStripMenuItem.Name = "конструкторЗапросовToolStripMenuItem";
             this.конструкторЗапросовToolStripMenuItem.Size = new System.Drawing.Size(271, 22);
             this.конструкторЗапросовToolStripMenuItem.Text = "Конструктор запросов";
+            this.конструкторЗапросовToolStripMenuItem.Click += new System.EventHandler(this.конструкторЗапросовToolStripMenuItem_Click);
             // 
             // приёмыПациентовToolStripMenuItem
             // 
@@ -545,6 +537,5 @@
         private System.Windows.Forms.ToolStripMenuItem управлениеКорпусамиToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem управлениеКабинетамиToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem управлениеРасписаниемВрачейToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem управлениеЗаписямиВрачейToolStripMenuItem;
     }
 }

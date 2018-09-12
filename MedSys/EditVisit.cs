@@ -13,7 +13,7 @@ namespace MedSys
     public partial class EditVisit : Form
     {
         TimeForVisit visit;
-        ModelMedContainer db = new ModelMedContainer();
+        ModelMedContainer db = ControlFunctions.dbContext;
 
 
         public EditVisit(TimeForVisit visit)
