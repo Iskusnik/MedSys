@@ -27,6 +27,11 @@ namespace MedSys
             var doctorsList = (from d in db.PersonSet where d is Doctor select d).ToArray();
             
 
+            if (doctorsList.Count() == 0)
+            {
+                MessageBox.Show("Добавьте врачей");
+                this.Close();
+            }
 
 
             foreach (Person d in doctorsList)
@@ -37,26 +42,41 @@ namespace MedSys
 
             var corpusList = (from c in db.CorpusSet select c).ToArray();
 
+            if (corpusList.Count() == 0)
+            {
+                MessageBox.Show("Добавьте корпусы");
+                this.Close();
+            }
+
             foreach (Corpus c in corpusList)
                 comboBoxCorpus.Items.Add(c.Name);
+            comboBoxCorpus.SelectedIndex = 0;
 
             string corpusName = comboBoxCorpus.Text;
 
             Corpus corpus = (from c in db.CorpusSet where c.Name == corpusName select c).ToList()[0];
 
+            if (corpus.Cabinet.Count() == 0)
+            {
+                MessageBox.Show("Добавьте кабинеты в корпус");
+                this.Close();
+            }
+
+            comboBoxCabinet.Items.Clear();
             foreach (Cabinet c in corpus.Cabinet)
-                comboBoxCorpus.Items.Add(c.Num);
+                comboBoxCabinet.Items.Add(c.Num);
 
         }
 
         private void comboBoxCorpus_SelectedIndexChanged(object sender, EventArgs e)
         {
-            string corpusName = comboBoxCorpus.SelectedText;
+            comboBoxCabinet.Items.Clear();
+            string corpusName = comboBoxCorpus.Text;
 
             Corpus corpus = (from c in db.CorpusSet where c.Name == corpusName select c).ToList()[0]; 
 
             foreach (Cabinet c in corpus.Cabinet)
-                comboBoxCorpus.Items.Add(c.Num);
+                comboBoxCabinet.Items.Add(c.Num);
         }
 
         private void buttonSave_Click(object sender, EventArgs e)

@@ -49,7 +49,7 @@ namespace MedSys
         {
             string doctorIf = comboBoxDoctors.Text;
             string patientIf = comboBoxPatients.Text;
-            string dateIf = comboBoxPatients.Text;
+            string dateIf = comboBoxDate.Text;
 
             var visits = (from v in db.TimeForVisitSet select v).ToList();
 
@@ -62,7 +62,7 @@ namespace MedSys
             else if (dateIf == "Позже этого дня")
                 visits = (from v in visits where v.VisitTime.Date > day select v).ToList();
 
-            if (doctorIf != "Любой врач")
+            if (doctorIf != "Любой врач" && doctorIf != "")
             {
                 string name = comboBoxDoctors.Text.Split('_')[0];
                 DateTime birthDate = DateTime.Parse(comboBoxDoctors.Text.Split('_')[1]);
@@ -74,7 +74,7 @@ namespace MedSys
                 visits = (visits.Intersect(doctor.TimeForVisit.ToArray())).ToList();
             }
 
-            if (patientIf != "Любой пациент")
+            if (patientIf != "Любой пациент" && patientIf != "")
             {
                 string name = comboBoxPatients.Text.Split('_')[0];
                 DateTime birthDate = DateTime.Parse(comboBoxPatients.Text.Split('_')[1]);
@@ -85,8 +85,11 @@ namespace MedSys
                  
                 visits = (visits.Intersect(patient.TimeForVisit.ToArray())).ToList();
             }
-            if (visits != null && visits.Count != 0)
+            if (visits == null || visits.Count == 0)
+            {
                 MessageBox.Show("По данному запросу ничего не найдено");
+                LoadData(null);
+            }
             else
                 LoadData(visits);
         }
@@ -103,11 +106,18 @@ namespace MedSys
             dataGridView1.Columns["id"].Visible = false;
 
             dataGridView1.RowHeadersVisible = false;
+            if (visits != null)
+            {
+                List<TimeForVisit> visitsFree = (from tfv in visits where tfv.Patient == null select tfv).ToList();
+                visits = visits.Except(visitsFree).ToList();
 
+                foreach (TimeForVisit visit in visits)
+                    dataGridView1.Rows.Add(visit.Doctor.FullName, visit.Patient.FullName, visit.VisitTime, visit.Id);
 
-            foreach (TimeForVisit visit in visits)
-                dataGridView1.Rows.Add(visit.Doctor.FullName, visit.Patient.FullName, visit.VisitTime.ToShortDateString(), visit.Id);
+                foreach (TimeForVisit visit in visitsFree)
+                    dataGridView1.Rows.Add(visit.Doctor.FullName, "Запись свободна", visit.VisitTime, visit.Id);
 
+            }
             dataGridView1.Refresh();
         }
 
@@ -119,7 +129,7 @@ namespace MedSys
 
         private void buttonRemove_Click(object sender, EventArgs e)
         {
-            if (dataGridView1.SelectedCells.Count != 0)
+            if (dataGridView1.SelectedCells.Count != 0 && dataGridView1.SelectedCells[0].Value != null)
             {
                 int id = (int)dataGridView1.SelectedCells[3].Value;
                 ControlFunctions.RemoveVisit(id);
@@ -138,6 +148,7 @@ namespace MedSys
                 TimeForVisit visit = db.TimeForVisitSet.Find(id);
                 Form editVisit = new EditVisit(visit);
                 editVisit.ShowDialog();
+                LoadData(db.TimeForVisitSet.ToList());
             }
             else
                 MessageBox.Show("Выберите приём для редактирования");
