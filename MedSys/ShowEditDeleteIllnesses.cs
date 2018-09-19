@@ -29,6 +29,7 @@ namespace MedSys
         private void LoadForm()
         {
             dataGridView1.ReadOnly = true;
+            dataGridView1.Columns.Clear();
 
             patient = (Patient)db.PersonSet.Find(patient.Id);
             var IllNames = (from n in patient.MedCard.Illness select new { Название_болезни = n.Name, Доп_информация = n.Info, n.Id }).ToList();
@@ -52,7 +53,7 @@ namespace MedSys
         }
         private void buttonAdd_Click(object sender, EventArgs e)
         {
-            if (comboBox1.SelectedText != "")
+            if (comboBox1.Text != "")
             {
                 string name = comboBox1.Text;
                 Illness ill = (from il in db.IllnessSet where il.Name == name select il).ToList()[0];

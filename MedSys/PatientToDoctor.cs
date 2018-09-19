@@ -28,21 +28,26 @@ namespace MedSys
         private void PatientToDoctor_Load(object sender, EventArgs e)
         {
 
-            string[] jobs = (from job in db.JobSet select job.Name).ToArray();
+            //Выборка свободных докторов
+            Doctor[] doctors = (from tfv in db.TimeForVisitSet where tfv.Patient == null select tfv.Doctor).ToArray();
 
-            foreach (string job in jobs)
-                this.comboBoxJob.Items.Add(job);
-
-            this.comboBoxJob.Items.Remove("Главврач");
-
-            var timeForVisit = (from t in db.TimeForVisitSet
-                                where t.Patient == null
-                                select t).ToList();
-            if (timeForVisit.Count == 0)
+            if (doctors.Length == 0)
             {
                 MessageBox.Show("Свободных для записи врачей нет");
                 Close();
             }
+
+            List<Job> jobs = new List<Job>();
+            foreach (Doctor doc in doctors)
+                foreach (Job job in doc.Job)
+                    if (!jobs.Contains(job))
+                        jobs.Add(job);
+
+            foreach (var job in jobs)
+                this.comboBoxJob.Items.Add(job.Name);
+
+            this.comboBoxJob.Items.Remove("Главврач");
+            this.comboBoxJob.Items.Remove("Нет должности");            
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -90,11 +95,12 @@ namespace MedSys
             button1.Enabled = false;
             this.comboBoxDoctor.Items.Clear();
 
+            Doctor[] doctors = (from tfv in db.TimeForVisitSet where tfv.Patient == null select tfv.Doctor).ToArray();
 
-            object[] temp = (from doctor in db.PersonSet where (doctor is Doctor) select (doctor)).ToArray();
+            // object[] temp = (from doctor in db.PersonSet where (doctor is Doctor) select (doctor)).ToArray();
             string s = comboBoxJob.Text;
             Job selectedJob = (from Job j in db.JobSet where j.Name == s select j).ToArray()[0];
-            DoctorsList = (selectedJob.Doctor).ToArray();
+            DoctorsList = (selectedJob.Doctor).Intersect(doctors).ToArray();
 
 
             foreach (Doctor doct in DoctorsList)
@@ -113,7 +119,11 @@ namespace MedSys
                 try
                 {
                     Doctor tempDoctor = DoctorsList[index];
-                    var searchResult = (from doc in db.PersonSet where doc is Doctor && doc.BirthDate == tempDoctor.BirthDate && doc.FullName == tempDoctor.FullName select doc).ToList();
+                    var searchResult = (from doc in db.PersonSet
+                                        where doc is Doctor && 
+                                        doc.BirthDate == tempDoctor.BirthDate &&
+                                        doc.FullName == tempDoctor.FullName
+                                        select doc).ToList();
                     Doctor d = (Doctor)searchResult[0];
 
                     string[] distinct = (from dates in d.TimeForVisit where dates.Patient == null select dates.VisitTime.ToShortDateString()).Distinct().ToArray();

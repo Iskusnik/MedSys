@@ -33,7 +33,6 @@
             this.buttonDeleteJob = new System.Windows.Forms.Button();
             this.buttonAddJob = new System.Windows.Forms.Button();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.button1 = new System.Windows.Forms.Button();
             this.label2 = new System.Windows.Forms.Label();
             this.numericUpDown1 = new System.Windows.Forms.NumericUpDown();
             this.textBoxCorpus = new System.Windows.Forms.TextBox();
@@ -69,6 +68,7 @@
             this.dataGridView1.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dataGridView1.Size = new System.Drawing.Size(382, 418);
             this.dataGridView1.TabIndex = 2;
+            this.dataGridView1.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellContentClick);
             // 
             // buttonDeleteJob
             // 
@@ -82,7 +82,7 @@
             // 
             // buttonAddJob
             // 
-            this.buttonAddJob.Location = new System.Drawing.Point(6, 233);
+            this.buttonAddJob.Location = new System.Drawing.Point(9, 153);
             this.buttonAddJob.Name = "buttonAddJob";
             this.buttonAddJob.Size = new System.Drawing.Size(226, 23);
             this.buttonAddJob.TabIndex = 4;
@@ -92,7 +92,6 @@
             // 
             // groupBox1
             // 
-            this.groupBox1.Controls.Add(this.button1);
             this.groupBox1.Controls.Add(this.label2);
             this.groupBox1.Controls.Add(this.numericUpDown1);
             this.groupBox1.Controls.Add(this.textBoxCorpus);
@@ -102,34 +101,25 @@
             this.groupBox1.Controls.Add(this.buttonAddJob);
             this.groupBox1.Location = new System.Drawing.Point(12, 12);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(238, 262);
+            this.groupBox1.Size = new System.Drawing.Size(238, 190);
             this.groupBox1.TabIndex = 6;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Корпусы";
             this.groupBox1.Enter += new System.EventHandler(this.groupBox1_Enter);
             // 
-            // button1
-            // 
-            this.button1.Location = new System.Drawing.Point(6, 75);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(226, 23);
-            this.button1.TabIndex = 12;
-            this.button1.Text = "Изменить корпус";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
-            // 
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(6, 191);
+            this.label2.Location = new System.Drawing.Point(9, 111);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(39, 13);
             this.label2.TabIndex = 11;
             this.label2.Text = "Этажи";
+            this.label2.Click += new System.EventHandler(this.label2_Click);
             // 
             // numericUpDown1
             // 
-            this.numericUpDown1.Location = new System.Drawing.Point(6, 207);
+            this.numericUpDown1.Location = new System.Drawing.Point(9, 127);
             this.numericUpDown1.Maximum = new decimal(new int[] {
             10,
             0,
@@ -148,22 +138,25 @@
             0,
             0,
             0});
+            this.numericUpDown1.ValueChanged += new System.EventHandler(this.numericUpDown1_ValueChanged);
             // 
             // textBoxCorpus
             // 
-            this.textBoxCorpus.Location = new System.Drawing.Point(6, 168);
+            this.textBoxCorpus.Location = new System.Drawing.Point(9, 88);
             this.textBoxCorpus.Name = "textBoxCorpus";
             this.textBoxCorpus.Size = new System.Drawing.Size(226, 20);
             this.textBoxCorpus.TabIndex = 8;
+            this.textBoxCorpus.TextChanged += new System.EventHandler(this.textBoxCorpus_TextChanged);
             // 
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(6, 152);
+            this.label3.Location = new System.Drawing.Point(9, 72);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(43, 13);
             this.label3.TabIndex = 9;
             this.label3.Text = "Корпус";
+            this.label3.Click += new System.EventHandler(this.label3_Click);
             // 
             // buttonRemoveDocFromJob
             // 
@@ -229,6 +222,5 @@
         private System.Windows.Forms.TextBox textBoxCorpus;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.NumericUpDown numericUpDown1;
-        private System.Windows.Forms.Button button1;
     }
 }

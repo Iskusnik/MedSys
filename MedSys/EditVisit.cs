@@ -25,8 +25,7 @@ namespace MedSys
 
         private void EditVisit_Load(object sender, EventArgs e)
         {
-            comboBoxPatient.Items.Add("Нет пациента");
-
+            
 
             var patientsList = (from p in db.PersonSet where p is Patient select p).ToArray();
             var doctorsList = (from d in db.PersonSet where d is Doctor select d).ToArray();
@@ -34,7 +33,8 @@ namespace MedSys
 
             foreach (Person p in patientsList)
                 comboBoxPatient.Items.Add(p.FullName + "_" + p.BirthDate.Date.ToString());
-            comboBoxPatient.Text = visit.Patient.FullName + "_" + visit.Patient.BirthDate.Date.ToString();
+            if (visit.Patient != null)
+                comboBoxPatient.Text = visit.Patient.FullName + "_" + visit.Patient.BirthDate.Date.ToString();
 
 
 
@@ -52,29 +52,29 @@ namespace MedSys
             comboBoxCorpus.Text = visit.Cabinet.Corpus.Name;
 
 
-
+            comboBoxCabinet.Items.Clear();
             foreach (Cabinet c in visit.Cabinet.Corpus.Cabinet)
-                comboBoxCorpus.Items.Add(c.Num);
+                comboBoxCabinet.Items.Add(c.Num);
             comboBoxCabinet.Text = visit.Cabinet.Num.ToString();
-
+            comboBoxPatient.Items.Add("Нет пациента");
 
         }
 
         private void comboBoxCorpus_SelectedIndexChanged(object sender, EventArgs e)
         {
-            string corpusName = comboBoxCorpus.SelectedText;
-
-            Corpus corpus = (from c in db.CorpusSet where c.Name == corpusName select c).ToList()[0]; 
+            string corpusName = comboBoxCorpus.Text;
+            comboBoxCabinet.Items.Clear();
+            Corpus corpus = (from c in db.CorpusSet where c.Name == corpusName select c).ToList().First(); 
 
             foreach (Cabinet c in corpus.Cabinet)
-                comboBoxCorpus.Items.Add(c.Num);
+                comboBoxCabinet.Items.Add(c.Num);
         }
 
         private void buttonSave_Click(object sender, EventArgs e)
         {
             if (comboBoxCabinet.SelectedIndex >= 0 &&
                 comboBoxCorpus.SelectedIndex >= 0 &&
-                comboBoxPatient.SelectedIndex >= 0 &&
+                comboBoxCorpus.SelectedIndex >= 0 &&
                 comboBoxDoctor.SelectedIndex >= 0)
             {
                 ControlFunctions.EditVisit(visit, comboBoxDoctor.Text, comboBoxPatient.Text, comboBoxCorpus.Text, comboBoxCabinet.Text, datePicker.Text, timePicker.Text);

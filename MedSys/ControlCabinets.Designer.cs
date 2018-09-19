@@ -111,7 +111,7 @@
             // 
             // numericUpDownCabinetNum
             // 
-            this.numericUpDownCabinetNum.Location = new System.Drawing.Point(6, 99);
+            this.numericUpDownCabinetNum.Location = new System.Drawing.Point(6, 179);
             this.numericUpDownCabinetNum.Maximum = new decimal(new int[] {
             1000,
             0,
@@ -134,7 +134,7 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(6, 162);
+            this.label4.Location = new System.Drawing.Point(6, 123);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(33, 13);
             this.label4.TabIndex = 10;
@@ -143,7 +143,7 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(6, 122);
+            this.label3.Location = new System.Drawing.Point(6, 83);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(43, 13);
             this.label3.TabIndex = 9;
@@ -153,7 +153,7 @@
             // 
             this.comboBoxFloor.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboBoxFloor.FormattingEnabled = true;
-            this.comboBoxFloor.Location = new System.Drawing.Point(6, 178);
+            this.comboBoxFloor.Location = new System.Drawing.Point(6, 139);
             this.comboBoxFloor.Name = "comboBoxFloor";
             this.comboBoxFloor.Size = new System.Drawing.Size(226, 21);
             this.comboBoxFloor.TabIndex = 8;
@@ -162,7 +162,7 @@
             // 
             this.comboBoxCorpus.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboBoxCorpus.FormattingEnabled = true;
-            this.comboBoxCorpus.Location = new System.Drawing.Point(6, 138);
+            this.comboBoxCorpus.Location = new System.Drawing.Point(6, 99);
             this.comboBoxCorpus.Name = "comboBoxCorpus";
             this.comboBoxCorpus.Size = new System.Drawing.Size(226, 21);
             this.comboBoxCorpus.TabIndex = 7;
@@ -171,7 +171,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(6, 83);
+            this.label2.Location = new System.Drawing.Point(6, 163);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(41, 13);
             this.label2.TabIndex = 6;

@@ -30,8 +30,9 @@ namespace MedSys
             foreach (Corpus c in corpusList)
                 comboBoxCorpus.Items.Add(c.Name);
 
-            for(int i = 0; i < cabinet.Corpus.Floors; i++)
-                comboBoxCorpus.Items.Add(i+1);
+            comboBoxFloor.Items.Clear();
+            for (int i = 0; i < cabinet.Corpus.Floors; i++)
+                comboBoxFloor.Items.Add(i+1);
 
 
             comboBoxFloor.Text = cabinet.Floor.ToString();
@@ -69,12 +70,14 @@ namespace MedSys
         {
             comboBoxFloor.Items.Clear();
 
-            string corpusName = comboBoxFloor.SelectedText;
+            string corpusName = comboBoxCorpus.Text;
+            if (corpusName != "")
+            {
+                Corpus corpus = (from c in db.CorpusSet where c.Name == corpusName select c).ToList()[0];
 
-            Corpus corpus = (from c in db.CorpusSet where c.Name == corpusName select c).ToList()[0];
-
-            for (int i = 0; i < corpus.Floors; i++)
-                comboBoxFloor.Items.Add(i + 1);
+                for (int i = 0; i < corpus.Floors; i++)
+                    comboBoxFloor.Items.Add(i + 1);
+            }
         }
     }
 }

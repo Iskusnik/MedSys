@@ -40,7 +40,7 @@ namespace MedSys
             foreach (Corpus c in corpusList)
                 comboBoxCorpus.Items.Add(c.Name);
 
-            string corpusName = comboBoxCorpus.SelectedText;
+            string corpusName = comboBoxCorpus.Text;
 
             Corpus corpus = (from c in db.CorpusSet where c.Name == corpusName select c).ToList()[0];
 

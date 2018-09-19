@@ -365,7 +365,7 @@ namespace MedSys
 
             //Проверка наличия совпадений по этажу, комнате, корпусу
             var searchResult = (from c in dbContext.CabinetSet
-                                where c.Corpus == cabinet.Corpus &&
+                                where c.Corpus.Id == cabinet.Corpus.Id &&
                                       c.Num == cabinet.Num
                                 select c).ToList();
             if (searchResult.Count != 0)
@@ -492,7 +492,7 @@ namespace MedSys
 
 
             Patient patient = null;
-            if (patInfo != "Нет пациента")
+            if (patInfo != "Нет пациента" && patInfo != "")
             {
                 string[] patFIODB = patInfo.Split('_');
                 string patFIO = patFIODB[0];
@@ -663,9 +663,11 @@ namespace MedSys
             Corpus corpus = (from c in dbContext.CorpusSet where c.Name == corpusName select c).ToArray()[0];
             Cabinet cabinet = (from c in corpus.Cabinet where c.Num == cabinetNum select c).ToArray()[0];
 
-            foreach (TimeForVisit tfv in cabinet.TimeForVisit)
-                RemoveVisit(tfv.Id);
-            
+            TimeForVisit[] tfvs = cabinet.TimeForVisit.ToArray();
+            foreach (TimeForVisit tfv in tfvs)
+                dbContext.TimeForVisitSet.Remove(tfv);
+
+            cabinet.TimeForVisit.Clear();
 
             dbContext.CabinetSet.Remove(cabinet);
             dbContext.SaveChanges();

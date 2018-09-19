@@ -24,7 +24,7 @@ namespace MedSys
         }
         private void ReloadForm(bool RefreshDataGrid = false, bool selectByCab = false)
         {
-            
+
             if (RefreshDataGrid)
             {
                 if (!selectByCab)
@@ -64,14 +64,14 @@ namespace MedSys
                 }
                 dataGridView1.Refresh();
             }
-            else;
+            else
+            {
+                comboBoxJobs.Items.Clear();
+                var corpuses = (from c in db.CorpusSet select c).ToList();
 
-            comboBoxJobs.Items.Clear();
-            var corpuses = (from c in db.CorpusSet select c).ToList();
-
-            foreach (var c in corpuses)
-                comboBoxJobs.Items.Add(c.Name);
-
+                foreach (var c in corpuses)
+                    comboBoxJobs.Items.Add(c.Name);
+            }
         }
 
         private void ChangeJobs_Load(object sender, EventArgs e)
@@ -98,28 +98,37 @@ namespace MedSys
         private void buttonDeleteJob_Click(object sender, EventArgs e)
         {
             string corpusName = comboBoxJobs.Text;
+            if (comboBoxJobs.Text != "")
+            {
+                if (MessageBox.Show(text: "Все кабинеты в данном корпусе и все приёмы в тех кабинетах будут удалены, продолжить?",
+                                         caption: "Продолжить?",
+                                         buttons: MessageBoxButtons.YesNo,
+                                         icon: MessageBoxIcon.Question) == DialogResult.Yes)
+                    ControlFunctions.RemoveCorpus(corpusName);
 
-
-            if (MessageBox.Show(text: "Все кабинеты в данном корпусе и все приёмы в тех кабинетах будут удалены, продолжить?",
-                                     caption: "Продолжить?",
-                                     buttons: MessageBoxButtons.YesNo,
-                                     icon: MessageBoxIcon.Question) == DialogResult.Yes)
-                ControlFunctions.RemoveCorpus(corpusName);
-
-            ReloadForm();
+                ReloadForm();
+            }
+            else
+                MessageBox.Show("Выберите корпус");
         }
 
         private void buttonAddJob_Click(object sender, EventArgs e)
         {
             string corpusName = textBoxCorpus.Text;
-            int floors = (int)numericUpDown1.Value;
+            if (corpusName != "")
+            {
 
-            Corpus newCorpus = ControlFunctions.CreateCorpus(floors, corpusName);
-            string result = ControlFunctions.AddCorpus(newCorpus);
-            if (result != null)
-                MessageBox.Show(result, "Ошибка");
+                int floors = (int)numericUpDown1.Value;
 
-            ReloadForm();
+                Corpus newCorpus = ControlFunctions.CreateCorpus(floors, corpusName);
+                string result = ControlFunctions.AddCorpus(newCorpus);
+                if (result != null)
+                    MessageBox.Show(result, "Ошибка");
+                else
+                    ReloadForm();
+            }
+            else
+                MessageBox.Show("Введите название корпуса");
         }
 
         private void comboBoxJobs_SelectedIndexChanged(object sender, EventArgs e)
@@ -133,6 +142,31 @@ namespace MedSys
         }
 
         private void button1_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void numericUpDown1_ValueChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label2_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void textBoxCorpus_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label3_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
 
         }
