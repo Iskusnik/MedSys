@@ -64,5 +64,10 @@ namespace MedSys
             Form showRecords = new ShowRecords(patient);
             showRecords.Show();
         }
+
+        private void редактироватьДанныеToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }

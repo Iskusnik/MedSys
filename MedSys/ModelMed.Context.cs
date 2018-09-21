@@ -40,13 +40,10 @@ namespace MedSys
 
             Doctor docC = ControlFunctions.CreateDoctor("Иванов Иван Иванович", DateTime.Parse("11.11.1955"), "Паспорт РФ", "0000000003", "Терапевт", "Home,2", "Enough", "Мужской", "123473", "2");
             ControlFunctions.AddPerson(docC);
-            // db.PersonSet.Add(docC);
 
 
 
-
-
-            Patient patA = ControlFunctions.CreatePatient("Иванов Иван Иванович", DateTime.Parse("11.12.1980"), "Паспорт РФ", "0000000003", "Home,3", "+1", "Мужской", "12347", "2");
+            Patient patA = ControlFunctions.CreatePatient("Иванов Иван Иванович", DateTime.Parse("11.12.1980"), "Паспорт РФ", "0000000004", "Home,3", "+1", "Мужской", "12347", "2");
             Corpus corpA = ControlFunctions.CreateCorpus(3, "Корпус 1");
             db.CorpusSet.Add(corpA);
             db.SaveChanges();

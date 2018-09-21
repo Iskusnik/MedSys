@@ -119,7 +119,8 @@ namespace MedSys
 
         private void конструкторЗапросовToolStripMenuItem_Click(object sender, EventArgs e)
         {
-
+            Form queryBuilder = new QueryBuilderMedSys();
+            queryBuilder.ShowDialog();
         }
     }
 }

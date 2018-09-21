@@ -80,7 +80,7 @@
             this.textBoxDocType.Location = new System.Drawing.Point(123, 6);
             this.textBoxDocType.Name = "textBoxDocType";
             this.textBoxDocType.ReadOnly = true;
-            this.textBoxDocType.Size = new System.Drawing.Size(638, 20);
+            this.textBoxDocType.Size = new System.Drawing.Size(237, 20);
             this.textBoxDocType.TabIndex = 143;
             this.textBoxDocType.Text = "a";
             // 
@@ -116,7 +116,7 @@
             this.textBoxDocumentNum.Location = new System.Drawing.Point(123, 32);
             this.textBoxDocumentNum.Name = "textBoxDocumentNum";
             this.textBoxDocumentNum.ReadOnly = true;
-            this.textBoxDocumentNum.Size = new System.Drawing.Size(638, 20);
+            this.textBoxDocumentNum.Size = new System.Drawing.Size(237, 20);
             this.textBoxDocumentNum.TabIndex = 128;
             this.textBoxDocumentNum.Text = "1";
             // 
@@ -225,7 +225,7 @@
             this.редактироватьДанныеToolStripMenuItem});
             this.menuStrip2.Location = new System.Drawing.Point(0, 0);
             this.menuStrip2.Name = "menuStrip2";
-            this.menuStrip2.Size = new System.Drawing.Size(777, 24);
+            this.menuStrip2.Size = new System.Drawing.Size(376, 24);
             this.menuStrip2.TabIndex = 136;
             this.menuStrip2.Text = "menuStrip1";
             // 
@@ -347,7 +347,7 @@
             this.tabControl1.Location = new System.Drawing.Point(0, 24);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(777, 166);
+            this.tabControl1.Size = new System.Drawing.Size(376, 166);
             this.tabControl1.TabIndex = 144;
             // 
             // tabPage1
@@ -404,7 +404,7 @@
             this.tabPage2.Location = new System.Drawing.Point(4, 22);
             this.tabPage2.Name = "tabPage2";
             this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage2.Size = new System.Drawing.Size(769, 140);
+            this.tabPage2.Size = new System.Drawing.Size(368, 140);
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "Удостоверение личности";
             this.tabPage2.UseVisualStyleBackColor = true;
@@ -418,7 +418,7 @@
             this.tabPage3.Location = new System.Drawing.Point(4, 22);
             this.tabPage3.Name = "tabPage3";
             this.tabPage3.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage3.Size = new System.Drawing.Size(769, 140);
+            this.tabPage3.Size = new System.Drawing.Size(368, 140);
             this.tabPage3.TabIndex = 2;
             this.tabPage3.Text = "Данные врача";
             this.tabPage3.UseVisualStyleBackColor = true;
@@ -443,7 +443,7 @@
             this.textBoxJob.Location = new System.Drawing.Point(123, 6);
             this.textBoxJob.Name = "textBoxJob";
             this.textBoxJob.ReadOnly = true;
-            this.textBoxJob.Size = new System.Drawing.Size(638, 20);
+            this.textBoxJob.Size = new System.Drawing.Size(237, 20);
             this.textBoxJob.TabIndex = 147;
             this.textBoxJob.Text = "a";
             // 
@@ -467,7 +467,7 @@
             this.textBoxEducation.Location = new System.Drawing.Point(123, 32);
             this.textBoxEducation.Name = "textBoxEducation";
             this.textBoxEducation.ReadOnly = true;
-            this.textBoxEducation.Size = new System.Drawing.Size(638, 20);
+            this.textBoxEducation.Size = new System.Drawing.Size(237, 20);
             this.textBoxEducation.TabIndex = 146;
             this.textBoxEducation.Text = "1";
             // 
@@ -477,7 +477,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoScroll = true;
             this.AutoSize = true;
-            this.ClientSize = new System.Drawing.Size(777, 190);
+            this.ClientSize = new System.Drawing.Size(376, 190);
             this.Controls.Add(this.tabControl1);
             this.Controls.Add(this.menuStrip2);
             this.MaximumSize = new System.Drawing.Size(793, 229);

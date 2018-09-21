@@ -69,7 +69,7 @@
             this.textBoxBirthDate.Location = new System.Drawing.Point(127, 58);
             this.textBoxBirthDate.Name = "textBoxBirthDate";
             this.textBoxBirthDate.ReadOnly = true;
-            this.textBoxBirthDate.Size = new System.Drawing.Size(537, 20);
+            this.textBoxBirthDate.Size = new System.Drawing.Size(296, 20);
             this.textBoxBirthDate.TabIndex = 141;
             this.textBoxBirthDate.Text = "a";
             // 
@@ -81,7 +81,7 @@
             this.textBoxGender.Location = new System.Drawing.Point(127, 32);
             this.textBoxGender.Name = "textBoxGender";
             this.textBoxGender.ReadOnly = true;
-            this.textBoxGender.Size = new System.Drawing.Size(537, 20);
+            this.textBoxGender.Size = new System.Drawing.Size(296, 20);
             this.textBoxGender.TabIndex = 140;
             this.textBoxGender.Text = "a";
             // 
@@ -105,7 +105,7 @@
             this.textBoxBloodType.Location = new System.Drawing.Point(127, 110);
             this.textBoxBloodType.Name = "textBoxBloodType";
             this.textBoxBloodType.ReadOnly = true;
-            this.textBoxBloodType.Size = new System.Drawing.Size(537, 20);
+            this.textBoxBloodType.Size = new System.Drawing.Size(296, 20);
             this.textBoxBloodType.TabIndex = 138;
             this.textBoxBloodType.Text = "a";
             // 
@@ -139,6 +139,7 @@
             this.редактироватьДанныеToolStripMenuItem.Name = "редактироватьДанныеToolStripMenuItem";
             this.редактироватьДанныеToolStripMenuItem.Size = new System.Drawing.Size(75, 20);
             this.редактироватьДанныеToolStripMenuItem.Text = "Мед карта";
+            this.редактироватьДанныеToolStripMenuItem.Click += new System.EventHandler(this.редактироватьДанныеToolStripMenuItem_Click);
             // 
             // просмотретьИсториюЗаписейToolStripMenuItem
             // 
@@ -219,7 +220,7 @@
             this.textBoxAdress.Location = new System.Drawing.Point(127, 84);
             this.textBoxAdress.Name = "textBoxAdress";
             this.textBoxAdress.ReadOnly = true;
-            this.textBoxAdress.Size = new System.Drawing.Size(537, 20);
+            this.textBoxAdress.Size = new System.Drawing.Size(296, 20);
             this.textBoxAdress.TabIndex = 120;
             this.textBoxAdress.Text = "a";
             // 
@@ -255,7 +256,7 @@
             this.textBoxName.Location = new System.Drawing.Point(127, 6);
             this.textBoxName.Name = "textBoxName";
             this.textBoxName.ReadOnly = true;
-            this.textBoxName.Size = new System.Drawing.Size(537, 20);
+            this.textBoxName.Size = new System.Drawing.Size(296, 20);
             this.textBoxName.TabIndex = 115;
             this.textBoxName.Text = "a";
             // 
@@ -278,7 +279,7 @@
             this.редактироватьДанныеToolStripMenuItem});
             this.menuStrip2.Location = new System.Drawing.Point(0, 0);
             this.menuStrip2.Name = "menuStrip2";
-            this.menuStrip2.Size = new System.Drawing.Size(680, 24);
+            this.menuStrip2.Size = new System.Drawing.Size(439, 24);
             this.menuStrip2.TabIndex = 136;
             this.menuStrip2.Text = "menuStrip1";
             // 
@@ -290,7 +291,7 @@
             this.tabControl1.Location = new System.Drawing.Point(0, 24);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(680, 188);
+            this.tabControl1.Size = new System.Drawing.Size(439, 188);
             this.tabControl1.TabIndex = 144;
             // 
             // tabPage1
@@ -310,7 +311,7 @@
             this.tabPage1.Location = new System.Drawing.Point(4, 22);
             this.tabPage1.Name = "tabPage1";
             this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage1.Size = new System.Drawing.Size(672, 162);
+            this.tabPage1.Size = new System.Drawing.Size(431, 162);
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "Общие сведения";
             this.tabPage1.UseVisualStyleBackColor = true;
@@ -335,7 +336,7 @@
             this.textBoxInsuranceNum.Location = new System.Drawing.Point(127, 136);
             this.textBoxInsuranceNum.Name = "textBoxInsuranceNum";
             this.textBoxInsuranceNum.ReadOnly = true;
-            this.textBoxInsuranceNum.Size = new System.Drawing.Size(537, 20);
+            this.textBoxInsuranceNum.Size = new System.Drawing.Size(296, 20);
             this.textBoxInsuranceNum.TabIndex = 142;
             this.textBoxInsuranceNum.Text = "a";
             // 
@@ -371,7 +372,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoScroll = true;
             this.AutoSize = true;
-            this.ClientSize = new System.Drawing.Size(680, 212);
+            this.ClientSize = new System.Drawing.Size(439, 212);
             this.Controls.Add(this.tabControl1);
             this.Controls.Add(this.menuStrip2);
             this.MaximumSize = new System.Drawing.Size(793, 251);

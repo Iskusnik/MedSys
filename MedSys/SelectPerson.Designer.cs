@@ -148,19 +148,19 @@
             // 
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridView1.Dock = System.Windows.Forms.DockStyle.Right;
-            this.dataGridView1.Location = new System.Drawing.Point(224, 0);
+            this.dataGridView1.Location = new System.Drawing.Point(227, 0);
             this.dataGridView1.MultiSelect = false;
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.ReadOnly = true;
             this.dataGridView1.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dataGridView1.Size = new System.Drawing.Size(398, 489);
+            this.dataGridView1.Size = new System.Drawing.Size(398, 488);
             this.dataGridView1.TabIndex = 18;
             // 
             // SelectPerson
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(622, 489);
+            this.ClientSize = new System.Drawing.Size(625, 488);
             this.Controls.Add(this.dataGridView1);
             this.Controls.Add(this.comboBoxBirth);
             this.Controls.Add(this.buttonDelete);
