@@ -153,10 +153,16 @@ namespace MedSys
                     else;
                 }
                 else;
-            if (person is Patient)
+            if (this.Owner is PatientMenu)
                 (this.Owner as PatientMenu).ReloadForm();
             else
+                if (this.Owner is DoctorMenu)
                 (this.Owner as DoctorMenu).ReloadForm();
+            else
+                if (this.Owner is PatientDetails)
+                (this.Owner as PatientDetails).ReloadForm();
+            else
+                (this.Owner as DoctorDetails).ReloadForm();
         }
         private string TextBoxesCheck()
         {

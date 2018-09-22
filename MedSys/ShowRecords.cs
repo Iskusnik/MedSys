@@ -83,9 +83,14 @@ namespace MedSys
 
         private void buttonRemove_Click(object sender, EventArgs e)
         {
-            int id = (int)dataGridView1.SelectedRows[0].Cells[2].Value;
-            ControlFunctions.RemoveRecord(id);
-            RefreshData();
+            if (dataGridView1.SelectedCells.Count != 0)
+            {
+                int id = (int)dataGridView1.SelectedRows[0].Cells[2].Value;
+                ControlFunctions.RemoveRecord(id);
+                RefreshData();
+            }
+            else
+                MessageBox.Show("Выберите запись для удаления");
         }
 
         private void buttonAdd_Click(object sender, EventArgs e)

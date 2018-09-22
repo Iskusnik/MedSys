@@ -36,7 +36,7 @@ namespace MedSys
 
         private void buttonSave_Click(object sender, EventArgs e)
         {
-            if (textBoxInfo.Text == "")
+            if (textBoxInfo.Text != "")
             {
                 Record newRecord = ControlFunctions.CreateRecord(DateTime.Now, doctor, textBoxInfo.Text, patient.MedCard);
                 string result = ControlFunctions.AddRecord(newRecord);

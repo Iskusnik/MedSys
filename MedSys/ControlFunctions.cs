@@ -368,6 +368,7 @@ namespace MedSys
                                 where c.Corpus.Id == cabinet.Corpus.Id &&
                                       c.Num == cabinet.Num
                                 select c).ToList();
+
             if (searchResult.Count != 0)
                 return "Такой кабинет уже существует";
             else;
@@ -417,8 +418,9 @@ namespace MedSys
             //Проверка наличия совпадений по названию
             var searchResult = (from rec in dbContext.RecordSet
                                 where rec.Date == record.Date &&
-                                      rec.Doctor == record.Doctor
+                                      rec.Doctor.Id == record.Doctor.Id
                                 select rec).ToList();
+
             if (searchResult.Count != 0)
                 return "Доктор уже делал такую запись в это время";
             else;
@@ -585,15 +587,15 @@ namespace MedSys
         static public void RemovePerson(int id)
         {
             Person pers = dbContext.PersonSet.Find(id);
-            dbContext.PersonSet.Remove(pers);
+
             dbContext.DocumentSet.Remove(pers.Document);
+            
 
             if (pers is Patient)
             {
-                dbContext.MedCardSet.Remove((pers as Patient).MedCard);
-
-                foreach (Record rec in (pers as Patient).MedCard.Record)
-                    dbContext.RecordSet.Remove(rec);
+                Record[] recs = (pers as Patient).MedCard.Record.ToArray();
+                foreach (Record rec in recs)
+                    dbContext.Entry(rec).State = System.Data.Entity.EntityState.Deleted;
 
 
                 foreach (Illness ill in (pers as Patient).MedCard.Illness)
@@ -602,11 +604,13 @@ namespace MedSys
                 (pers as Patient).MedCard.Illness.Clear();
 
 
-
-                foreach (TimeForVisit t in (pers as Patient).TimeForVisit)
-                    dbContext.TimeForVisitSet.Remove(t);
+                TimeForVisit[] tfvs = (pers as Patient).TimeForVisit.ToArray();
+                foreach (TimeForVisit t in tfvs)
+                    dbContext.Entry(t).State = System.Data.Entity.EntityState.Deleted;
 
                 (pers as Patient).TimeForVisit.Clear();
+
+                dbContext.MedCardSet.Remove((pers as Patient).MedCard);
 
             }
             else
@@ -614,15 +618,19 @@ namespace MedSys
                 foreach (Job j in (pers as Doctor).Job)
                     j.Doctor.Remove((pers as Doctor));
 
-                foreach (TimeForVisit t in (pers as Doctor).TimeForVisit)
-                    dbContext.TimeForVisitSet.Remove(t);
+
+                TimeForVisit[] tfvs = (pers as Doctor).TimeForVisit.ToArray();
+                foreach (TimeForVisit t in tfvs)
+                    dbContext.Entry(t).State = System.Data.Entity.EntityState.Deleted;
 
                 (pers as Doctor).TimeForVisit.Clear();
 
 
-                foreach (Record rec in (pers as Doctor).Record)
-                    dbContext.RecordSet.Remove(rec);
+                Record[] recs = (pers as Patient).MedCard.Record.ToArray();
+                foreach (Record rec in recs)
+                    dbContext.Entry(rec).State = System.Data.Entity.EntityState.Deleted;
             }
+            dbContext.PersonSet.Remove(pers);
             dbContext.SaveChanges();
         }
         static public void RemoveJob(string jobName)
@@ -689,6 +697,133 @@ namespace MedSys
             Corpus corpus = (from c in dbContext.CorpusSet where c.Name == corpusName select c).ToList()[0];
             dbContext.CorpusSet.Remove(corpus);
             dbContext.SaveChanges();
+        }
+
+
+
+
+
+        static Random random = new Random();
+        public static void GenerateRandomDataBase(int N = 100)
+        {
+            int doctorNum = random.Next(1, N / 5 + 2);
+            string[] jobs = { "Главврач", "Хирург", "Эндокринолог", "Невролог", "Участковый врач", "Окуляринголог", "Дантист" };
+            string[] corpuses = { "1", "2", "3"};
+            string[] illnesses = { "Болезнь В", "Болезнь Г", "Болезнь Д", "Болезнь Е", "Болезнь Ж" };
+            foreach (string job in jobs)
+                AddJob(CreateJob(job));
+
+            foreach (string corpus in corpuses)
+                AddCorpus(CreateCorpus(3, corpus));
+
+            foreach (string illness in illnesses)
+                AddIllness(CreateIllness("Описание" + " " + random.Next(0,10).ToString(), illness));
+
+            foreach (Corpus c in dbContext.CorpusSet)
+                for (int i = 1; i <= 10; i++)
+                    dbContext.CabinetSet.Add(CreateCabinet(c.Name, random.Next(1, 4), i));
+
+            dbContext.SaveChanges();
+            
+
+
+
+            string[] namesM = { "Иван", "Денис", "Вячеслав", "Владимир", "Константин", "Александр", "Михаил", "Игнат", "Артём" };
+            string[] namesW = { "Алёна", "Арина", "Елизавета", "Екатерина", "Александра", "Кристина", "Татьяна", "Людмила" };
+            string[] genders = { "Мужской", "Женский" };
+            string[] surnames = { "Иванов", "Александров", "Степанов", "Семёнов", "Удальцов", "Молодцов", "Бобров", "Медведев" };
+
+            string[] adresses = { "Пермская", "Кирова", "Революции", "Совесткая", "Полевая", "Парковая", "Морская", "Веселая" };
+            string[] documentTypes = {
+                                        "Паспорт гражданина РФ",
+                                        "Свидетельство о рождении",
+                                        "Дипломатический паспорт",
+                                        "Военный билет",
+                                        "Служебное удостоверение работника прокуратуры"
+                                    };
+            
+
+            string[] educations = { "Мед.образование1", "Мед.образование2", "Мед.образование3" };
+
+            for (int i = 0; i < N; i++)
+            {
+                    Person temp = new Person();
+                    temp.Adress = adresses[random.Next(0,8)] + " " + random.Next(1, 20).ToString() + "," + " " + random.Next(1, 50).ToString();
+                    temp.BirthDate = new DateTime(random.Next(1950, 2018), random.Next(1, 13), random.Next(1, 28));
+                    temp.Document = new Document { Type = documentTypes[random.Next(0, 5)], Num = random.Next(0, Int32.MaxValue).ToString(), Person = temp };
+                    if (random.Next(0, 2) == 0)
+                    {
+                        temp.Gender = genders[0];
+                        temp.FullName = surnames[random.Next(0, 8)] + " " + namesM[random.Next(0, 9)] + " " + namesM[random.Next(0, 9)] + "ович";
+                    }
+                    else
+                    {
+                        temp.Gender = genders[1];
+                        temp.FullName = surnames[random.Next(0, 8)] + "а " + namesW[random.Next(0, 8)] + " " + namesM[random.Next(0, 9)] + "овна";
+                    }
+                    temp.InsuranceNum = random.Next(0, Int32.MaxValue).ToString();
+                    
+
+                    temp.Password = "1";
+
+                if (doctorNum > 0)
+                {
+                    doctorNum--;
+                    Doctor t = CreateDoctor(temp.FullName, temp.BirthDate, temp.Document.Type, temp.Document.Num, jobs[random.Next(0, 7)], temp.Adress, educations[random.Next(0, 3)], temp.Gender, temp.InsuranceNum, temp.Password);
+                    dbContext.PersonSet.Add(t);
+                    dbContext.SaveChanges();
+                }
+                else
+                {
+                    int num = (byte)random.Next(1, 5);
+                    string res = "+";
+                    if (random.Next(0, 100) < 50)
+                        res = "-";
+                    Patient t = CreatePatient(temp.FullName, temp.BirthDate, temp.Document.Type, temp.Document.Num, temp.Adress, res + num.ToString(), temp.Gender, temp.InsuranceNum, temp.Password);
+
+
+
+                    dbContext.PersonSet.Add(t);
+
+
+
+                    for (int k = 0; k < 10; k++)
+                    {
+                        Person[] doctors = (from d in dbContext.PersonSet where d is Doctor select d).ToArray();
+                        int randomDoc = random.Next(0, doctors.Length);
+
+                        string docInfo = doctors[randomDoc].FullName + "_" + doctors[randomDoc].BirthDate.ToShortDateString();
+                        
+                        string date = (new DateTime(random.Next(1950, 2018), random.Next(1, 13), random.Next(1, 28))).ToShortDateString();
+                        DateTime time = DateTime.Today + TimeSpan.FromDays(random.Next(1, 15));
+                        time += DateTime.Now.TimeOfDay + TimeSpan.FromHours(random.Next(0, 23)) + TimeSpan.FromMinutes(random.Next(0, 2) * 30);
+
+                        TimeForVisit tfv = CreateTimeForVisit(docInfo, corpuses[random.Next(0, corpuses.Length)], random.Next(1, 11).ToString(), time.ToShortDateString(), time.ToShortTimeString());
+                        tfv.Patient = t;
+
+                        AddTimeForVisit(tfv);
+                        
+                    }
+
+                    for (int k = 0; k < random.Next(5, 12); k++)
+                    {
+                        Illness[] ill = (from illlnesss in dbContext.IllnessSet select illlnesss).ToArray();
+                        t.MedCard.Illness.Add(ill[random.Next(0, ill.Length)]);
+                    }
+
+                    for (int k = 0; k < random.Next(2, 7); k++)
+                    {
+                        Person[] doctors = (from d in dbContext.PersonSet where d is Doctor select d).ToArray();
+                        int randomDoc = random.Next(0, doctors.Length);
+
+                        AddRecord(CreateRecord(DateTime.Today + TimeSpan.FromMinutes(random.Next(0, 60)), (Doctor)doctors[randomDoc], "Запись" + " " + k.ToString(), t.MedCard));
+                    }
+
+
+                    dbContext.SaveChanges();
+
+                }
+            }
         }
     }
 }

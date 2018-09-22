@@ -13,9 +13,10 @@ namespace MedSys
     public partial class SelectPerson : Form
     {
         ModelMedContainer db = ControlFunctions.dbContext;
-        int function;
-        public SelectPerson(int function = 0)
+        int function, docId;
+        public SelectPerson(int docId, int function = 0)
         {
+            this.docId = docId;
             this.function = function;
             InitializeComponent();
         }
@@ -73,7 +74,9 @@ namespace MedSys
 
                 if (person is Patient)
                 {
-                    Form patientDetails = new PatientDetails(person as Patient);
+
+                    Doctor doctor = (Doctor)db.PersonSet.Find(docId);
+                    Form patientDetails = new PatientDetails(person as Patient, doctor);
                     patientDetails.ShowDialog();
                 }
                 else
@@ -107,7 +110,9 @@ namespace MedSys
         {
             if (dataGridView1.SelectedRows.Count != 0 && dataGridView1.SelectedCells[0] != null)
             {
-                ControlFunctions.RemovePerson(dataGridView1.SelectedRows[0].Index);
+                ControlFunctions.RemovePerson((int)dataGridView1.SelectedCells[4].Value);
+                FillDataGridView(db.PersonSet.ToList());
+                dataGridView1.Refresh();
             }
             else
                 MessageBox.Show("Человек не выбран");
@@ -184,7 +189,8 @@ namespace MedSys
             dataGridView1.Rows.Clear();
 
             var doctors = (from pers in people
-                           where pers is Doctor
+                           where pers is Doctor &&
+                                 pers.Id != docId
                            select new
                            {
                                ФИО = pers.FullName,
@@ -204,9 +210,9 @@ namespace MedSys
                                 Врач = "Пациент",
                                 Id = pers.Id
                             }).ToList();
-
-            foreach (var pers in doctors)
-                dataGridView1.Rows.Add(pers.ФИО, pers.ДР.Date, pers.Пол, pers.Врач, pers.Id);
+            if(function == 0)
+             foreach (var pers in doctors)
+                    dataGridView1.Rows.Add(pers.ФИО, pers.ДР.Date, pers.Пол, pers.Врач, pers.Id);
 
             foreach (var pers in patients)
                 dataGridView1.Rows.Add(pers.ФИО, pers.ДР.Date, pers.Пол, pers.Врач, pers.Id);

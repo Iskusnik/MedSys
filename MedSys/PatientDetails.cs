@@ -13,8 +13,10 @@ namespace MedSys
     public partial class PatientDetails : Form
     {
         public Patient patient;
-        public PatientDetails(Patient patient)
+        public Doctor doctor;
+        public PatientDetails(Patient patient, Doctor doctor)
         {
+            this.doctor = doctor;
             this.patient = patient;
             InitializeComponent();
         }
@@ -61,7 +63,13 @@ namespace MedSys
 
         private void записиВрачейToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            Form showRecords = new ShowRecords(patient);
+            Form showRecords = new ShowRecords(patient, 1, doctor);
+            showRecords.Show();
+        }
+
+        private void просмотретьToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Form showRecords = new ShowRecords(patient, 1, doctor);
             showRecords.Show();
         }
     }

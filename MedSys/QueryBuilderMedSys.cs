@@ -154,7 +154,11 @@ namespace MedSys
             Fields[2] = new string[] { "Полное имя", "Возраст", "Дата рождения", "Адрес", "Фамилия", "Группа крови", "Не выбрано" };
             Fields[3] = new string[] { "Число записей", "Имя владельца" };
             Fields[4] = new string[] { "Число больных", "Название болезни" };
+
+
+
             Fields[5] = new string[] { "День приёма", "Имя врача", "Имя пациента" };
+
             Fields[6] = new string[] { "День создания записи", "Имя врача", "Имя пациента" };
             Fields[7] = new string[] { "Этажей", "Номер" };
             Fields[8] = new string[] { "Корпус", "Номер" };
@@ -176,9 +180,12 @@ namespace MedSys
 
         private void buttonSearch_Click(object sender, EventArgs e)
         {
-            if (field1 != -1 && textBoxField1.Text == "Не выбрано" ||
-                field2 != -1 && (comboBox1or_and2.Text != "Не выбрано" && textBoxField2.Text == "Не выбрано") ||
-                field3 != -1 && (comboBox12_and_or3.Text != "Не выбрано" && textBoxField3.Text == "Не выбрано"))
+    //         ||
+    //            field2 != -1 && (comboBox1or_and2.Text != "Не выбрано" && textBoxField2.Text == "Не выбрано") ||
+    //            field3 != -1 && (comboBox12_and_or3.Text != "Не выбрано" && textBoxField3.Text == "Не выбрано")
+
+
+            if (field1 != -1 && textBoxField1.Text == "Не выбрано")
                 MessageBox.Show("Выберите, что собираетесь искать. Определите значения для поиска. Определите, как комбинировать условия");
             else
                 switch (EntityIndex)
@@ -602,20 +609,126 @@ namespace MedSys
                         break;
                     #endregion
 
-
+                    #region Медкарта
                     //Медицинская карта
                     case 3:
                         {
+                            using (ModelMedContainer db = new ModelMedContainer())
+                            {
+                                var list = (from medcard in db.MedCardSet
+                                            select new { medcard.Id, medcard.Patient.FullName, medcard.Record.Count}).ToList();
 
+                                switch (field1)
+                                {
+                                    
+                                    case 0:
+                                        {
+                                            int recs;
+                                            if (int.TryParse(textBoxField1.Text, out recs))
+                                            {
+                                                switch (comboBoxEqual1.SelectedIndex)
+                                                {
+                                                    case 0: list = (from p in list where p.Count < recs select p).ToList(); break;
+                                                    case 1: list = (from p in list where p.Count <= recs select p).ToList(); break;
+                                                    case 2: list = (from p in list where p.Count == recs select p).ToList(); break;
+                                                    case 3: list = (from p in list where p.Count >= recs select p).ToList(); break;
+                                                    case 4: list = (from p in list where p.Count > recs select p).ToList(); break;
+                                                }
+                                            }
+                                            else
+                                                MessageBox.Show("Введите число записей как целое число");
+                                        }
+                                        break;
+                                    case 1:
+                                        {
+                                            if (textBoxField1.Text != "")
+                                            {
+                                                switch (comboBoxEqual1.SelectedIndex)
+                                                {
+                                                    case 0: list = (from p in list where String.Compare(p.FullName, textBoxField1.Text) < 0 select p).ToList(); break;
+                                                    case 1: list = (from p in list where String.Compare(p.FullName, textBoxField1.Text) <= 0 select p).ToList(); break;
+                                                    case 2: list = (from p in list where String.Compare(p.FullName, textBoxField1.Text) == 0 select p).ToList(); break;
+                                                    case 3: list = (from p in list where String.Compare(p.FullName, textBoxField1.Text) >= 0 select p).ToList(); break;
+                                                    case 4: list = (from p in list where String.Compare(p.FullName, textBoxField1.Text) > 0 select p).ToList(); break;
+                                                }
+                                            }
+                                            else
+                                                MessageBox.Show("Введите значение для поиска");
+                                        }
+                                        break;
+
+
+                                }
+                                dataGridView1.DataSource = list;
+                                dataGridView1.RowHeadersVisible = false;
+
+                                dataGridView1.Columns[0].HeaderText = "Id";
+                                dataGridView1.Columns[1].HeaderText = "Имя владельца";
+                                dataGridView1.Columns[2].HeaderText = "Число записей";
+                            }
                         }
                         break;
-
+                    #endregion
+                    #region Болезнь
                     //Болезнь
                     case 4:
                         {
+                            using (ModelMedContainer db = new ModelMedContainer())
+                            {
+                                var list = (from ill in db.IllnessSet
+                                            select new { ill.Id, ill.Name, ill.MedCard.Count }).ToList();
 
+                                switch (field1)
+                                {
+
+                                    case 0:
+                                        {
+                                            int recs;
+                                            if (int.TryParse(textBoxField1.Text, out recs))
+                                            {
+                                                switch (comboBoxEqual1.SelectedIndex)
+                                                {
+                                                    case 0: list = (from p in list where p.Count < recs select p).ToList(); break;
+                                                    case 1: list = (from p in list where p.Count <= recs select p).ToList(); break;
+                                                    case 2: list = (from p in list where p.Count == recs select p).ToList(); break;
+                                                    case 3: list = (from p in list where p.Count >= recs select p).ToList(); break;
+                                                    case 4: list = (from p in list where p.Count > recs select p).ToList(); break;
+                                                }
+                                            }
+                                            else
+                                                MessageBox.Show("Введите число больных как целое число");
+                                        }
+                                        break;
+                                    case 1:
+                                        {
+                                            if (textBoxField1.Text != "")
+                                            {
+                                                switch (comboBoxEqual1.SelectedIndex)
+                                                {
+                                                    case 0: list = (from p in list where String.Compare(p.Name, textBoxField1.Text) < 0 select p).ToList(); break;
+                                                    case 1: list = (from p in list where String.Compare(p.Name, textBoxField1.Text) <= 0 select p).ToList(); break;
+                                                    case 2: list = (from p in list where String.Compare(p.Name, textBoxField1.Text) == 0 select p).ToList(); break;
+                                                    case 3: list = (from p in list where String.Compare(p.Name, textBoxField1.Text) >= 0 select p).ToList(); break;
+                                                    case 4: list = (from p in list where String.Compare(p.Name, textBoxField1.Text) > 0 select p).ToList(); break;
+                                                }
+                                            }
+                                            else
+                                                MessageBox.Show("Введите значение для поиска");
+                                        }
+                                        break;
+
+
+                                }
+                                dataGridView1.DataSource = list;
+                                dataGridView1.RowHeadersVisible = false;
+
+                                dataGridView1.Columns[0].HeaderText = "Id";
+                                dataGridView1.Columns[1].HeaderText = "Название болезни";
+                                dataGridView1.Columns[2].HeaderText = "Число больных";
+                            }
                         }
                         break;
+                    #endregion
 
                     //Запись на приём
                     case 5:
@@ -654,5 +767,6 @@ namespace MedSys
                 }
         }
 
+        
     }
 }

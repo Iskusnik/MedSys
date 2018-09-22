@@ -23,8 +23,8 @@ namespace MedSys
         private void ShowVisits_Load(object sender, EventArgs e)
         {
             doctor = (Doctor)db.PersonSet.Find(doctor.Id);
-
-            var thisPersonVisits = (from visit in doctor.TimeForVisit select new { Время_начала_приёма = visit.VisitTime, Имя_пациента = visit.Patient.FullName, Корпус = visit.Cabinet.Corpus.Name, Этаж = visit.Cabinet.Floor.ToString(), Кабинет = visit.Cabinet.Num.ToString() }).ToList();
+            
+            var thisPersonVisits = (from visit in doctor.TimeForVisit select visit).ToList();
             dataGridView1.Columns.Clear();
             dataGridView1.Columns.Add("Время начала приёма", "Время начала приёма");
             dataGridView1.Columns.Add("Имя пациента", "Имя пациента");
@@ -34,11 +34,16 @@ namespace MedSys
 
             foreach (var s in thisPersonVisits)
             {
-                string date = s.Время_начала_приёма.ToString();
-                string name = s.Имя_пациента;
-                string corpus = s.Корпус;
-                string floor = s.Этаж;
-                string cabinet = s.Кабинет;
+                string date = s.VisitTime.ToString();
+
+                string name = "Запись свободная";
+
+                if (s.Patient != null)
+                    name = s.Patient.FullName;
+
+                string corpus = s.Cabinet.Corpus.Name;
+                string floor = s.Cabinet.Floor.ToString();
+                string cabinet = s.Cabinet.Num.ToString();
 
                 dataGridView1.Rows.Add(date, name, corpus, floor, cabinet);
             }
@@ -53,7 +58,7 @@ namespace MedSys
             {
                 case 0:
                     {
-                        var thisPersonVisits = (from visit in doctor.TimeForVisit select new { Время_начала_приёма = visit.VisitTime, Имя_пациента = visit.Patient.FullName, Корпус = visit.Cabinet.Corpus.Name, Этаж = visit.Cabinet.Floor.ToString(), Кабинет = visit.Cabinet.Num.ToString() }).ToList();
+                        var thisPersonVisits = (from visit in doctor.TimeForVisit select visit).ToList();
                         dataGridView1.Columns.Clear();
                         dataGridView1.Columns.Add("Время начала приёма", "Время начала приёма");
                         dataGridView1.Columns.Add("Имя пациента", "Имя пациента");
@@ -63,11 +68,16 @@ namespace MedSys
 
                         foreach (var s in thisPersonVisits)
                         {
-                            string date = s.Время_начала_приёма.ToString();
-                            string name = s.Имя_пациента;
-                            string corpus = s.Корпус;
-                            string floor = s.Этаж;
-                            string cabinet = s.Кабинет;
+                            string date = s.VisitTime.ToString();
+
+                            string name = "Запись свободная";
+
+                            if (s.Patient != null)
+                                name = s.Patient.FullName;
+
+                            string corpus = s.Cabinet.Corpus.Name;
+                            string floor = s.Cabinet.Floor.ToString();
+                            string cabinet = s.Cabinet.Num.ToString();
 
                             dataGridView1.Rows.Add(date, name, corpus, floor, cabinet);
                         }
@@ -77,7 +87,7 @@ namespace MedSys
                     }
                 case 1:
                     {
-                        var thisPersonVisits = (from visit in doctor.TimeForVisit where (visit.VisitTime > DateTime.Now) select new { Время_начала_приёма = visit.VisitTime, Имя_пациента = visit.Patient.FullName, Корпус = visit.Cabinet.Corpus.Name, Этаж = visit.Cabinet.Floor.ToString(), Кабинет = visit.Cabinet.Num.ToString() }).ToList();
+                        var thisPersonVisits = (from visit in doctor.TimeForVisit where (visit.VisitTime > DateTime.Now) select visit).ToList();
                         dataGridView1.Columns.Clear();
                         dataGridView1.Columns.Add("Время начала приёма", "Время начала приёма");
                         dataGridView1.Columns.Add("Имя пациента", "Имя пациента");
@@ -87,11 +97,16 @@ namespace MedSys
 
                         foreach (var s in thisPersonVisits)
                         {
-                            string date = s.Время_начала_приёма.ToString();
-                            string name = s.Имя_пациента;
-                            string corpus = s.Корпус;
-                            string floor = s.Этаж;
-                            string cabinet = s.Кабинет;
+                            string date = s.VisitTime.ToString();
+
+                            string name = "Запись свободная";
+
+                            if (s.Patient != null)
+                                name = s.Patient.FullName;
+
+                            string corpus = s.Cabinet.Corpus.Name;
+                            string floor = s.Cabinet.Floor.ToString();
+                            string cabinet = s.Cabinet.Num.ToString();
 
                             dataGridView1.Rows.Add(date, name, corpus, floor, cabinet);
                         }
@@ -102,7 +117,7 @@ namespace MedSys
                     }
                 case 2:
                     {
-                        var thisPersonVisits = (from visit in doctor.TimeForVisit where (visit.VisitTime <= DateTime.Now) select new { Время_начала_приёма = visit.VisitTime, Имя_пациента = visit.Patient.FullName, Корпус = visit.Cabinet.Corpus.Name, Этаж = visit.Cabinet.Floor.ToString(), Кабинет = visit.Cabinet.Num.ToString() }).ToList();
+                        var thisPersonVisits = (from visit in doctor.TimeForVisit where (visit.VisitTime <= DateTime.Now) select visit).ToList();
                         dataGridView1.Columns.Clear();
                         dataGridView1.Columns.Add("Время начала приёма", "Время начала приёма");
                         dataGridView1.Columns.Add("Имя пациента", "Имя пациента");
@@ -112,11 +127,16 @@ namespace MedSys
 
                         foreach (var s in thisPersonVisits)
                         {
-                            string date = s.Время_начала_приёма.ToString();
-                            string name = s.Имя_пациента;
-                            string corpus = s.Корпус;
-                            string floor = s.Этаж;
-                            string cabinet = s.Кабинет;
+                            string date = s.VisitTime.ToString();
+
+                            string name = "Запись свободная";
+
+                            if (s.Patient != null)
+                                name = s.Patient.FullName;
+
+                            string corpus = s.Cabinet.Corpus.Name;
+                            string floor = s.Cabinet.Floor.ToString();
+                            string cabinet = s.Cabinet.Num.ToString();
 
                             dataGridView1.Rows.Add(date, name, corpus, floor, cabinet);
                         }

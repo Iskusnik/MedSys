@@ -19,6 +19,7 @@ namespace MedSys
 
         private void buttonLogin_Click(object sender, EventArgs e)
         {
+            ControlFunctions.GenerateRandomDataBase();
             string mes;
             Person pers;
             if (!ControlFunctions.LoginResult(this.textBoxFullName.Text, this.textBoxPassword.Text, out mes, out pers))

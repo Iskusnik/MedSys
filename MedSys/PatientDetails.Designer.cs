@@ -33,6 +33,7 @@
             this.label17 = new System.Windows.Forms.Label();
             this.textBoxBloodType = new System.Windows.Forms.TextBox();
             this.записиВрачейToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.просмотретьToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.просмотретьИсториюБолезнейToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.изменитьДанныеToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.редактироватьДанныеToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -55,7 +56,6 @@
             this.textBoxInsuranceNum = new System.Windows.Forms.TextBox();
             this.tabPage2 = new System.Windows.Forms.TabPage();
             this.textBoxDocType = new System.Windows.Forms.TextBox();
-            this.просмотретьToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip2.SuspendLayout();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
@@ -118,6 +118,13 @@
             this.записиВрачейToolStripMenuItem.Size = new System.Drawing.Size(172, 22);
             this.записиВрачейToolStripMenuItem.Text = "Записи врачей";
             this.записиВрачейToolStripMenuItem.Click += new System.EventHandler(this.записиВрачейToolStripMenuItem_Click);
+            // 
+            // просмотретьToolStripMenuItem
+            // 
+            this.просмотретьToolStripMenuItem.Name = "просмотретьToolStripMenuItem";
+            this.просмотретьToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.просмотретьToolStripMenuItem.Text = "Просмотреть";
+            this.просмотретьToolStripMenuItem.Click += new System.EventHandler(this.просмотретьToolStripMenuItem_Click);
             // 
             // просмотретьИсториюБолезнейToolStripMenuItem
             // 
@@ -367,12 +374,6 @@
             this.textBoxDocType.Size = new System.Drawing.Size(638, 20);
             this.textBoxDocType.TabIndex = 143;
             this.textBoxDocType.Text = "a";
-            // 
-            // просмотретьToolStripMenuItem
-            // 
-            this.просмотретьToolStripMenuItem.Name = "просмотретьToolStripMenuItem";
-            this.просмотретьToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
-            this.просмотретьToolStripMenuItem.Text = "Просмотреть";
             // 
             // PatientDetails
             // 
