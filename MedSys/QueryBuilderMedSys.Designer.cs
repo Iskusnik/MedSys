@@ -66,6 +66,7 @@
             this.buttonToExcel.Size = new System.Drawing.Size(50, 50);
             this.buttonToExcel.TabIndex = 29;
             this.buttonToExcel.UseVisualStyleBackColor = true;
+            this.buttonToExcel.Click += new System.EventHandler(this.buttonToExcel_Click);
             // 
             // dataGridView1
             // 
